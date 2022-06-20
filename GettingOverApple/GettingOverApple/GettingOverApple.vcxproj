@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -26,6 +27,8 @@
   <ItemGroup>
     <ClInclude Include="UI.h" />
   </ItemGroup>
+=======
+>>>>>>> parent of b9f8496 (main.cppの編集)
 =======
 >>>>>>> parent of b9f8496 (main.cppの編集)
   <PropertyGroup Label="Globals">
