@@ -19,7 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="DriveAndAvoid.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Controller.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
