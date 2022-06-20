@@ -1,5 +1,8 @@
 #include "DxLib.h"
 #define RANKING_DATA 5
+#include"player.h"
+
+player Player;
 
 /*************************************************************************
 *	定数の宣言
@@ -144,7 +147,9 @@ void GameInit(void) {
 *　ゲームメイン
 **************************************************************************/
 void GameMain(void) {
-
+	Player.LoadImages();
+	Player.GameInit();
+	Player.Draw();
 }
 
 /*************************************************************************
@@ -335,7 +340,7 @@ int LoadImages() {
 	if ((g_EndImage = LoadGraph("images/End.bmp")) == -1)return -1;						//未差し替え
 
 	//プレイヤー
-	
+
 	
 	//ステージ背景
 	if ((g_StageImage = LoadGraph("images/back.bmp")) == -1)return -1;					//未差し替え
