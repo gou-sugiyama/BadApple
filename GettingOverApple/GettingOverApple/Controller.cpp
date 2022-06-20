@@ -1,16 +1,18 @@
 #include "Controller.h"
 
-void Controller::Key()
+int Controller::Key(bool ControlFlg)
 {
 	XINPUT_STATE input;
 
-	if (controllerKey) {
+	if (ControlFlg) {
 		OldKey = NowKey;
-		NowKey = GetJoypadXInputState(DX_INPUT_KEY_PAD1,&input);
+		NowKey = GetJoypadXInputState(DX_INPUT_PAD1,&input);
 		KeyFlg = NowKey & ~OldKey;
 	}
 	else
 	{
-
+		KeyFlg = GetJoypadXInputState(DX_INPUT_PAD1, &input);
 	}
+
+	return KeyFlg;
 }
