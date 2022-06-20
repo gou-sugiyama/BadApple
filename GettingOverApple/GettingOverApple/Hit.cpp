@@ -10,6 +10,8 @@
 
 void* Hit(int *p, int *a_x,int*a_y) {
 
+	bool OnHit;
+
 	//xy,は中心座標とする
 	int sx1 = *p;
 	int sy1 = PLAYER_TOP;
@@ -23,7 +25,12 @@ void* Hit(int *p, int *a_x,int*a_y) {
 
 	//短形が重なっていれば当たり
 	if (sx1 < dx2 && dx1 < sx2 && sy1 < dy2 && dy1 < sy2) {
-		return ;
+		OnHit = TRUE;
 	}
-	return ;
+	else {
+		OnHit = FALSE;
+	}
+
+
+	return (int*)OnHit;
 }
