@@ -885,5 +885,9 @@ int HitBoxPlayer(PLAYER* p, ENEMY* e) {
 	}
 
 	return FALSE;
+<<<<<<< HEAD
 }
 >>>>>>> parent of b9f8496 (main.cppの編雁E
+=======
+}
+>>>>>>> parent of b9f8496 (main.cppの編集)
