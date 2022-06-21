@@ -80,6 +80,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//ランキングデータ読み込み
 	if (ReadRanking() == -1) return -1;
 
+
+	Player.LoadImages();
+	Player.GameInit();
+
+
+
 	//ゲームループ
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		//入力キー取得
@@ -147,8 +153,8 @@ void GameInit(void) {
 *　ゲームメイン
 **************************************************************************/
 void GameMain(void) {
-	Player.LoadImages();
-	Player.GameInit();
+	Player.playerspeed(g_NowKey, g_OldKey);
+	Player.UpdateX(g_NowKey);
 	Player.Draw();
 }
 
