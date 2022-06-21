@@ -3,10 +3,11 @@
 
 #define CONTROL_X_RIGHT 25000
 #define CONTROL_X_LEFT -25000
+#define MAX_BUTTON 16
 
 bool controllerKey;
 
-XINPUT_STATE input;
+
 
 enum Controll
 {
@@ -17,13 +18,14 @@ enum Controll
 class Controller
 {
 private:
-	int OldKey;
-	int NowKey;
-	int KeyFlg;
+	XINPUT_STATE input;
+	XINPUT_STATE OldKey;
+	unsigned char KeyFlg[16];
+	short stick;
 
 
 public:
-	int Key(bool ControlFlg);
+	int Key();
 	int BoolKey(enum  data);
 };
 

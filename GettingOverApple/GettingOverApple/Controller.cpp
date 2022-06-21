@@ -2,25 +2,13 @@
 
 
 
-int Controller::Key(bool ControlFlg)
+int Controller::Key()
 {
 
-	if (ControlFlg) {			//TRUE:’·‰Ÿ‚µ‘jŽ~
-		OldKey = NowKey;
-		NowKey = GetJoypadXInputState(DX_INPUT_PAD1,&input);
-	}
-	else
-	{							//FALSE:’·‰Ÿ‚µ‹–‰Â
-		
-		if (input.ThumbLX!=128) {
-			OldKey = KeyFlg;
-			KeyFlg = input.ThumbLX;
-			
-		}
-		else if(input.Buttons[5]!=FALSE) {
-			KeyFlg = GetJoypadXInputState(DX_INPUT_PAD1, &input);
-		}
-		
+	OldKey = input;
+	GetJoypadXInputState(DX_INPUT_PAD1, &input);
+	for (int i = 0; i < MAX_BUTTON; i++) {
+		KeyFlg[i] = input.Buttons[i] & ~OldKey.Buttons[i];
 	}
 
 	return KeyFlg;
