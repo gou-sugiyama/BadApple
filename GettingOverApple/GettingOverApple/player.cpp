@@ -11,7 +11,6 @@ const int PLAYER_POS_X = SCREEN_WIDTH / 2;
 const int PLAYER_POS_Y = SCREEN_HEIGHT - 100;
 const int PLAYER_WIDTH = 40;
 const int PLAYER_HIGHT = 100;
-const int PLAYER_SPEED = 5;
 
 
 void player::PlayerControl() {
@@ -32,32 +31,19 @@ void player::Draw() {
 }
 
 void player::playerspeed(int g_Nowkey, int g_OldKey) {
-	if (g_OldKey == g_Nowkey) {
-		if (i <= 4) {
-			speed += i * 0.2;
+	if (g_OldKey == g_Nowkey) {// g_OldKey == 0 && g_NowKey == 0
+		if (i < 25) {
+			speed += i * 0.01;
 			i++;
 		}
 	}
-	else if (g_OldKey) {
-		if (i >= -4) {
-			speed += -i * 0.1;
+	else  {
+		if (i < 0) {
+			speed -= i * 0.01;
 			i--;
 		}
 	}
-	//else if (g_Nowkey) {
-	//	if (i == 4) {
-	//		speed -= i + 5;
-	//		i--;
-	//	}
-	//}
-	else if (g_OldKey) {
-		if (i == 4) {
-		speed -= -i - 0.5;
-		i--;
-	}
-	}
 }
-
 void player::UpdateX(int g_Nowkey) {
 	if (g_Nowkey & PAD_INPUT_LEFT)g_playerx -=speed ;
 	if (g_Nowkey & PAD_INPUT_RIGHT)g_playerx += speed;
