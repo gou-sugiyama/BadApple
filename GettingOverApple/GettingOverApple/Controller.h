@@ -25,7 +25,8 @@ private:
 
 
 public:
-	int Key();
-	int BoolKey(enum  data);
+
+	void Control(XINPUT_STATE &data);
+	void PL_Control(XINPUT_STATE &input);
 };
 

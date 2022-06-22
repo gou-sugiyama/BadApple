@@ -2,24 +2,23 @@
 
 
 
-int Controller::Key()
+void Controller::Control(XINPUT_STATE &data)
 {
-
 	OldKey = input;
 	GetJoypadXInputState(DX_INPUT_PAD1, &input);
 	for (int i = 0; i < MAX_BUTTON; i++) {
-		KeyFlg[i] = input.Buttons[i] & ~OldKey.Buttons[i];
+		data.Buttons[i] = input.Buttons[i] & ~OldKey.Buttons[i];
 	}
-
-	return KeyFlg;
+	data.LeftTrigger = input.LeftTrigger & ~OldKey.LeftTrigger;
+	data.RightTrigger = input.RightTrigger & ~OldKey.RightTrigger;
+	data.ThumbLX = input.ThumbLX & ~OldKey.ThumbLX;
+	data.ThumbLY = input.ThumbLY & ~OldKey.ThumbLY;
+	data.ThumbRX = input.ThumbRX & ~OldKey.ThumbRX;
+	data.ThumbRY = input.ThumbRY & ~OldKey.ThumbRY;
 }
 
-int Controller::BoolKey(enum data)
+void Controller::PL_Control(XINPUT_STATE &input)
 {
-	if (input.ThumbLX == ) {
-
-	}
-
-
-	return 0;
+	GetJoypadXInputState(DX_INPUT_PAD1, &input);
 }
+
