@@ -1,12 +1,17 @@
 #include "DxLib.h"
+#include"Apple.h"
+#include"Object.h"
+#include"AppleManager.h"
+
 #define RANKING_DATA 5
+
+//#include"AppleManager.h"
 
 /*************************************************************************
 *	定数の宣言
 **************************************************************************/
 //画面領域の大きさ
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+
 const int PLAYER_POS_X = SCREEN_WIDTH / 2;
 const int PLAYER_POS_Y = SCREEN_HEIGHT - 100;
 const int PLAYER_WIDTH = 63;
@@ -83,6 +88,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	if (LoadImages() == -1)return -1;
 
+
+
 	//ランキングデータ読み込み
 	if (ReadRanking() == -1) return -1;
 
@@ -144,16 +151,19 @@ void DrawHelp(void) {
 void GameInit(void) {
 	//スコアの初期化
 	g_Score = 0;
-
+	//apple.image = 4;
 	//ゲームメイン処理へ
 	g_GameState = 5;
+	//apple.Apple = 4;
 }
 
 /*************************************************************************
 *　ゲームメイン
 **************************************************************************/
 void GameMain(void) {
-
+	static APPLE apple;
+	apple.AppleControl();
+	apple.CreateApple();
 }
 
 /*************************************************************************
