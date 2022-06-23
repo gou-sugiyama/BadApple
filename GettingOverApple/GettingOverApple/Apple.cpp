@@ -19,6 +19,8 @@ APPLE::APPLE() {
 	speed = 3;
 	point = 0;
 	image = LoadGraph("images/Apple_2.png");
+	App = 0;
+	n = 0;
 }
 //APPLE::~APPLE() {
 //
@@ -28,7 +30,7 @@ APPLE::APPLE() {
 
 void APPLE::AppleInit(void) {
 	
-	
+	*App = 4;
 	//ƒŠƒ“ƒS‚Ì‰Šúˆ—
 	for (int i = 0; i < *App; i++) {
 		flg = TRUE;
@@ -74,7 +76,7 @@ NORMAL::NORMAL(){
 BLUE::BLUE() {
 	speed = 5;
 	image = LoadGraph("images/BlueApple.jpg");
-	point = 270;
+	point = 300;
 }
 GOLD::GOLD() {
 	speed = 10;
@@ -93,7 +95,6 @@ POISON::POISON() {
 –ß‚è’l:TRUE:¬Œ÷@FALSE:¸”s
 */
  void APPLE::CreateApple(void) {
-	 //int App[10] = {1,1,1,1,0,0,0,0,0,0};
 	 
 	for (int i = 0; i < n / 2; i++) {
 		for (int j = 0; j < n; j++) {
