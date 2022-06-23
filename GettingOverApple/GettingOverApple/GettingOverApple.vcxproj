@@ -19,10 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Apple.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Apple.h" />
+    <ClInclude Include="define.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Manager.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

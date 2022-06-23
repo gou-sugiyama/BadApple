@@ -1,5 +1,8 @@
 #include "DxLib.h"
 #define RANKING_DATA 5
+#include"Manager.h"
+#include"Title.h"
+#include"Apple.h"
 #include"UI.h"
 
 UserInterface UI;
@@ -80,6 +83,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//ランキングデータ読み込み
 	if (ReadRanking() == -1) return -1;
 
+	//管理システムを動的確保
+	CManager* manager;
+	manager = new CManager(&g_NowKey);
+
+	//タイトルを動的確保
+	manager->scene = new CTitle(manager);
+
 	//ゲームループ
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		//入力キー取得
@@ -89,10 +99,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		ClearDrawScreen();		//画面の初期化
 
-		GameMain();				//ゲームメイン処理
+		manager->Update();
+		manager->Render();
 
 		ScreenFlip();				//裏画面の内容を表画面に反映
 	}
+
+	//managerの解放
+	delete manager;
+
 	DxLib_End();					//DXライブラリ使用の終了処理
 	return 0;				//ソフト終了
 }
@@ -147,7 +162,7 @@ void GameInit(void) {
 *　ゲームメイン
 **************************************************************************/
 void GameMain(void) {
-	UI.Draw();
+
 }
 
 /*************************************************************************
