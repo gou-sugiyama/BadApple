@@ -1,4 +1,7 @@
 #pragma once
+#define D_APPLE_WIDTH (40)
+#define D_APPLE_HEIGHT (40)
+class CAppleManager;
 class CApple
 {
 private:
@@ -9,9 +12,13 @@ private:
 	int image;
 	int speed;
 	int score;
+	bool isShow;
 public:
-	CApple();
-	void Draw()const;
-	void Fall();
+	CApple(int pimage);
+	void Update();
+	void Render();
+	void toggleisShow();
+	int getY() { return m_y; };
+	bool getisShow() { return isShow; };
 };
 

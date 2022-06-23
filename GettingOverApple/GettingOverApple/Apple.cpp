@@ -1,20 +1,26 @@
 #include "Apple.h"
 #include"DxLib.h"
+#include"AppleManager.h"
 
-CApple::CApple() {
+CApple::CApple(int pimage) {
 	m_x = GetRand(6)*70;
-	m_y = 30;
-	m_w = 40;
-	m_h = 40;
-	image = LoadGraph("images/cone.bmp");
+	m_y = 0;
+	m_w = D_APPLE_WIDTH;
+	m_h = D_APPLE_HEIGHT;
+	image = pimage;
 	speed = 3;
 	score = 50;
+	isShow = true;
 }
 
-void CApple::Draw()const {
+void CApple::Update() {
+	m_y += speed;
+}
+
+void CApple::Render() {
 	DrawGraph(m_x, m_y, image,true);
 }
 
-void CApple::Fall() {
-	m_y += speed;
+void CApple::toggleisShow() {
+	isShow = !isShow;
 }

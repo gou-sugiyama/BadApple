@@ -14,8 +14,8 @@ CPlayer::CPlayer(CManager* pManager) {
 	height = D_PLAYER_HEIGHT;
 
 	//位置を初期化(座標は x:ゲーム領域の中心, y:ウインドウの下辺)
-	x = D_GAME_AREA / 2;
-	y = D_SCREEN_HEIGHT - (height / 2);	//RotaGraphで描画するため画像サイズの2分の一にする
+	x = (float)(D_GAME_AREA / 2);
+	y = (float)(D_SCREEN_HEIGHT - (height / 2));	//RotaGraphで描画するため画像サイズの2分の一にする
 
 	speed = 0;
 	isMove = false;
@@ -42,7 +42,7 @@ void CPlayer::Update() {
 }
 
 void CPlayer::Render() {
-	DrawRotaGraph(x, y, 1.0f, 0, graphic[isMove], FALSE);
+	DrawRotaGraph((int)x, (int)y, 1.0f, 0, graphic[isMove], FALSE);
 
 	DrawFormatString(0, 20, 0xFFFFFF, "%lf", this->x);
 	DrawFormatString(0, 40, 0xFFFFFF, "%lf", this->speed);
@@ -72,16 +72,15 @@ void CPlayer::SpeedControl() {
 		speed -= D_PLAYER_SUB_SPEED;
 		if (speed < 0) {
 			speed = 0;
-			isMove = false;
 		}
 	}
 	if (speed < 0) {
 		speed += D_PLAYER_SUB_SPEED;
 		if (speed > 0) {
 			speed = 0;
-			isMove = false;
 		}
 	}
+	if (speed == 0) isMove = false;
 }
 
 void CPlayer::SetWH() {

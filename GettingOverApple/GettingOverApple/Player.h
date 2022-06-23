@@ -17,14 +17,15 @@ private:
 	//画像データ格納
 	int graphic[D_PLAYER_GRAPHIC_NUM];
 
-	//DXライブラリで定義されている構造体(中身はfloat型のx,y,z)
+	//座標周辺情報
 	int width;
 	int height;
 	float x;
 	float y;
 
+	//移動周辺情報
 	float speed;
-	bool isMove;
+	bool isMove;	//移動しているか？
 
 public:
 	CPlayer(CManager*);
