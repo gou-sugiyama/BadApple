@@ -22,6 +22,9 @@ XINPUT_STATE Controller::Control()
 XINPUT_STATE Controller::PL_Control()
 {
 	GetJoypadXInputState(DX_INPUT_PAD1, &data);
+	for (int i = 0; i < MAX_BUTTON; i++) {
+		data.Buttons[i] = input.Buttons[i] & ~OldKey.Buttons[i];
+	}
 
 	return data;
 }
