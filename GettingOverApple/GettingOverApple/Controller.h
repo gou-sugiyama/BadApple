@@ -20,13 +20,14 @@ class Controller
 private:
 	XINPUT_STATE input;
 	XINPUT_STATE OldKey;
-	unsigned char KeyFlg[16];
+	XINPUT_STATE data;
+
 	short stick;
 
 
 public:
 
-	void Control(XINPUT_STATE &data);
-	void PL_Control(XINPUT_STATE &input);
+	XINPUT_STATE Control();
+	XINPUT_STATE PL_Control();
 };
 

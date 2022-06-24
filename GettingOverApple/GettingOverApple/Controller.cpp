@@ -2,7 +2,7 @@
 
 
 
-void Controller::Control(XINPUT_STATE &data)
+XINPUT_STATE Controller::Control()
 {
 	OldKey = input;
 	GetJoypadXInputState(DX_INPUT_PAD1, &input);
@@ -15,10 +15,14 @@ void Controller::Control(XINPUT_STATE &data)
 	data.ThumbLY = input.ThumbLY & ~OldKey.ThumbLY;
 	data.ThumbRX = input.ThumbRX & ~OldKey.ThumbRX;
 	data.ThumbRY = input.ThumbRY & ~OldKey.ThumbRY;
+
+	return data;
 }
 
-void Controller::PL_Control(XINPUT_STATE &input)
+XINPUT_STATE Controller::PL_Control()
 {
-	GetJoypadXInputState(DX_INPUT_PAD1, &input);
+	GetJoypadXInputState(DX_INPUT_PAD1, &data);
+
+	return data;
 }
 
