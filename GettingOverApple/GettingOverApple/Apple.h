@@ -16,9 +16,9 @@ private:
 public:
 	CApple(int pimage);
 	void Update();
-	void Render();
+	void Render()const;
 	void toggleisShow();
-	int getY() { return m_y; };
-	bool getisShow() { return isShow; };
+	int getY() { return m_y; }
+	bool getisShow() { return isShow; }
 };
 

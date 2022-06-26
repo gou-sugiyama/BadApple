@@ -1,23 +1,23 @@
 #pragma once
-class UserInterface
+class CUI
 {
 private:
-	int m_AppleCount[4];
-	int m_score;
-	int m_TimeLimit;
+	int AppleCount[4];
+	int score;
+	int TimeLimit;
 	bool isPause;
 public:
-	UserInterface();
-	void Draw(void);
+	CUI();
+	void Render();
 	bool getisPause() const {
 		return isPause;
 	}
 
 	int getScore() const{
-		return m_score;
+		return score;
 	}
 	void setScore(int add) {
-		m_score += add;
+		score += add;
 	}
 };
 

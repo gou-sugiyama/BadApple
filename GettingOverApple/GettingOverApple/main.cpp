@@ -1,11 +1,9 @@
 #include "DxLib.h"
 #define RANKING_DATA 5
-#include"Manager.h"
+#include"SceneManager.h"
 #include"Title.h"
 #include"Apple.h"
 #include"UI.h"
-
-UserInterface UI;
 
 /*************************************************************************
 *	定数の宣言
@@ -84,8 +82,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	if (ReadRanking() == -1) return -1;
 
 	//管理システムを動的確保
-	CManager* manager;
-	manager = new CManager(&g_NowKey);
+	CSceneManager* manager;
+	manager = new CSceneManager(&g_NowKey);
 
 	//タイトルを動的確保
 	manager->scene = new CTitle(manager);

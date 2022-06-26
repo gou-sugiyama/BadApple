@@ -5,10 +5,10 @@ class CTitle :
     public CScene
 {
 public:
-    CTitle(CManager* pManager) :CScene(pManager) {};        //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
-    ~CTitle() {};
+    CTitle(CSceneManager* pManager) :CScene(pManager) {}        //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
+    ~CTitle() {}
 
-    void Update() override;
-    void Render() override;
+    CScene* Update() override;
+    void Render()const override;
 };
 

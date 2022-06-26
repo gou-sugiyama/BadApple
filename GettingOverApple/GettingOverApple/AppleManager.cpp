@@ -27,6 +27,6 @@ void CAppleManager::Update() {
 	Apple->Update();
 }
 
-void CAppleManager::Render() {
+void CAppleManager::Render()const {
 	Apple->Render();
 }

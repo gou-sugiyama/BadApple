@@ -1,16 +1,16 @@
 #include"DxLib.h"
-#include"Manager.h"
+#include"SceneManager.h"
 #include"Title.h"
 #include"Game.h"
 
-void CTitle::Update() {
+CScene* CTitle::Update() {
 	if (*(manager->GetKey()) >= 1) {
 		//ゲームシーンに移行
-		manager->scene = new CGame(manager);
-		delete this;
+		return new CGame(manager);
 	}
+	return this;
 }
 
-void CTitle::Render() {
+void CTitle::Render()const {
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "タイトル");
 }

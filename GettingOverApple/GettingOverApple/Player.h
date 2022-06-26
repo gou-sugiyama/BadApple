@@ -7,12 +7,12 @@
 #define D_PLAYER_SUB_SPEED 0.15f
 #define D_PLAYER_MAX_SPEED 5.0f//(-5)
 #define D_PLAYER_GRAPHIC_NUM (2)
-class CManager;
+class CSceneManager;
 class CPlayer
 {
 private:
 	//シーン管理クラス
-	CManager* manager;		//入力をもらいたい
+	CSceneManager* manager;		//入力をもらいたい
 
 	//画像データ格納
 	int graphic[D_PLAYER_GRAPHIC_NUM];
@@ -28,13 +28,13 @@ private:
 	bool isMove;	//移動しているか？
 
 public:
-	CPlayer(CManager*);
+	CPlayer(CSceneManager*);
 	~CPlayer();
 
 	//更新
 	void Update();
 	//描画
-	void Render();
+	void Render()const;
 
 private:
 	//スピードの加算

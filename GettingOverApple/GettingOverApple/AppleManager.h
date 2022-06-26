@@ -12,6 +12,6 @@ public:
 	bool CreateApple();
 
 	void Update();
-	void Render();
+	void Render()const;
 };
 

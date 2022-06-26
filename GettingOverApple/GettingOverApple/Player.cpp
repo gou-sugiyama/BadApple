@@ -1,10 +1,10 @@
 #include"DxLib.h"
 #include"Player.h"
-#include"Manager.h"
+#include"SceneManager.h"
 #include"define.h"
 
-CPlayer::CPlayer(CManager* pManager) {
-	//CManagerのアドレス格納
+CPlayer::CPlayer(CSceneManager* pManager) {
+	//CSceneManagerのアドレス格納
 	manager = pManager;
 	//画像データ
 	graphic[false] = LoadGraph("images/car1.bmp");
@@ -41,7 +41,7 @@ void CPlayer::Update() {
 	if (x > D_GAME_AREA - D_PLAYER_WIDTH_MOVE)x = D_GAME_AREA - D_PLAYER_WIDTH_MOVE;		//左端
 }
 
-void CPlayer::Render() {
+void CPlayer::Render()const {
 	DrawRotaGraph((int)x, (int)y, 1.0f, 0, graphic[isMove], FALSE);
 
 	DrawFormatString(0, 20, 0xFFFFFF, "%lf", this->x);

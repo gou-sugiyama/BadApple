@@ -17,7 +17,7 @@ void CApple::Update() {
 	m_y += speed;
 }
 
-void CApple::Render() {
+void CApple::Render()const {
 	DrawGraph(m_x, m_y, image,true);
 }
 

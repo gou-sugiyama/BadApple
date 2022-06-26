@@ -1,11 +1,11 @@
 #include"DxLib.h"
-#include"Manager.h"
+#include"SceneManager.h"
 #include"Game.h"
 #include"Title.h"
 #include"Player.h"
 #include"AppleManager.h"
 
-CGame::CGame(CManager* pManager) :CScene(pManager) { //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
+CGame::CGame(CSceneManager* pManager) :CScene(pManager) { //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
 	//プレイヤーを動的確保
 	player = new CPlayer(pManager);
 	//アップルマネージャーを動的確保
@@ -18,12 +18,14 @@ CGame::~CGame() {
 	delete applemanager;
 }
 
-void CGame::Update() {
+CScene* CGame::Update() {
 	applemanager->Update();
 	player->Update();
+
+	return this;
 }
 
-void CGame::Render() {
+void CGame::Render()const {
 	DrawFormatString(0, 0, GetColor(255, 255, 255),"ゲーム");
 	applemanager->Render();
 	player->Render();
