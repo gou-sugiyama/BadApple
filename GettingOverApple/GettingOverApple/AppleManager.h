@@ -5,7 +5,6 @@ class AppleManager
 private:
 	int image;
 	APPLE* Apple;
-	//APPLE* apple[APPLE_MAX];
 public:
 	AppleManager();
 	~AppleManager();
