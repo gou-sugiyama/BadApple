@@ -14,15 +14,16 @@ AppleManager::AppleManager()
 bool AppleManager::CreateApple()
 {
 	
-
-	if (Apple->getisShow() == FALSE) {
-		Apple = new APPLE(image);
+	for (int i = 0; i < APPLE_MAX; i++) {
+		if (Apple->getisShow() == FALSE) {
+			Apple = new APPLE(image);
+		}
+		if (Apple->getY() >= SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
+			Apple->toggleisShow();
+		}
+		return TRUE;
 	}
-	if (Apple->getY() >= SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
-		Apple->toggleisShow();
-	}
-	return TRUE;
-	
+	return FALSE;
 }
 
 void AppleManager::Update(){

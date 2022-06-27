@@ -5,7 +5,7 @@
 
 APPLE::APPLE(int pimage) {
 	x = GetRand(6) * 71 + 35;
-	y = 10;
+	y = 0;
 	/*h = 40;
 	w = 40;*/
 	image = pimage;
