@@ -1,23 +1,37 @@
-//#include"DxLib.h"
-//#include"Apple.h"
-// #include"Object"
-//#include"AppleManager.h"
-//
-//APPLEManager::APPLEManager()
-//{
-//	for (int i = 0; i < APPLE_MAX; i++)
-//	{
-//		if (apple[i] != NULL)
-//		{
-//			apple[i]->AppleControl();
-//		}
-//	}
-//}
+#include"DxLib.h"
+#include"Apple.h"
+#include"AppleManager.h"
 
-//APLEManager::~APPLEManager()
-//{
-//	for (int i = 0; num < APPLE_MAX; i++)
-//	{
-//		delete apple[i];
-//	}
-//}
+AppleManager::AppleManager()
+{
+	image = LoadGraph("images/Apple_2.png");
+	Apple = new APPLE(image);
+   	//Apple->toggleisShow();
+	//Apple = NULL;
+
+}AppleManager::~AppleManager() { delete Apple; }
+
+bool AppleManager::CreateApple()
+{
+	
+
+	if (Apple->getisShow() == FALSE) {
+		Apple = new APPLE(image);
+	}
+	if (Apple->getY() >= SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
+		Apple->toggleisShow();
+	}
+	return TRUE;
+	
+}
+
+void AppleManager::Update(){
+	static int WaitTime = 0;
+	if (!(++WaitTime % 25)) CreateApple();
+	Apple->Update();
+}
+
+void AppleManager::Render(){
+
+	Apple->Render();
+}

@@ -1,6 +1,5 @@
 #include "DxLib.h"
 #include"Apple.h"
-#include"Object.h"
 #include"AppleManager.h"
 
 #define RANKING_DATA 5
@@ -161,9 +160,9 @@ void GameInit(void) {
 *Å@ÉQÅ[ÉÄÉÅÉCÉì
 **************************************************************************/
 void GameMain(void) {
-	static APPLE apple;
-	apple.AppleControl();
-	apple.CreateApple();
+	static AppleManager applemanager;
+	applemanager.Update();
+	applemanager.Render();
 }
 
 /*************************************************************************
