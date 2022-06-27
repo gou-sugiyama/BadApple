@@ -150,10 +150,8 @@ void DrawHelp(void) {
 void GameInit(void) {
 	//スコアの初期化
 	g_Score = 0;
-	//apple.image = 4;
 	//ゲームメイン処理へ
 	g_GameState = 5;
-	//apple.Apple = 4;
 }
 
 /*************************************************************************

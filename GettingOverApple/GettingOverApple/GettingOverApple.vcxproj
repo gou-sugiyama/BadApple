@@ -22,12 +22,10 @@
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AppleManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Apple.h" />
     <ClInclude Include="AppleManager.h" />
-    <ClInclude Include="Object.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

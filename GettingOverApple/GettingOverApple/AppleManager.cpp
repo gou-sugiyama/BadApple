@@ -6,8 +6,6 @@ AppleManager::AppleManager()
 {
 	image = LoadGraph("images/Apple_2.png");
 	Apple = new APPLE(image);
-   	//Apple->toggleisShow();
-	//Apple = NULL;
 
 }AppleManager::~AppleManager() { delete Apple; }
 
