@@ -1,8 +1,12 @@
 #include "Controller.h"
 
-if (controllerKey) {
 
-	
+XINPUT_STATE Controller::control()
+{
+
+	if (controllerKey) {
+
+
 		OldKey = input;
 		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		for (int i = 0; i < MAX_BUTTON; i++) {
@@ -16,17 +20,18 @@ if (controllerKey) {
 		data.ThumbRY = input.ThumbRY & ~OldKey.ThumbRY;
 
 		return data;
-	
-}
-else {
 
-	
+	}
+	else {
+
+
 		GetJoypadXInputState(DX_INPUT_PAD1, &data);
 		for (int i = 0; i < MAX_BUTTON; i++) {
 			data.Buttons[i] = input.Buttons[i] & ~OldKey.Buttons[i];
 		}
 
 		return data;
-	
-}
 
+	}
+
+}
