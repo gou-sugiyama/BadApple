@@ -11,7 +11,7 @@ CPlayer::CPlayer(CSceneManager* pManager) {
 	graphic[true] = LoadGraph("images/car1pol.bmp");
 	//画像情報初期化
 	width = D_PLAYER_WIDTH;
-	height = D_Player2.hEIGHT;
+	height = D_PLAYER_HEIGHT;
 
 	//位置を初期化(座標は x:ゲーム領域の中心, y:ウインドウの下辺)
 	x = (float)(D_GAME_AREA / 2);
@@ -87,11 +87,11 @@ void CPlayer::SetWH() {
 	//移動中
 	if (isMove) {
 		width = D_PLAYER_WIDTH_MOVE;
-		height = D_Player2.hEIGHT_MOVE;
+		height = D_PLAYER_HEIGHT_MOVE;
 	}
 	//待機中
 	else {
 		width = D_PLAYER_WIDTH;
-		height = D_Player2.hEIGHT;
+		height = D_PLAYER_HEIGHT;
 	}
 }
