@@ -1,13 +1,11 @@
 #pragma once
-#pragma once
 class CSceneManager;
 //シーンの基底クラス
 class CScene
 {
 protected:
 	//動的確保するシーン管理クラスのポインタ
-	CSceneManager* manager;		//子クラス内でもmanagerにシーンを渡すために必要
-
+	CSceneManager* manager;		//シーン内でクラスにマネージャーを渡したい
 public:
 	CScene(CSceneManager* pManager) { manager = pManager; }		//生成したときにmanagerのアドレスを引き継ぐ
 	virtual ~CScene() {};	//必要に応じてそのシーンのデストラクタを呼びたいため仮想関数(必要ないシーンもあるため純粋仮想関数にはしない)
