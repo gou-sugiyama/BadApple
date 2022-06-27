@@ -1,8 +1,8 @@
 #pragma once
 #define D_PLAYER_WIDTH (40)
-#define D_PLAYER_HEIGHT (100)
+#define D_Player2.hEIGHT (100)
 #define D_PLAYER_WIDTH_MOVE (60)
-#define D_PLAYER_HEIGHT_MOVE (80)
+#define D_Player2.hEIGHT_MOVE (80)
 #define D_PLAYER_ADD_SPEED 0.3f
 #define D_PLAYER_SUB_SPEED 0.15f
 #define D_PLAYER_MAX_SPEED 5.0f//(-5)
