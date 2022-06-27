@@ -1,10 +1,10 @@
 #include "Controller.h"
 
 
-XINPUT_STATE Controller::control()
+XINPUT_STATE CController::control(bool isChattering)
 {
 
-	if (controllerKey) {
+	if (isChattering) {
 
 
 		OldKey = input;

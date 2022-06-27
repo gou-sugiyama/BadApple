@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include"SceneManager.h"
+#include"Controller.h"
 #include"Title.h"
 #include"Apple.h"
 #include"UI.h"
@@ -26,13 +27,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	//コントローラの動的確保
+	CController* Controller;
+	Controller = new CController;
 
 	//管理システムを動的確保
 	CSceneManager* manager;
-	manager = new CSceneManager(&g_NowKey);
-
-	//タイトルを動的確保
-	manager->scene = new CTitle(manager);
+	manager = new CSceneManager(new CTitle(Controller));
 
 	//ゲームループ
 	while (ProcessMessage() == 0 && !(g_KeyFlg & PAD_INPUT_START) && manager->Update() != nullptr) {
@@ -43,7 +44,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		ClearDrawScreen();		//画面の初期化
 
-		
 		manager->Render();
 
 		ScreenFlip();				//裏画面の内容を表画面に反映
