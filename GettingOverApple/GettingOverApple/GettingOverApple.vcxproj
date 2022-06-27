@@ -42,7 +42,6 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Hit.cpp" />
-    <ClCompile Include="main.cpp" />
 
   </ItemGroup>
   <PropertyGroup Label="Globals">
