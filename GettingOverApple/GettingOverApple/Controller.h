@@ -9,12 +9,6 @@ bool controllerKey;
 
 
 
-enum Controll
-{
-	
-};
-
-
 class Controller
 {
 private:
@@ -22,12 +16,5 @@ private:
 	XINPUT_STATE OldKey;
 	XINPUT_STATE data;
 
-	short stick;
-
-
-public:
-
-	XINPUT_STATE Control();
-	XINPUT_STATE PL_Control();
 };
 
