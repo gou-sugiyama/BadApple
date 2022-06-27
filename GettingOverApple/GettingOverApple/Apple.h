@@ -6,8 +6,9 @@
 #define SCREEN_HEIGHT 480
 #define APPLE_WIDTH 40
 #define APPLE_HEIGHT 40
-class AppleManager;
-class APPLE {
+
+class CAppleManager;
+class CApple {
 private:
 	int x;
 	int y;
@@ -18,7 +19,7 @@ private:
 	int score;
 	bool isShow;
 public:
-	APPLE(int pimage);
+	CApple(int pimage);
 	void Update();
 	void Render();
 	void toggleisShow();

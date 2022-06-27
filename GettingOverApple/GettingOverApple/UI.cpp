@@ -1,7 +1,9 @@
-#include "UI.h"
 #include"DxLib.h"
+#include "UI.h"
+#include"SceneManager.h"
 
-CUI::CUI() {
+CUI::CUI(CSceneManager* pManager) {
+	manager = pManager;
 	for (int i = 0; i < 4; i++) {
 		AppleCount[i] = 0;
 	}
@@ -11,14 +13,32 @@ CUI::CUI() {
 	isPause = false;
 }
 
-void CUI::Render() {
-	int White = 0xFFFFFF;
-	int Black = 0x000000;
-	int const StrMargin = 20;
+bool CUI::Update() {
 	if (isPause == false) {
 		--TimeLimit;
 	}
-	else {
+
+	if (GetJoypadInputState(DX_INPUT_KEY_PAD1) & PAD_INPUT_M) {		//スペースキーが押されたらPAUSE
+		isPause = !isPause;
+	}
+
+	if (TimeLimit <= 0) {
+		TimeLimit = 0;
+
+		return false;
+		//TODO　制限時間が0になったら3秒後に画面遷移
+		//次のゲームステートを返すorゲームステートを変更する
+	}
+
+	return true;
+}
+
+void CUI::Render()const {
+	int White = 0xFFFFFF;
+	int Black = 0x000000;
+	int const StrMargin = 20;
+
+	if (isPause) {
 		SetFontSize(50);
 		DrawString(0, 240, "------PAUSE------", White);
 	}
@@ -29,10 +49,6 @@ void CUI::Render() {
 	SetFontSize(50);
 	DrawFormatString(545, StrMargin * 5, Black, "%02d", TimeLimit / 60);//数値調整済み
 	SetFontSize(16);
-	//DrawFormatString(510, 180, 0x000000, "取得したリンゴ");
-	/*DrawRotaGraph(523, 120, 0.3f, 0, g_Teki[0], TRUE, FALSE);
-	DrawRotaGraph(573, 120, 0.3f, 0, g_Teki[1], TRUE, FALSE);
-	DrawRotaGraph(623, 120, 0.3f, 0, g_Teki[2], TRUE, FALSE);*/
 
 	DrawFormatString(510, StrMargin * 12, White, "%03d", AppleCount[0]);
 	DrawFormatString(560, StrMargin * 12, White, "%03d", AppleCount[1]);
@@ -50,18 +66,5 @@ void CUI::Render() {
 	DrawFormatString(510, 240, 0x000000, "スピード");
 	DrawFormatString(555, 260, 0xFFFFFF, "%08d", g_player.speed);*/
 
-	if (GetJoypadInputState(DX_INPUT_KEY_PAD1) & PAD_INPUT_M) {		//スペースキーが押されたらPAUSE
-		isPause = !isPause;
-	}
 
-	if (TimeLimit <= 0) {
-		TimeLimit = 0;
-		static int WaitTime = 0;
-		if (++WaitTime > 180) {
-			WaitTime = 0;
-			TimeLimit = 60 * 30;		//TODOデバッグ用：後で消す
-		//TODO　制限時間が0になったら3秒後に画面遷移
-		//次のゲームステートを返すorゲームステートを変更する
-		}
-	}
 }

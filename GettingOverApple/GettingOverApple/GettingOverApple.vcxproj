@@ -25,7 +25,6 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Player2.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="UI.h" />
@@ -35,17 +34,12 @@
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AppleManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player2.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Hit.cpp" />
     <ClCompile Include="player.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Apple.h" />
-    <ClInclude Include="AppleManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

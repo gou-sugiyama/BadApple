@@ -1,14 +1,14 @@
 #pragma once
-class APPLE;
-class AppleManager
+class CApple;
+class CAppleManager
 {
 private:
 	int image;
-	APPLE* Apple;
-	//APPLE* apple[APPLE_MAX];
+	CApple* Apple;
+	
 public:
-	AppleManager();
-	~AppleManager();
+	CAppleManager();
+	~CAppleManager();
     bool CreateApple();
 	
 	void Update();

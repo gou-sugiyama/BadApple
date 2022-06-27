@@ -1,7 +1,7 @@
-#include "DxLib.h"
+#include"DxLib.h"
 #include"player.h"
-#define _USE_MATH_DEFINES
-#include <math.h>
+#include"SceneManager.h"
+
 int i = 0;
 //íËêîÇÃêÈåæ
 const int SCREEN_WIDTH = 640;
@@ -12,26 +12,22 @@ const int PLAYER_POS_Y = SCREEN_HEIGHT - 100;
 const int PLAYER_WIDTH = 40;
 const int PLAYER_HIGHT = 100;
 
-
-void player::PlayerControl() {
-
-}
-int player::LoadImages() {
-	if ((g_player = LoadGraph("images/car1pol.bmp")) == -1)return -1;
-}
-
-void player::GameInit() {
+CPlayer::CPlayer(CSceneManager* pManager) {
+	manager = pManager;
 	g_playerx = PLAYER_POS_X;
 	g_playery = PLAYER_POS_Y;
 	g_playerw = PLAYER_WIDTH;
 	g_playerh = PLAYER_HIGHT;
+	g_player = LoadGraph("images/car1pol.bmp");
 }
-void player::Draw() {
+
+
+void CPlayer::Render()const {
 	DrawRotaGraph(g_playerx, g_playery, 1.0f,0, g_player, TRUE, FALSE);
 }
 
-void player::playerspeed(int g_Nowkey, int g_OldKey) {
-	if (g_OldKey == g_Nowkey) {// g_OldKey == 0 && g_NowKey == 0
+void CPlayer::playerspeed() {
+	if (*(manager->GetKey())) {// g_OldKey == 0 && g_NowKey == 0
 		if (i < 25) {
 			speed += i * 0.01;
 			i++;
@@ -44,10 +40,11 @@ void player::playerspeed(int g_Nowkey, int g_OldKey) {
 		}
 	}
 }
-void player::UpdateX(int g_Nowkey) {
-	if (g_Nowkey & PAD_INPUT_LEFT)g_playerx -=speed ;
-	if (g_Nowkey & PAD_INPUT_RIGHT)g_playerx += speed;
-	DrawFormatString(0, 0, 0xFFFFFF, "%d", g_playerx);
+void CPlayer::Update() {
+	if (*(manager->GetKey()) & PAD_INPUT_LEFT)g_playerx -=speed ;
+	if (*(manager->GetKey()) & PAD_INPUT_RIGHT)g_playerx += speed;
+
+	playerspeed();
 
 	//âÊñ ÇÇÕÇ›èoÇ≥Ç»Ç¢ÇÊÇ§Ç…Ç∑ÇÈ
 	if (g_playerx < 32)g_playerx = 32;

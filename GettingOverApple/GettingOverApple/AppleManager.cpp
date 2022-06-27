@@ -2,19 +2,19 @@
 #include"Apple.h"
 #include"AppleManager.h"
 
-AppleManager::AppleManager()
+CAppleManager::CAppleManager()
 {
 	image = LoadGraph("images/Apple_2.png");
-	Apple = new APPLE(image);
+	Apple = new CApple(image);
 
-}AppleManager::~AppleManager() { delete Apple; }
+}CAppleManager::~CAppleManager() { delete Apple; }
 
-bool AppleManager::CreateApple()
+bool CAppleManager::CreateApple()
 {
 	
 	for (int i = 0; i < APPLE_MAX; i++) {
 		if (Apple->getisShow() == FALSE) {
-			Apple = new APPLE(image);
+			Apple = new CApple(image);
 		}
 		if (Apple->getY() >= SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
 			Apple->toggleisShow();
@@ -24,13 +24,13 @@ bool AppleManager::CreateApple()
 	return FALSE;
 }
 
-void AppleManager::Update(){
+void CAppleManager::Update(){
 	static int WaitTime = 0;
 	if (!(++WaitTime % 25)) CreateApple();
 	Apple->Update();
 }
 
-void AppleManager::Render(){
+void CAppleManager::Render(){
 
 	Apple->Render();
 }

@@ -35,7 +35,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	manager->scene = new CTitle(manager);
 
 	//ゲームループ
-	while (ProcessMessage() == 0  && !(g_KeyFlg & PAD_INPUT_START)) {
+	while (ProcessMessage() == 0 && !(g_KeyFlg & PAD_INPUT_START) && manager->Update() != nullptr) {
 		//入力キー取得
 		g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
@@ -43,7 +43,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		ClearDrawScreen();		//画面の初期化
 
-		manager->Update();
+		
 		manager->Render();
 
 		ScreenFlip();				//裏画面の内容を表画面に反映

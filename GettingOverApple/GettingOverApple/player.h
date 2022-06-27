@@ -1,12 +1,12 @@
 #pragma once
-class player {
+class CSceneManager;
+class CPlayer {
 public:
-	void PlayerControl();
-	void GameInit();
-	int LoadImages();
-	void Draw();
-	void playerspeed(int g_Nowkey, int g_OldKey);
-	void UpdateX(int g_Nowkey);
+	CSceneManager* manager;
+	CPlayer(CSceneManager* pManager);
+	void Render()const;
+	void playerspeed();
+	void Update();
 
 private:
 	int g_player;//ƒvƒŒƒCƒ„[‰æ‘œ•Ï”

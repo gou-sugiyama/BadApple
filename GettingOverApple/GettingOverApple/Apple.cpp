@@ -3,7 +3,7 @@
 #include"Apple.h"
 #include"AppleManager.h"
 
-APPLE::APPLE(int pimage) {
+CApple::CApple(int pimage) {
 	x = GetRand(6) * 71 + 35;
 	y = 0;
 	w = 40;
@@ -14,14 +14,14 @@ APPLE::APPLE(int pimage) {
 	isShow = true;
 }
 
-void APPLE::Update() {
+void CApple::Update() {
 	y += speed;
 }
 
-void APPLE::Render() {
+void CApple::Render() {
 	DrawGraph(x, y, image, TRUE);
 }
 
-void APPLE::toggleisShow() {
+void CApple::toggleisShow() {
 	isShow = !isShow;
 }

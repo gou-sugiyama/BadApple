@@ -1,14 +1,18 @@
 #pragma once
+class CSceneManager;
 class CUI
 {
 private:
+	CSceneManager* manager;
 	int AppleCount[4];
 	int score;
 	int TimeLimit;
 	bool isPause;
 public:
-	CUI();
-	void Render();
+	CUI(CSceneManager* pSceneManager);
+	bool Update();
+	void Render()const;
+
 	bool getisPause() const {
 		return isPause;
 	}
@@ -16,6 +20,7 @@ public:
 	int getScore() const{
 		return score;
 	}
+
 	void setScore(int add) {
 		score += add;
 	}
