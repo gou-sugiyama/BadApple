@@ -5,20 +5,40 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="ソースファイル">
+      <UniqueIdentifier>{5a5c9512-3100-493c-a672-412c6d2b683b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Apple.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="AppleManager.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
     <ClCompile Include="Controller.cpp">
-      <Filter>リソース ファイル</Filter>
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="Hit.cpp">
-      <Filter>リソース ファイル</Filter>
+      <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>リソース ファイル</Filter>
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,28 +71,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Apple.cpp">
-      <Filter>リソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="AppleManager.cpp">
-      <Filter>リソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>リソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>リソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>リソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>リソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>リソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
       <Filter>リソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
