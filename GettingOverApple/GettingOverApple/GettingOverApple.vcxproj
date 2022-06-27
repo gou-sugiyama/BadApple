@@ -26,6 +26,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Player2.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
@@ -40,6 +41,7 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Hit.cpp" />
+    <ClCompile Include="player.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
