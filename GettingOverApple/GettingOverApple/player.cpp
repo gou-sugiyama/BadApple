@@ -1,70 +1,111 @@
 #include"DxLib.h"
-#include"player.h"
+#include"Player.h"
 #include"Controller.h"
-#define D_KEY_CONTROL_LEFT -2000
-#define D_KEY_CONTROL_RIGHT 2000
-
-int i = 0;
-//定数の宣言
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-//自機の初期値
-const int PLAYER_POS_X = SCREEN_WIDTH / 2;
-const int PLAYER_POS_Y = SCREEN_HEIGHT - 100;
-const int PLAYER_WIDTH = 40;
-const int PLAYER_HIGHT = 100;
+#include"define.h"
 
 CPlayer::CPlayer(CController* pController) {
+	//controllerのアドレス格納
 	controller = pController;
-	g_playerx = PLAYER_POS_X;
-	g_playery = PLAYER_POS_Y;
-	g_playerw = PLAYER_WIDTH;
-	g_playerh = PLAYER_HIGHT;
-	speed = 3;
-	g_player = LoadGraph("images/taiki.png");
+	//画像データ
+	graphic[false] = LoadGraph("images/car1.bmp");
+	graphic[true] = LoadGraph("images/car1pol.bmp");
+	//画像情報初期化
+	width = D_PLAYER_WIDTH;
+	height = D_PLAYER_HEIGHT;
+
+	//位置を初期化(座標は x:ゲーム領域の中心, y:ウインドウの下辺)
+	x = (float)(D_GAME_AREA / 2);
+	y = (float)(D_SCREEN_HEIGHT - (height / 2));	//RotaGraphで描画するため画像サイズの2分の一にする
+
+	speed = 0;
+	isMove = false;
+}
+
+CPlayer::~CPlayer() {
+
 }
 
 void CPlayer::Update() {
-	if (KeyControl() < 0)g_playerx -= speed; 
-	if (0 < KeyControl())g_playerx += speed;
+	//スピードの加算
+	AddSpeed();
 
-	//playerspeed();
+	//移動中なら当たり判定を変える
+	SetWH();
 
-	//画面をはみ出さないようにする
-	if (g_playerx < 32)g_playerx = 32;
-	if (g_playerx > SCREEN_WIDTH - 180)g_playerx = SCREEN_WIDTH - 180;
+	//speedの最大値、最小値、原点の制御
+	SpeedControl();
+
+	//位置情報の更新
+	x += speed;
+	//ゲーム領域の端で止める
+	if (x < D_PLAYER_WIDTH_MOVE) x = D_PLAYER_WIDTH_MOVE;		//左端
+	if (x > D_GAME_AREA - D_PLAYER_WIDTH_MOVE)x = D_GAME_AREA - D_PLAYER_WIDTH_MOVE;		//左端
 }
+
 void CPlayer::Render()const {
-	DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_player, TRUE, FALSE);
-	//DrawFormatString(0, 20, 0xFFFFFF, "%d", controller->control(true).ThumbLX);
+	DrawRotaGraph((int)x, (int)y, 1.0f, 0, graphic[isMove], FALSE);
+
+	DrawFormatString(0, 20, 0xFFFFFF, "%lf", this->x);
+	DrawFormatString(0, 40, 0xFFFFFF, "%lf", this->speed);
+	DrawFormatString(0, 60, 0xFFFFFF, "%d", this->width);
+	DrawFormatString(0, 80, 0xFFFFFF, "%d", this->height);
 }
 
-void CPlayer::playerspeed() {
-	if (KeyControl()<0) {// g_OldKey == 0 && g_NowKey == 0
-		if (i < 25) {
-			speed += i * 0.01f;
-			i++;
+void CPlayer::AddSpeed() {
+	//キー入力中にspeedに加算
+	if (KeyControl() < 0) {
+		speed -= D_PLAYER_ADD_SPEED;
+		isMove = true;
+	}
+	if (0 < KeyControl()) {
+		speed += D_PLAYER_ADD_SPEED;
+		isMove = true;
+	}
+}
+
+void CPlayer::SpeedControl() {
+	//最大値、最小値の制御
+	if (speed < -D_PLAYER_MAX_SPEED)speed = -D_PLAYER_MAX_SPEED;
+	if (speed > D_PLAYER_MAX_SPEED)speed = D_PLAYER_MAX_SPEED;
+
+	//毎フレームspeedを0に少しずつ近づけ、0になったら移動フラグをfalseする
+	if (speed > 0) {
+		speed -= D_PLAYER_SUB_SPEED;
+		if (speed < 0) {
+			speed = 0;
 		}
 	}
-	else if(0 < KeyControl()){
-		if (i < 0) {
-			speed -= i * 0.01f;
-			i--;
+	if (speed < 0) {
+		speed += D_PLAYER_SUB_SPEED;
+		if (speed > 0) {
+			speed = 0;
 		}
+	}
+	if (speed == 0) isMove = false;
+}
+
+void CPlayer::SetWH() {
+	//移動中
+	if (isMove) {
+		width = D_PLAYER_WIDTH_MOVE;
+		height = D_PLAYER_HEIGHT_MOVE;
+	}
+	//待機中
+	else {
+		width = D_PLAYER_WIDTH;
+		height = D_PLAYER_HEIGHT;
 	}
 }
 
 int CPlayer::KeyControl() {
 	short int key = (controller->control(true)).ThumbLX;
 
-	if ( D_KEY_CONTROL_RIGHT< key) {
+	if (D_KEY_CONTROL_RIGHT < key) {
 		return 1;//右
 	}
-	else if(key < D_KEY_CONTROL_LEFT) {
+	else if (key < D_KEY_CONTROL_LEFT) {
 		return -1;//左
 	}
 	else {
 		return 0;
 	}
-	
-}

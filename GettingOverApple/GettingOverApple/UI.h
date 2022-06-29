@@ -5,9 +5,9 @@ class CUI
 {
 private:
 	CController* controller;
-	int AppleCount[4];
+	int appleCount[4];
 	int score;
-	int TimeLimit;
+	int timeLimit;
 	bool isPause;
 public:
 	CUI(CController* pController);

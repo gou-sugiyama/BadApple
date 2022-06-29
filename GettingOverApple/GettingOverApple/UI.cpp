@@ -5,25 +5,25 @@
 CUI::CUI(CController* pController) {
 	controller = pController;
 	for (int i = 0; i < 4; i++) {
-		AppleCount[i] = 0;
+		appleCount[i] = 0;
 	}
 
 	score = 0;
-	TimeLimit = 60 * 30;			//60ƒtƒŒ[ƒ€*30•b
+	timeLimit = 60 * 30;			//60ƒtƒŒ[ƒ€*30•b
 	isPause = false;
 }
 
 bool CUI::Update() {
 	if (isPause == false) {
-		--TimeLimit;
+		--timeLimit;
 	}
 
 	if (controller->control(false).Buttons[4]) {	
 		isPause = !isPause;
 	}
 
-	if (TimeLimit <= 0) {
-		TimeLimit = 0;
+	if (timeLimit <= 0) {
+		timeLimit = 0;
 
 		return false;
 		//TODO@§ŒÀŽžŠÔ‚ª0‚É‚È‚Á‚½‚ç3•bŒã‚É‰æ–Ê‘JˆÚ
@@ -47,12 +47,12 @@ void CUI::Render()const {
 	SetFontSize(30);
 	DrawString(508, 30, "§ŒÀŽžŠÔ", Black);					//”’l’²®Ï‚Ý
 	SetFontSize(50);
-	DrawFormatString(545, StrMargin * 5, Black, "%02d", TimeLimit / 60);//”’l’²®Ï‚Ý
+	DrawFormatString(545, StrMargin * 5, Black, "%02d", timeLimit / 60);//”’l’²®Ï‚Ý
 	SetFontSize(16);
 
-	DrawFormatString(510, StrMargin * 12, White, "%03d", AppleCount[0]);
-	DrawFormatString(560, StrMargin * 12, White, "%03d", AppleCount[1]);
-	DrawFormatString(610, StrMargin * 12, White, "%03d", AppleCount[2]);
+	DrawFormatString(510, StrMargin * 12, White, "%03d", appleCount[0]);
+	DrawFormatString(560, StrMargin * 12, White, "%03d", appleCount[1]);
+	DrawFormatString(610, StrMargin * 12, White, "%03d", appleCount[2]);
 
 	DrawString(510, StrMargin * 14, "SCORE:", White);
 	DrawFormatString(580, StrMargin * 14, White, "%06d", score);
