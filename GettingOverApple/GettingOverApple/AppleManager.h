@@ -4,15 +4,15 @@ class CAppleManager
 {
 private:
 	int image;
-	CApple* Apple;
+	CApple* apple;
 	
 public:
 	CAppleManager();
 	~CAppleManager();
-    bool CreateApple();
+    void CreateApple();
 	
 	void Update();
-	void Render();
+	void Render()const;
 
-	CApple* getpApple() { return Apple; }
+	CApple* getpApple() { return apple; }
 };

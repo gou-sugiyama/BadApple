@@ -3,6 +3,9 @@
 #include"Controller.h"
 #include"define.h"
 
+//-----------------------
+// コンストラクタ
+//-----------------------
 CPlayer::CPlayer(CController* pController) {
 	//controllerのアドレス格納
 	controller = pController;
@@ -25,6 +28,9 @@ CPlayer::~CPlayer() {
 
 }
 
+//------------------------
+// 更新
+//------------------------
 void CPlayer::Update() {
 	//スピードの加算
 	AddSpeed();
@@ -42,6 +48,9 @@ void CPlayer::Update() {
 	if (x > D_GAME_AREA - D_PLAYER_WIDTH_MOVE)x = D_GAME_AREA - D_PLAYER_WIDTH_MOVE;		//左端
 }
 
+//-------------------------
+// 描画
+//-------------------------
 void CPlayer::Render()const {
 	DrawRotaGraph((int)x, (int)y, 1.0f, 0, graphic[isMove], FALSE);
 
@@ -51,18 +60,26 @@ void CPlayer::Render()const {
 	DrawFormatString(0, 80, 0xFFFFFF, "%d", this->height);
 }
 
+//-----------------------
+// スピードの加算
+//-----------------------
 void CPlayer::AddSpeed() {
-	//キー入力中にspeedに加算
+	//左へキー入力中speedをxマイナス方向に加算
 	if (KeyControl() < 0) {
 		speed -= D_PLAYER_ADD_SPEED;
 		isMove = true;
 	}
+
+	//右へキー入力中speedをxプラス方向に加算
 	if (0 < KeyControl()) {
 		speed += D_PLAYER_ADD_SPEED;
 		isMove = true;
 	}
 }
 
+//------------------------
+// スピードの制御
+//------------------------
 void CPlayer::SpeedControl() {
 	//最大値、最小値の制御
 	if (speed < -D_PLAYER_MAX_SPEED)speed = -D_PLAYER_MAX_SPEED;
@@ -84,6 +101,9 @@ void CPlayer::SpeedControl() {
 	if (speed == 0) isMove = false;
 }
 
+//----------------------------
+// 当たり判定の切り替え
+//----------------------------
 void CPlayer::SetWH() {
 	//移動中
 	if (isMove) {
@@ -97,13 +117,16 @@ void CPlayer::SetWH() {
 	}
 }
 
+//------------------------
+// キー入力制御
+//------------------------
 int CPlayer::KeyControl() {
 	short int key = (controller->control(true)).ThumbLX;
 
-	if (D_KEY_CONTROL_RIGHT < key) {
+	if (D_KEY_CONTROL_RIGHT < key) {			//スティックが右に倒されたら
 		return 1;//右
 	}
-	else if (key < D_KEY_CONTROL_LEFT) {
+	else if (key < D_KEY_CONTROL_LEFT) {		//スティックが左に倒されたら
 		return -1;//左
 	}
 	else {

@@ -4,20 +4,13 @@
 XINPUT_STATE CController::control(bool isChattering)
 {
 
-	if (!isChattering) {
+	if (isChattering) {
 
 
-		OldKey = input;
-		GetJoypadXInputState(DX_INPUT_PAD1, &input);
+		GetJoypadXInputState(DX_INPUT_PAD1, &data);
 		for (int i = 0; i < MAX_BUTTON; i++) {
-			data.Buttons[i] = input.Buttons[i] & ~OldKey.Buttons[i];
+			data.Buttons[i] = input.Buttons[i] & ~oldKey.Buttons[i];
 		}
-		data.LeftTrigger = input.LeftTrigger & ~OldKey.LeftTrigger;
-		data.RightTrigger = input.RightTrigger & ~OldKey.RightTrigger;
-		data.ThumbLX = input.ThumbLX & ~OldKey.ThumbLX;
-		data.ThumbLY = input.ThumbLY & ~OldKey.ThumbLY;
-		data.ThumbRX = input.ThumbRX & ~OldKey.ThumbRX;
-		data.ThumbRY = input.ThumbRY & ~OldKey.ThumbRY;
 
 		return data;
 
@@ -25,10 +18,17 @@ XINPUT_STATE CController::control(bool isChattering)
 	else {
 
 
-		GetJoypadXInputState(DX_INPUT_PAD1, &data);
+		oldKey = input;
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		for (int i = 0; i < MAX_BUTTON; i++) {
-			data.Buttons[i] = input.Buttons[i] & ~OldKey.Buttons[i];
+			data.Buttons[i] = input.Buttons[i] & ~oldKey.Buttons[i];
 		}
+		data.LeftTrigger = input.LeftTrigger & ~oldKey.LeftTrigger;
+		data.RightTrigger = input.RightTrigger & ~oldKey.RightTrigger;
+		data.ThumbLX = input.ThumbLX & ~oldKey.ThumbLX;
+		data.ThumbLY = input.ThumbLY & ~oldKey.ThumbLY;
+		data.ThumbRX = input.ThumbRX & ~oldKey.ThumbRX;
+		data.ThumbRY = input.ThumbRY & ~oldKey.ThumbRY;
 
 		return data;
 

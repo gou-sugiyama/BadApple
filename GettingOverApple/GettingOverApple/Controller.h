@@ -11,12 +11,8 @@ class CController
 {
 private:
 	XINPUT_STATE input;
-	XINPUT_STATE OldKey;
+	XINPUT_STATE oldKey;
 	XINPUT_STATE data;
 public:
 	XINPUT_STATE control(bool isChattering);
 };
-
-
-void* Hit(CPlayer* pPlayer, CApple* pApple);
-

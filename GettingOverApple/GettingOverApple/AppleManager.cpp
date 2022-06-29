@@ -3,39 +3,54 @@
 #include"Apple.h"
 #include"AppleManager.h"
 
-/******************************************
-
-*コンストラクタ
-
-******************************************/
+//-----------------------
+// コンストラクタ
+//-----------------------
 CAppleManager::CAppleManager()
 {
 	image = LoadGraph("images/Apple_2.png");
-	
-	Apple = new CApple(image);
 
-}CAppleManager::~CAppleManager() { delete Apple; }
+	apple = new CApple(image);
 
-bool CAppleManager::CreateApple()
+}CAppleManager::~CAppleManager() { delete apple; }
+
+//-------------------------
+// 生成
+//-------------------------
+void CAppleManager::CreateApple()
 {	
-		if (Apple->getisShow() == FALSE) {
-			delete Apple;
-			Apple = new CApple(image);
-			return TRUE;
-		}
-		return FALSE;
+	//リンゴが非表示なら確保しているメモリを解放し、新たに確保する
+	if (apple->GetisShow() == FALSE) {
+		delete apple;
+		apple = new CApple(image);
+	}
 }
 
-void CAppleManager::Update(){
-	if (Apple->getY() >= D_SCREEN_HEIGHT) {
-		Apple->toggleisShow();
+//------------------------
+// 更新
+//------------------------
+void CAppleManager::Update() {
+	//画面外に出たら非表示にする
+	if (apple->GetY() >= D_SCREEN_HEIGHT) {
+		apple->ToggleisShow();
 	}
+
+	//25秒に1回生成を試みる
 	static int WaitTime = 0;
 	if (!(++WaitTime % 25)) CreateApple();
-	Apple->Update();
+
+	//値が入っているリンゴの更新
+	if (apple != NULL) {
+		apple->Update();
+	}
 }
 
-void CAppleManager::Render(){
-
-	Apple->Render();
+//-------------------------
+// 描画
+//-------------------------
+void CAppleManager::Render()const {
+	//値が入っているリンゴがあれば描画する
+	if (apple != NULL) {
+		apple->Render();
+	}
 }

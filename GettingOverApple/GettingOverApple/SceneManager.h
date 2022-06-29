@@ -10,12 +10,9 @@ public:
 	virtual ~CScene() {}	//必要に応じてそのシーンのデストラクタを呼びたいため仮想関数(必要ないシーンもあるため純粋仮想関数にはしない)
 
 	//更新
-	virtual CScene* Update() = 0;	//デストラクタと同様
+	virtual CScene* Update() = 0;	
 	//描画
-	virtual void Render()const {}	//デストラクタと同様
-
-	//キー入力取得
-
+	virtual void Render()const = 0;
 };
 
 //シーン管理クラス

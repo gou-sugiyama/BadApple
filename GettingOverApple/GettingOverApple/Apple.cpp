@@ -3,6 +3,9 @@
 #include"Apple.h"
 #include"AppleManager.h"
 
+//-----------------------
+// コンストラクタ
+//-----------------------
 CApple::CApple(int pimage) {
 	x = GetRand(6) * 71 + 35;
 	y = 0;
@@ -14,14 +17,17 @@ CApple::CApple(int pimage) {
 	isShow = true;
 }
 
+//------------------------
+// 更新
+//------------------------
 void CApple::Update() {
 	y += speed;
 }
 
-void CApple::Render() {
+//-------------------------
+// 描画
+//-------------------------
+void CApple::Render()const {
 	DrawGraph(x, y, image, TRUE);
 }
 
-void CApple::toggleisShow() {
-	isShow = !isShow;
-}

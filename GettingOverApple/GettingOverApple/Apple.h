@@ -1,5 +1,4 @@
 #pragma once
-#define _USE_MATH_DEFINES
 
 #define APPLE_MAX 10
 #define APPLE_WIDTH 40
@@ -19,11 +18,11 @@ private:
 public:
 	CApple(int pimage);
 	void Update();
-	void Render();
-	void toggleisShow();
-	int getX() { return x; }
-	int getY() { return y; }
-	int getW() { return w; }
-	int getH() { return h; }
-	bool getisShow() { return isShow; };
+	void Render()const;
+	void ToggleisShow() { isShow = !isShow; }
+	int GetX() { return x; }
+	int GetY() { return y; }
+	int GetW() { return w; }
+	int GetH() { return h; }
+	bool GetisShow() { return isShow; };
 };
