@@ -2,6 +2,7 @@
 #include"SceneManager.h"
 #include"Controller.h"
 #include"Title.h"
+#include"Game.h"//TODO:消す
 #include"Apple.h"
 #include"UI.h"
 /*************************************************************************
@@ -28,15 +29,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	//コントローラの動的確保
-	CController* Controller;
-	Controller = new CController;
+	CController* controller;
+	controller = new CController;
 
 	//管理システムを動的確保
 	CSceneManager* manager;
-	manager = new CSceneManager(new CTitle(Controller));
+	manager = new CSceneManager(new CGame(controller));
 
 	//ゲームループ
-	while (ProcessMessage() == 0 && !(g_KeyFlg & PAD_INPUT_START) && manager->Update() != nullptr) {
+	while (ProcessMessage() == 0 
+		&& manager->Update() != nullptr&& (controller->control(true)).Buttons[5] != TRUE) {
 		//入力キー取得
 		g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
@@ -51,6 +53,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//managerの解放
 	delete manager;
+	//controllerの解放
+	delete controller;
+
 
 	DxLib_End();					//DXライブラリ使用の終了処理
 	return 0;				//ソフト終了

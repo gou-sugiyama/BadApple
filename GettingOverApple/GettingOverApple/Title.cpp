@@ -4,10 +4,10 @@
 #include"Game.h"
 
 CScene* CTitle::Update() {
-	if (*(manager->GetKey()) >= 1) {
-		//ゲームシーンに移行
-		return new CGame(manager);
-	}
+	//if () {
+	//	//ゲームシーンに移行
+	//	return new CGame(manager);
+	//}
 	return this;
 }
 

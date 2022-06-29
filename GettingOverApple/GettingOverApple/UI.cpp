@@ -1,15 +1,15 @@
 #include"DxLib.h"
 #include "UI.h"
-#include"SceneManager.h"
+#include"Controller.h"
 
-CUI::CUI(CSceneManager* pManager) {
-	manager = pManager;
+CUI::CUI(CController* pController) {
+	controller = pController;
 	for (int i = 0; i < 4; i++) {
 		AppleCount[i] = 0;
 	}
 
 	score = 0;
-	TimeLimit = 60 * 10;			//60フレーム*30秒
+	TimeLimit = 60 * 30;			//60フレーム*30秒
 	isPause = false;
 }
 
@@ -18,7 +18,7 @@ bool CUI::Update() {
 		--TimeLimit;
 	}
 
-	if (GetJoypadInputState(DX_INPUT_KEY_PAD1) & PAD_INPUT_M) {		//スペースキーが押されたらPAUSE
+	if (controller->control(false).Buttons[4]) {	
 		isPause = !isPause;
 	}
 

@@ -13,4 +13,6 @@ public:
 	
 	void Update();
 	void Render();
+
+	CApple* getpApple() { return Apple; }
 };

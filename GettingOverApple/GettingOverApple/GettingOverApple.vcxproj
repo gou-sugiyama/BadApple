@@ -24,15 +24,16 @@
     <ClInclude Include="AppleManager.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Hit.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AppleManager.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Title.cpp" />

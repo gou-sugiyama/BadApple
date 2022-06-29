@@ -5,20 +5,27 @@
 #include"player.h"
 #include"AppleManager.h"
 #include"UI.h"
+#include"Hit.h"
 
-CGame::CGame(CSceneManager* pManager) :CScene(pManager) { //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
+CGame::CGame(CController* pController):CScene(pController){ 
+	//受け取ったコントローラの格納
+	controller = pController;
 	//プレイヤーを動的確保
-	player = new CPlayer(pManager);
+	player = new CPlayer(controller);
 	//アップルマネージャーを動的確保
 	applemanager = new CAppleManager();
 	//UIを動的確保
-	UI = new CUI(pManager);
+	UI = new CUI(controller);
+	//Hit
+	hit = new CHitBoxCheck;
 }
 
 CGame::~CGame() {
 	//動的確保したものを解放する
 	delete player;
 	delete applemanager;
+	delete UI;
+	delete hit;
 }
 
 CScene* CGame::Update() {
@@ -26,6 +33,11 @@ CScene* CGame::Update() {
 	if (UI->Update()) {
 		applemanager->Update();
 		player->Update();
+		if (hit->HitBox(player, applemanager->getpApple())
+			&& applemanager->getpApple()->getisShow()) {
+			applemanager->getpApple()->toggleisShow();
+
+		}
 	}
 	else {
 		static int WaitTime = 0;
@@ -40,7 +52,7 @@ CScene* CGame::Update() {
 }
 
 void CGame::Render()const {
-	DrawFormatString(0, 0, GetColor(255, 255, 255),"ゲーム");
+	//DrawFormatString(0, 0, GetColor(255, 255, 255),"ゲーム");
 	applemanager->Render();
 	player->Render();
 	UI->Render();

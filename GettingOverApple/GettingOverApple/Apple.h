@@ -2,8 +2,6 @@
 #define _USE_MATH_DEFINES
 
 #define APPLE_MAX 10
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
 #define APPLE_WIDTH 40
 #define APPLE_HEIGHT 40
 
@@ -23,6 +21,9 @@ public:
 	void Update();
 	void Render();
 	void toggleisShow();
-	int getY() { return y; };
+	int getX() { return x; }
+	int getY() { return y; }
+	int getW() { return w; }
+	int getH() { return h; }
 	bool getisShow() { return isShow; };
 };

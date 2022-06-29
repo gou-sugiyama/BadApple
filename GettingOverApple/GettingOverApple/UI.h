@@ -1,15 +1,16 @@
 #pragma once
-class CSceneManager;
+class CController;
+
 class CUI
 {
 private:
-	CSceneManager* manager;
+	CController* controller;
 	int AppleCount[4];
 	int score;
 	int TimeLimit;
 	bool isPause;
 public:
-	CUI(CSceneManager* pSceneManager);
+	CUI(CController* pController);
 	bool Update();
 	void Render()const;
 

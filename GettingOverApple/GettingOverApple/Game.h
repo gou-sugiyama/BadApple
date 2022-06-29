@@ -2,6 +2,9 @@
 class CPlayer;
 class CAppleManager;
 class CUI;
+class CController;
+class CHitBoxCheck;
+
 class CGame :
     public CScene
 {
@@ -12,8 +15,11 @@ private:
     CAppleManager* applemanager;
     //UI‚ğŠÇ—‚·‚éƒ|ƒCƒ“ƒ^
     CUI* UI;
+    //Hit
+    CHitBoxCheck* hit;
+
 public:
-    CGame(CSceneManager* pManager);
+    CGame(CController* pController);
 
     ~CGame();
 

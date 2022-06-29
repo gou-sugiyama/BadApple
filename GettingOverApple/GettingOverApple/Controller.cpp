@@ -4,7 +4,7 @@
 XINPUT_STATE CController::control(bool isChattering)
 {
 
-	if (isChattering) {
+	if (!isChattering) {
 
 
 		OldKey = input;
