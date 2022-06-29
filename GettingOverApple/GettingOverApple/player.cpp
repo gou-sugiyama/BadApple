@@ -109,3 +109,4 @@ int CPlayer::KeyControl() {
 	else {
 		return 0;
 	}
+}

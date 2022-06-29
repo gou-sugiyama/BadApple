@@ -39,7 +39,6 @@
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="Hit.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

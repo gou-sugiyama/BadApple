@@ -5,7 +5,6 @@
 #include"player.h"
 #include"AppleManager.h"
 #include"UI.h"
-#include"Hit.h"
 
 CGame::CGame(CController* pController):CScene(pController){ 
 	//受け取ったコントローラの格納
@@ -16,8 +15,6 @@ CGame::CGame(CController* pController):CScene(pController){
 	applemanager = new CAppleManager();
 	//UIを動的確保
 	UI = new CUI(controller);
-	//Hit
-	hit = new CHitBoxCheck;
 }
 
 CGame::~CGame() {
@@ -25,7 +22,6 @@ CGame::~CGame() {
 	delete player;
 	delete applemanager;
 	delete UI;
-	delete hit;
 }
 
 CScene* CGame::Update() {
@@ -33,11 +29,7 @@ CScene* CGame::Update() {
 	if (UI->Update()) {
 		applemanager->Update();
 		player->Update();
-		if (hit->HitBox(player, applemanager->getpApple())
-			&& applemanager->getpApple()->getisShow()) {
-			applemanager->getpApple()->toggleisShow();
-
-		}
+		
 	}
 	else {
 		static int WaitTime = 0;

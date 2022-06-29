@@ -15,8 +15,6 @@ private:
     CAppleManager* applemanager;
     //UI‚ğŠÇ—‚·‚éƒ|ƒCƒ“ƒ^
     CUI* UI;
-    //Hit
-    CHitBoxCheck* hit;
 
 public:
     CGame(CController* pController);

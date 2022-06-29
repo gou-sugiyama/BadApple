@@ -10,6 +10,7 @@
 #define D_KEY_CONTROL_LEFT -2000
 #define D_KEY_CONTROL_RIGHT 2000
 
+class CController;
 
 class CPlayer
 {
