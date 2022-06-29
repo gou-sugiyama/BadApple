@@ -17,5 +17,6 @@ private:
 	XINPUT_STATE data;
 public:
 	XINPUT_STATE control();
+	void Hantei();
 };
 

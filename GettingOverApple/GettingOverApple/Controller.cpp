@@ -25,13 +25,22 @@ XINPUT_STATE Controller::control()
 	else {
 
 
-		GetJoypadXInputState(DX_INPUT_PAD1, &data);
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		for (int i = 0; i < MAX_BUTTON; i++) {
 			data.Buttons[i] = input.Buttons[i] & ~OldKey.Buttons[i];
+		}
+		if (input.ThumbLX <=2000 || -2000 >=input.ThumbLX) {
+			data.ThumbLX = input.ThumbLX & ~input.ThumbLX;
 		}
 
 		return data;
 
 	}
+
+}
+
+
+void Controller::Hantei()
+{
 
 }
