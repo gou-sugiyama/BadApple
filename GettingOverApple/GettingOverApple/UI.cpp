@@ -14,12 +14,13 @@ CUI::CUI(CController* pController) {
 }
 
 bool CUI::Update() {
-	if (isPause == false) {
-		--timeLimit;
-	}
-
+	//スタートボタンが押されたらPAUSE
 	if (controller->control(false).Buttons[4]) {	
 		isPause = !isPause;
+	}
+
+	if (isPause == false) {
+		--timeLimit;
 	}
 
 	if (timeLimit <= 0) {
