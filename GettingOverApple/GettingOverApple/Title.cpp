@@ -1,13 +1,14 @@
 #include"DxLib.h"
 #include"SceneManager.h"
 #include"Title.h"
+#include"Controller.h"
 #include"Game.h"
 
 CScene* CTitle::Update() {
-	//if () {
-	//	//ゲームシーンに移行
-	//	return new CGame(manager);
-	//}
+	if ((controller->control(true)).Buttons[4] == true) {
+		//ゲームシーンに移行
+		return new CGame(controller);
+	}
 	return this;
 }
 

@@ -5,24 +5,24 @@ class CUI
 {
 private:
 	CController* controller;
-	int AppleCount[4];
+	int appleCount[4];
 	int score;
-	int TimeLimit;
+	int timeLimit;
 	bool isPause;
 public:
 	CUI(CController* pController);
 	bool Update();
 	void Render()const;
 
-	bool getisPause() const {
+	bool GetisPause() const {
 		return isPause;
 	}
 
-	int getScore() const{
+	int GetScore() const{
 		return score;
 	}
 
-	void setScore(int add) {
+	void SetScore(int add) {
 		score += add;
 	}
 };

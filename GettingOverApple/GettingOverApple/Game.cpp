@@ -4,6 +4,7 @@
 #include"Title.h"
 #include"player.h"
 #include"AppleManager.h"
+#include"Ranking.h"
 #include"UI.h"
 #include"Hit.h"
 
@@ -43,7 +44,7 @@ CScene* CGame::Update() {
 		static int WaitTime = 0;
 		if (++WaitTime > 180) {
 			WaitTime = 0;
-			return nullptr;
+			return new CRanking(controller);
 		}
 		
 	}
