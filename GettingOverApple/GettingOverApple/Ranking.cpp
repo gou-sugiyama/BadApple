@@ -1,5 +1,6 @@
 #include "SceneManager.h"
-#include "CRanking.h"
+#include"Controller.h"
+#include "Ranking.h"
 
 //--------------------------------
 // コンストラクタ
@@ -12,6 +13,7 @@ CRanking::CRanking(CController* pController) :CScene(pController) {
 // 更新
 //--------------------------------
 CScene* CRanking::Update() {
+	//controller->control(false);
 	return this;
 }
 

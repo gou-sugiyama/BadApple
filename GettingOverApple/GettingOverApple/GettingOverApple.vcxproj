@@ -22,7 +22,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Apple.h" />
     <ClInclude Include="AppleManager.h" />
-    <ClInclude Include="CRanking.h" />
+    <ClInclude Include="Ranking.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
@@ -33,7 +33,7 @@
   <ItemGroup>
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AppleManager.cpp" />
-    <ClCompile Include="CRanking.cpp" />
+    <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
