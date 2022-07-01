@@ -2,7 +2,6 @@
 #include"SceneManager.h"
 #include"Controller.h"
 #include"Title.h"
-#include"Game.h"//TODO:消す
 #include"Apple.h"
 #include"UI.h"
 
@@ -24,7 +23,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//管理システムを動的確保
 	CSceneManager* manager;
-	manager = new CSceneManager(new CGame(&controller));
+	manager = new CSceneManager(new CTitle(&controller));
 
 	//ゲームループ
 	while (ProcessMessage() == 0 

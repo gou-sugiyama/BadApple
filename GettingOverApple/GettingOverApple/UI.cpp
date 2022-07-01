@@ -2,6 +2,9 @@
 #include "UI.h"
 #include"Controller.h"
 
+//--------------------------------
+// コンストラクタ
+//--------------------------------
 CUI::CUI(CController* pController) {
 	controller = pController;
 	for (int i = 0; i < 4; i++) {
@@ -13,6 +16,9 @@ CUI::CUI(CController* pController) {
 	isPause = false;
 }
 
+//--------------------------------
+// 更新
+//--------------------------------
 bool CUI::Update() {
 	//スタートボタンが押されたらPAUSE
 	if (controller->control(false).Buttons[4]) {	
@@ -34,6 +40,9 @@ bool CUI::Update() {
 	return true;
 }
 
+//--------------------------------
+// 描画
+//--------------------------------
 void CUI::Render()const {
 	int White = 0xFFFFFF;
 	int Black = 0x000000;

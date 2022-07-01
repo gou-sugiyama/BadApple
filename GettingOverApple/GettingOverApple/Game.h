@@ -18,10 +18,9 @@ private:
 
 public:
     CGame(CController* pController);
-
     ~CGame();
 
-    CScene* Update();
-    void Render()const;
+    CScene* Update()override;
+    void Render()const override;
 };
 

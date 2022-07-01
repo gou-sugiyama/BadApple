@@ -1,6 +1,6 @@
 #pragma once
 #include"DxLib.h"
-#include"player.h"
+#include"Player.h"
 #include"Apple.h"
 
 #define CONTROL_X_RIGHT 25000

@@ -6,8 +6,10 @@ class CScene
 protected:
 	CController* controller;
 public:
-	CScene(CController* pController) :controller(pController) {};
-	virtual ~CScene() {}	//必要に応じてそのシーンのデストラクタを呼びたいため仮想関数(必要ないシーンもあるため純粋仮想関数にはしない)
+	CScene(CController* pController) {
+		controller = pController;
+	}	//基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
+	virtual ~CScene() {}
 
 	//更新
 	virtual CScene* Update() = 0;	

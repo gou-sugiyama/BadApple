@@ -1,11 +1,14 @@
 #include"DxLib.h"
 #include"SceneManager.h"
 #include"Game.h"
-#include"Title.h"
-#include"player.h"
+#include"Player.h"
 #include"AppleManager.h"
 #include"UI.h"
 
+
+//--------------------------------
+// コンストラクタ
+//--------------------------------
 CGame::CGame(CController* pController):CScene(pController){ 
 	//受け取ったコントローラの格納
 	controller = pController;
@@ -17,6 +20,9 @@ CGame::CGame(CController* pController):CScene(pController){
 	UI = new CUI(controller);
 }
 
+//--------------------------------
+// デストラクタ
+//--------------------------------
 CGame::~CGame() {
 	//動的確保したものを解放する
 	delete player;
@@ -24,6 +30,9 @@ CGame::~CGame() {
 	delete UI;
 }
 
+//--------------------------------
+// 更新
+//--------------------------------
 CScene* CGame::Update() {
 	//ゲーム中(制限時間内、ポーズ中ではない)なら更新する
 	if (UI->Update()) {//ゲーム中(制限時間内、ポーズ中ではない)かどうかを返す
@@ -41,6 +50,9 @@ CScene* CGame::Update() {
 	return this;
 }
 
+//--------------------------------
+// 描画
+//--------------------------------
 void CGame::Render()const {
 	//DrawFormatString(0, 0, GetColor(255, 255, 255),"ゲーム");
 	applemanager->Render();
