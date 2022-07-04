@@ -4,8 +4,27 @@
 #include"Controller.h"
 #include"Game.h"
 
+enum class EMenu {
+	E_START = 0
+	,E_RANKING
+	,E_HELP
+	,E_END
+
+};
+
+CTitle::CTitle(CController* pController) :CScene(pController) {
+	titleImage = LoadGraph("images/Title.bmp");
+	startImage = LoadGraph("images/start_m.bmp");
+	rankingImage = LoadGraph("images/ranking_m.bmp");;
+	helpImage = LoadGraph("images/help_m.bmp");
+	endImage = LoadGraph("images/end_m.bmp");
+	menuCursor = 0;
+}
+
 CScene* CTitle::Update() {
-	if ((controller->control(true)).Buttons[4] == true) {
+
+
+	if ((controller->control(false)).Buttons[4] == true) {
 		//ゲームシーンに移行
 		return new CGame(controller);
 	}
@@ -13,5 +32,5 @@ CScene* CTitle::Update() {
 }
 
 void CTitle::Render()const {
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "タイトル");
+	DrawGraph(0, 0, titleImage, FALSE);
 }
