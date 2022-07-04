@@ -5,10 +5,10 @@
 
 APPLE::APPLE(int pimage) {
 	x = GetRand(6) * 71 + 35;
-	y = 0;
+	y = 40;
 	w = 40;
 	h = 40;
-	image = pimage;
+	image[4] = pimage;
 	speed = 3;
 	score = 0;
 	isShow = true;
@@ -19,7 +19,7 @@ void APPLE::Update() {
 }
 
 void APPLE::Render() {
-	DrawGraph(x, y, image, TRUE);
+	DrawGraph(x, y, image[4], TRUE);
 }
 
 void APPLE::toggleisShow() {

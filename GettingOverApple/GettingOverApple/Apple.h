@@ -14,7 +14,7 @@ private:
 	int w;
 	int h;
 	int speed;
-	int image;
+	int image[4];
 	int score;
 	bool isShow;
 public:

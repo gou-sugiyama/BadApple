@@ -3,13 +3,14 @@ class APPLE;
 class AppleManager
 {
 private:
-	int image;
+	int image[4];
+	int isShow;
 	APPLE* Apple;
 public:
 	AppleManager();
 	~AppleManager();
     bool CreateApple();
-	
+
 	void Update();
 	void Render();
 };
