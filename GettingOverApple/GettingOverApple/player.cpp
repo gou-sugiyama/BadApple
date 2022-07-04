@@ -17,7 +17,7 @@ void player::PlayerControl() {
 
 }
 int player::LoadImages() {
-	if ((g_player = LoadGraph("images/car1pol.bmp")) == -1)return -1;
+	if ((g_player = LoadGraph("images/taiki.png")) == -1)return -1;
 }
 
 void player::GameInit() {
@@ -31,16 +31,20 @@ void player::Draw() {
 }
 
 void player::playerspeed(int g_Nowkey, int g_OldKey) {
-	if (g_OldKey == g_Nowkey) {// g_OldKey == 0 && g_NowKey == 0
-		if (i < 25) {
-			speed += i * 0.01;
-			i++;
+	speed =0.0f;
+	k = 0.01f;
+	g = 0.01f;
+
+	if (g_Nowkey) {// g_OldKey == 0 && g_NowKey == 0
+		if ( k<25) {
+			speed += k * 0.01;
+			k++;
 		}
-	}
-	else  {
-		if (i < 0) {
-			speed -= i * 0.01;
-			i--;
+	}	
+	if (g_Nowkey) {
+		if (k > 25) {
+			speed += k * 0.01;
+			k++;
 		}
 	}
 }

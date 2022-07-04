@@ -16,7 +16,8 @@ private:
 	int g_playerh;//幅
 	int g_playerflg;//フラグ
 	int g_playercount;//カウント
-	float speed;//スピード
-	int i;//秒数
+	float speed ;//加速
+	float g;//減速度
+	float k;//加速度
 	
 };
