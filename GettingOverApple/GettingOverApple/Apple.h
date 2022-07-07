@@ -17,7 +17,7 @@ private:
 	int score;
 	bool isShow;
 public:
-	CApple(int pimage);
+	CApple(int* pimage);
 	void Update();
 	void Render();
 	void toggleisShow();

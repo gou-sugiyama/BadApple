@@ -3,16 +3,14 @@ class CApple;
 class CAppleManager
 {
 private:
-	int image;
-	CApple* Apple;
-	
+	int isShow;
 public:
+	int image[4];
+	CApple* Apple[10];
 	CAppleManager();
 	~CAppleManager();
-    bool CreateApple();
-	
+    void CreateApple();
 	void Update();
 	void Render();
-
-	CApple* getpApple() { return Apple; }
+	CApple* getpApple(int i) { return Apple[i]; }
 };

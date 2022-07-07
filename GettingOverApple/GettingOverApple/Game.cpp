@@ -34,9 +34,9 @@ CScene* CGame::Update() {
 	if (UI->Update()) {
 		applemanager->Update();
 		player->Update();
-		if (hit->HitBox(player, applemanager->getpApple())
-			&& applemanager->getpApple()->getisShow()) {
-			applemanager->getpApple()->toggleisShow();
+		if (hit->HitBox(player, applemanager->getpApple(0))
+			&& applemanager->getpApple(0)->getisShow()) {
+			applemanager->getpApple(0)->toggleisShow();
 
 		}
 	}

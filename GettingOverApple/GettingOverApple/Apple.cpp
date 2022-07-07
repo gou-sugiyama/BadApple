@@ -3,15 +3,15 @@
 #include"Apple.h"
 #include"AppleManager.h"
 
-CApple::CApple(int pimage) {
+CApple::CApple(int* pimage) {
 	x = GetRand(6) * 71 + 35;
 	y = 0;
 	w = 40;
 	h = 40;
-	image = pimage;
-	speed = 3;
+	image = *pimage;
+	speed = 2;
 	score = 0;
-	isShow = true;
+	isShow = TRUE;
 }
 
 void CApple::Update() {
