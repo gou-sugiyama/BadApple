@@ -1,15 +1,29 @@
 #pragma once
+#pragma warning(disable:4996)
 
-class CRanking :
+class CRanking;
+class CUI;
+
+class CRankMane:
     public CScene
 {
-
 private:
-public:
-    CRanking(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
-    ~CRanking() {}
+    CRanking* rankdata[5];
+    CUI* ui;
+    FILE* fp;
 
-    CScene* Update() override;
-    void Render()const override;
+    void InitRank(int i);
+
+public:
+    CRankMane(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
+    ~CRankMane() {}
+
+    bool  JudgeRanking(int i);
+  
+
+    CScene* Update();
+    void Render() const;
+
+
 };
 

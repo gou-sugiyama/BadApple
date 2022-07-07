@@ -44,7 +44,7 @@ CScene* CGame::Update() {
 		static int WaitTime = 0;
 		if (++WaitTime > 180) {
 			WaitTime = 0;
-			return new CRanking(controller);
+			return new CRankMane(controller);
 		}
 		
 	}
