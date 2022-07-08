@@ -1,19 +1,19 @@
 #include"DxLib.h"
 #include "SceneManager.h"
 #include"Controller.h"
-#include "Ranking.h"
+#include "Help.h"
 
 //--------------------------------
 // コンストラクタ
 //--------------------------------
-CRanking::CRanking(CController* pController) :CScene(pController) {
+CHelp::CHelp(CController* pController) :CScene(pController) {
 
 }
 
 //--------------------------------
 // 更新
 //--------------------------------
-CScene* CRanking::Update() {
+CScene* CHelp::Update() {
 	//controller->control(false);
 	return this;
 }
@@ -21,6 +21,6 @@ CScene* CRanking::Update() {
 //--------------------------------
 // 描画
 //--------------------------------
-void CRanking::Render()const {
-	DrawString(0, 0, "ランキング入力", 0xFFFFFF);
+void CHelp::Render()const {
+	DrawString(0, 0, "ヘルプ画面", 0xFFFFFF);
 }

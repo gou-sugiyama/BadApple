@@ -12,4 +12,3 @@ public:
     CScene* Update() override;
     void Render()const override;
 };
-
