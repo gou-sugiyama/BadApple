@@ -4,7 +4,7 @@
 class CRanking;
 class CUI;
 
-class CRankMane:
+class CRankMng:
     public CScene
 {
 private:
@@ -17,9 +17,9 @@ private:
     void InitRank(int i);
 
 public:
-    CRankMane(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
+    CRankMng(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
 
-    ~CRankMane() {}
+    ~CRankMng() {}
 
     bool  JudgeRanking() const;
   

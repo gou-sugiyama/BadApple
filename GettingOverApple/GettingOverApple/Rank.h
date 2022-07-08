@@ -1,5 +1,5 @@
 #pragma once
-class CRankMane;
+class CRankMng;
 
 
 class CRanking
