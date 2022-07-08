@@ -1,21 +1,25 @@
 #pragma once
 class CRankMane;
+
+
 class CRanking
 {
 private:
+    XINPUT_STATE input;
 
     int Rank = 0;
     char Name[9];
     int Score = 0;
 
 public:
-    CRanking(int i);
+    CRanking(FILE* fp);
 
-    int ShowRankDeta(int i) const { return rankdeta[i].Score; }
-    void InsertRanking(int i);
+    int ShowRankDeta() const { return Score; }
+
 
 
     void Update();
+
     void Render() const;
 };
 

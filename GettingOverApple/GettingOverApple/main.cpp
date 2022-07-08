@@ -29,7 +29,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	while (ProcessMessage() == 0 
 		&& manager->Update() != nullptr&& (controller.control(true)).Buttons[5] != TRUE) {
 		
-
 		ClearDrawScreen();		//‰æ–Ê‚Ì‰Šú‰»
 
 		manager->Render();

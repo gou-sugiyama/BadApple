@@ -5,32 +5,32 @@
 #include "Ranking.h"
 #include "UI.h"
 
-void CRankMane::InitRank(int i)
-{
-	fscanf(fp, "%2d %10s %10d", rankdata[i]->InsertRanking());
-}
+
 
 //--------------------------------
 // コンストラクタ
 //--------------------------------
 CRankMane::CRankMane(CController* pController):CScene(pController) {
 	for (int i = 0; i < 5; i++) {
-		rankdata[i] = new CRanking(i);
+		rankdata[i] = new CRanking(fp);
 
 	}
 }
 
 
-bool CRankMane::JudgeRanking(int i)
+
+bool CRankMane::JudgeRanking() const
 {
-	bool judge;
-	if (rank->ShowRankDeta(i - 1) > ui->GetScore() > rank->ShowRankDeta(i)) {
-		return TRUE;
+	for (int i = 4; i >= 0; i--) {
+		if (rankdata[i - 1]->ShowRankDeta() > ui->GetScore() > rankdata[i]->ShowRankDeta()) {
+			return TRUE;
+			break;
+		}
+		else {
+			
+		}
 	}
-	else {
-		return FALSE;
-	}
-	
+	return FALSE;
 }
 
 
@@ -39,12 +39,31 @@ bool CRankMane::JudgeRanking(int i)
 //--------------------------------
 CScene* CRankMane::Update() {
 	//controller->control(false);
-	/*for (int i = 4; i >= 0; i--) {
-		if (JudgeRanking(i)) {
-			return ;
-		}
-	}*/
-	return this;
+	if (JudgeRanking()) {
+		TrueUpdate();
+	}
+	else {
+		FalseUpdate();
+	}
+	
+}
+
+void CRankMane::TrueUpdate()
+{
+	XINPUT_STATE data;
+	for (int i = 1; i > 0;) {
+		data = controller->control(true);
+
+		InsertRanking();
+	}
+}
+
+void CRankMane::InsertRanking()
+{
+}
+
+void CRankMane::FalseUpdate()
+{
 }
 
 //--------------------------------

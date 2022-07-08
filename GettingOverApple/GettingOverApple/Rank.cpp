@@ -1,12 +1,13 @@
 #include"DxLib.h"
 #include "Rank.h"
+#include"Controller.h"
 
-CRanking::CRanking(int i)
+CRanking::CRanking(FILE* fp)
 {
-	(fp = fopen("dat/rankingdata.txt", "r"));
+	fscanf(fp, "%2d %10s %10d", Rank,Name,Score);
 }
 
-void CRanking::InsertRanking(int i)
-{
 
+void CRanking::Update()
+{
 }
