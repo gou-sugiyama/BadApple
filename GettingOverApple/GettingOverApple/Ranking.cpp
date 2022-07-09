@@ -12,9 +12,8 @@
 //--------------------------------
 CRankMng::CRankMng(CController* pController):CScene(pController) {
 
-
 	//ファイルオープン
-	fp = fopen("dat/chapter4/rankingdata.txt", "r");
+	fp = fopen("", "r");
 
 	//ファイルロード
 	for (int i = 0; i < 5; i++) {

@@ -22,6 +22,14 @@ private:
     };
     RankString rankstr[3][26];
 
+    struct Rank
+    {
+        int str_X;
+        int str_Y;
+        int image;
+    };
+    RankString rankstr[3][26];
+
 public:
     CRankMng(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
 
