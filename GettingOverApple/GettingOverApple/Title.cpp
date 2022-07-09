@@ -17,14 +17,14 @@ CTitle::CTitle(CController* pController) :CScene(pController) {
 	menuImage[D_HELP] = LoadGraph("images/help_m.bmp");
 	menuImage[D_END] = LoadGraph("images/end_m.bmp");
 	menuCursor = 0;
-	keyInput = controller->control(true);
+	keyInput = controller->GetKey(true);
 }
 
 //-----------------------------
 // XV
 //-----------------------------
 CScene* CTitle::Update() {
-	keyInput = controller->control(false);
+	keyInput = controller->GetKey(true);
 
 	SelectMenu();
 

@@ -121,7 +121,7 @@ void CPlayer::SetWH() {
 // キー入力制御
 //------------------------
 int CPlayer::KeyControl() {
-	short int key = (controller->control(true)).ThumbLX;
+	short int key = (controller->GetKey(true)).ThumbLX;
 
 	if (D_KEY_CONTROL_RIGHT < key) {			//スティックが右に倒されたら
 		return 1;//右

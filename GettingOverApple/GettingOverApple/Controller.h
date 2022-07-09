@@ -14,5 +14,7 @@ private:
 	XINPUT_STATE oldKey;
 	XINPUT_STATE data;
 public:
-	XINPUT_STATE control(bool isChattering);
+	CController();
+	void Update();
+	XINPUT_STATE GetKey();
 };

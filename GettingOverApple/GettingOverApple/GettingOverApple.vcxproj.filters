@@ -43,8 +43,12 @@
     <ClCompile Include="Help.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="End.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="End.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h">
