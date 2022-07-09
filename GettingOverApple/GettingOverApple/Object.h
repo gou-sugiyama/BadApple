@@ -2,6 +2,8 @@
 class CObject
 {
 protected:
+	//‰æ‘œ
+	int* graphic;
 	//À•W
 	float x;
 	float y;

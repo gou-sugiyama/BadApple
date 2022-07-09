@@ -14,9 +14,3 @@ void CController::Update() {
 		data.Buttons[i] = input.Buttons[i] & ~oldKey.Buttons[i];
 	}
 }
-XINPUT_STATE CController::GetKey()
-{
-		
-		return data;
-
-}

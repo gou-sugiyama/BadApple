@@ -16,5 +16,5 @@ private:
 public:
 	CController();
 	void Update();
-	XINPUT_STATE GetKey();
+	XINPUT_STATE GetKey() { return data; }
 };

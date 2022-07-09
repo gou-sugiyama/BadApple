@@ -21,7 +21,7 @@ CUI::CUI(CController* pController) {
 //--------------------------------
 bool CUI::Update() {
 	//スタートボタンが押されたらPAUSE
-	if (controller->GetKey(false).Buttons[4]) {	
+	if (controller->GetKey().Buttons[4]) {	
 		isPause = !isPause;
 	}
 

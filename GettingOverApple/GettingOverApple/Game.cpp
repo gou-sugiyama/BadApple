@@ -5,6 +5,7 @@
 #include"Ranking.h"
 #include"AppleManager.h"
 #include"UI.h"
+#include"Controller.h"
 
 
 //--------------------------------
@@ -35,6 +36,7 @@ CGame::~CGame() {
 // 更新
 //--------------------------------
 CScene* CGame::Update() {
+	controller->Update();
 	//ゲーム中(制限時間内、ポーズ中ではない)なら更新する
 	if (UI->Update()) {//ゲーム中(制限時間内、ポーズ中ではない)かどうかを返す
 		applemanager->Update();
