@@ -11,10 +11,18 @@
 // コンストラクタ
 //--------------------------------
 CRankMng::CRankMng(CController* pController):CScene(pController) {
+
+
+	//ファイルオープン
+	fp = fopen("dat/chapter4/rankingdata.txt", "r");
+
+	//ファイルロード
 	for (int i = 0; i < 5; i++) {
 		rankdata[i] = new CRanking(fp);
-
 	}
+
+	//ファイルクローズ
+	fclose(fp);
 }
 
 
@@ -22,7 +30,7 @@ CRankMng::CRankMng(CController* pController):CScene(pController) {
 bool CRankMng::JudgeRanking() const
 {
 	for (int i = 4; i >= 0; i--) {
-		if (rankdata[i - 1]->ShowRankDeta() > ui->GetScore() > rankdata[i]->ShowRankDeta()) {
+		if (rankdata[i - 1]->ShowRankScore() > ui->GetScore() > rankdata[i]->ShowRankScore()) {
 			return TRUE;
 			break;
 		}
@@ -43,32 +51,52 @@ CScene* CRankMng::Update() {
 		TrueUpdate();
 	}
 	else {
-		FalseUpdate();
+		if (FalseUpdate()) {
+			return this;
+		}
+		else {
+			return nullptr;
+		}
 	}
 	
+	return this;
 }
 
 void CRankMng::TrueUpdate()
 {
 	XINPUT_STATE data;
-	for (int i = 1; i > 0;) {
-		data = controller->control(true);
+	data = controller->control(true);
 
-		InsertRanking();
-	}
+
+	InsertRanking();
+
 }
 
 void CRankMng::InsertRanking()
 {
+	
 }
 
-void CRankMng::FalseUpdate()
+bool CRankMng::FalseUpdate()
 {
+	if (++WaitTime <= 240) {
+		return TRUE;
+	}
+	else {
+		return FALSE;
+	}
+
 }
 
 //--------------------------------
 // 描画
 //--------------------------------
 void CRankMng::Render()const {
-	DrawString(0, 0, "ランキング入力", 0xFFFFFF);
+	if (JudgeRanking()) {
+		DrawString(0, 0, "ランキング入力", 0xFFFFFF);
+	}
+	else if(WaitTime<=240){
+		DrawString(0, 0, "ランキング表示", 0xFFFFFF);
+	}
+	
 }

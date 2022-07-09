@@ -12,26 +12,30 @@ private:
     CUI* ui;
     FILE* fp;
 
-
-
-    void InitRank(int i);
+    int WaitTime;
+    
+    struct RankString
+    {
+        int str_X;
+        int str_Y;
+        int image;
+    };
+    RankString rankstr[3][26];
 
 public:
     CRankMng(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
 
-    ~CRankMng() {}
+    ~CRankMng() { delete []rankdata; }
 
-    bool  JudgeRanking() const;
-  
 
     CScene* Update();
 
+    bool  JudgeRanking() const;
+
     void TrueUpdate();
+    bool FalseUpdate();
 
     void InsertRanking();
-
-
-    void FalseUpdate();
 
     void Render() const;
 

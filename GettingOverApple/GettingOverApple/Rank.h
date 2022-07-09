@@ -14,7 +14,7 @@ private:
 public:
     CRanking(FILE* fp);
 
-    int ShowRankDeta() const { return Score; }
+    int ShowRankScore() const { return Score; }
 
 
 
