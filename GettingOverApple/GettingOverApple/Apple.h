@@ -1,7 +1,6 @@
 #pragma once
 #define _USE_MATH_DEFINES
 
-#define APPLE_MAX 10
 #define APPLE_WIDTH 40
 #define APPLE_HEIGHT 40
 
@@ -16,6 +15,7 @@ private:
 	int image;
 	int score;
 	bool isShow;
+	double raz;
 public:
 	CApple(int* pimage);
 	void Update();

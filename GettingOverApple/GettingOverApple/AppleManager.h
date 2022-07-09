@@ -1,4 +1,6 @@
 #pragma once
+#define APPLE_MAX 10
+
 class CApple;
 class CAppleManager
 {
@@ -10,7 +12,9 @@ public:
 	CAppleManager();
 	~CAppleManager();
     void CreateApple();
+	void ControlApple();
 	void Update();
 	void Render();
+
 	CApple* getpApple(int i) { return Apple[i]; }
 };
