@@ -12,7 +12,7 @@ CUI::CUI(CController* pController) {
 	}
 
 	score = 0;
-	timeLimit = 60 * 30;			//60フレーム*30秒
+	timeLimit = 60 * 10;			//60フレーム*30秒
 	isPause = false;
 }
 
@@ -20,11 +20,6 @@ CUI::CUI(CController* pController) {
 // 更新
 //--------------------------------
 bool CUI::Update() {
-	//スタートボタンが押されたらPAUSE
-	if (controller->GetKey().Buttons[4]) {	
-		isPause = !isPause;
-	}
-
 	if (isPause == false) {
 		--timeLimit;
 	}
@@ -37,6 +32,10 @@ bool CUI::Update() {
 		//次のゲームステートを返すorゲームステートを変更する
 	}
 
+	//スタートボタンが押されたらPAUSE
+	if (controller->GetKey().Buttons[4]) {	
+		isPause = !isPause;
+	}
 	return true;
 }
 

@@ -37,12 +37,15 @@ CGame::~CGame() {
 //--------------------------------
 CScene* CGame::Update() {
 	controller->Update();
+
 	//ゲーム中(制限時間内、ポーズ中ではない)なら更新する
 	if (UI->Update()) {//ゲーム中(制限時間内、ポーズ中ではない)かどうかを返す
-		applemanager->Update();
-		player->Update();
+		if (UI->GetisPause() != true) {
+			applemanager->Update();
+			player->Update();
+		}
 	}
-	else if(!UI->GetisPause()) {
+	else {
 		//制限時間切れの時、3秒後に画面遷移
 		static int WaitTime = 0;
 		if (++WaitTime > 180) {

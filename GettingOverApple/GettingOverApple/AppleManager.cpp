@@ -17,7 +17,7 @@ CAppleManager::~CAppleManager() { delete[] apple; }
 //-------------------------
 void CAppleManager::CreateApple()
 {	
-	//リンゴが非表示なら確保しているメモリを解放し、新たに確保する
+	//リンゴが非表示ならりんごを初期化する
 	for (int i = 0; i < D_APPLE_MAX; i++) {
 		if (apple[i].GetisShow() == false) {
 			apple[i].AppleInit(0);
@@ -43,8 +43,8 @@ void CAppleManager::Update() {
 			apple[i].Update();
 		
 		}
-			//画面外に出たら非表示にする
-		if (apple[i].GetY() >= D_SCREEN_HEIGHT) {
+		//画面外に出たら非表示にする
+		if (apple[i].GetY() >= D_SCREEN_HEIGHT && apple[i].GetisShow()) {
 			apple[i].ToggleisShow();
 		}
 
@@ -59,8 +59,8 @@ void CAppleManager::Render()const {
 
 		if (apple[i].GetisShow() == true) {
 			apple[i].Render();
-			DrawFormatString(0, 100 + 20 * i, 0xFFFFFF, "apple[%d]:%d", i, (int)apple[i].GetisShow());
 		}
-
+		DrawFormatString(0, 100 + 20 * i, 0xFFFFFF, 
+			"apple[%d]:%d", i, (int)apple[i].GetisShow());
 	}
 }
