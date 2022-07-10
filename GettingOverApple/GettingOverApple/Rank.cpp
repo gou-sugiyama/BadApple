@@ -9,6 +9,10 @@ CRanking::CRanking(FILE* fp)
 }
 
 
+void CRanking::InsertRankChar(char* data)
+{
+}
+
 void CRanking::Update()
 {
 

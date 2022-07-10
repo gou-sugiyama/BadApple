@@ -3,8 +3,7 @@
 #include"player.h"
 #include"Apple.h"
 
-#define CONTROL_X_RIGHT 25000
-#define CONTROL_X_LEFT -25000
+#define CONTROL_STICK 25000
 #define MAX_BUTTON 16
 
 class CController

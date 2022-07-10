@@ -1,5 +1,8 @@
 #pragma once
 #pragma warning(disable:4996)
+#define STR_MAX 26
+#define STR_TYPE 3
+
 
 class CRanking;
 class CUI;
@@ -10,25 +13,35 @@ class CRankMng:
 private:
     CRanking* rankdata[5];
     CUI* ui;
-    FILE* fp;
+    FILE* fp;\
 
     int WaitTime;
     
+    int Type;
+    int Str;
+    int Count;
+
+    bool JudgeFlg;
+
     struct RankString
     {
         int str_X;
         int str_Y;
         int image;
+        int bigimage;
+        char string;
+        bool strflg;
     };
-    RankString rankstr[3][26];
+    RankString rankstr[STR_TYPE][STR_MAX];
 
-    struct Rank
+    struct RankCursor
     {
-        int str_X;
-        int str_Y;
-        int image;
+        int crsr_X;
+        int crsr_Y;
     };
-    RankString rankstr[3][26];
+    RankCursor  rankcrsr[STR_TYPE][STR_MAX+2];
+
+    char RememberName[9];
 
 public:
     CRankMng(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
@@ -38,14 +51,18 @@ public:
 
     CScene* Update();
 
-    bool  JudgeRanking() const;
+    int JudgeRanking() const;
 
     void TrueUpdate();
     bool FalseUpdate();
 
-    void InsertRanking();
+    bool InsertJudge() const;
+    void ToggleJudge();
+    void InsertRanking(XINPUT_STATE data,int i);
 
-    void Render() const;
+    void ToggleStrFlg(int i,int j);
+
+    void Render();
 
 
 };

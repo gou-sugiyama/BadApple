@@ -16,7 +16,7 @@ public:
 
     int ShowRankScore() const { return Score; }
 
-
+    void InsertRankChar(char* data);
 
     void Update();
 
