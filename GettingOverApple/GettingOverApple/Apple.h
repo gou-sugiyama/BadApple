@@ -1,8 +1,8 @@
 #pragma once
 
-#define APPLE_MAX 10
-#define APPLE_WIDTH 40
-#define APPLE_HEIGHT 40
+#define D_APPLE_MAX 10
+#define D_APPLE_WIDTH 40
+#define D_APPLE_HEIGHT 40
 
 class CAppleManager;
 class CApple {
@@ -16,8 +16,9 @@ private:
 	int score;
 	bool isShow;
 public:
-	CApple(int pimage);
+	CApple();
 	void Update();
+	void AppleInit(int type);
 	void Render()const;
 	void ToggleisShow() { isShow = !isShow; }
 	int GetX() { return x; }

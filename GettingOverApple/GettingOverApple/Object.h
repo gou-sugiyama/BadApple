@@ -3,7 +3,7 @@ class CObject
 {
 protected:
 	//‰æ‘œ
-	int* graphic;
+	int* image;
 	//À•W
 	float x;
 	float y;

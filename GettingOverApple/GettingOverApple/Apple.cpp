@@ -1,20 +1,19 @@
 #include"DxLib.h"
-#define _USE_MATH_DEFINES
 #include"Apple.h"
 #include"AppleManager.h"
 
 //-----------------------
 // コンストラクタ
 //-----------------------
-CApple::CApple(int pimage) {
+CApple::CApple() {
 	x = GetRand(6) * 71 + 35;
 	y = 0;
 	w = 40;
 	h = 40;
-	image = pimage;
+	image = LoadGraph("images/Apple_2.png");
 	speed = 3;
 	score = 0;
-	isShow = true;
+	isShow = false;
 }
 
 //------------------------
@@ -22,6 +21,20 @@ CApple::CApple(int pimage) {
 //------------------------
 void CApple::Update() {
 	y += speed;
+}
+
+//------------------------
+// リンゴの生成：初期化
+//------------------------
+void CApple::AppleInit(int type) {
+	x = GetRand(6) * 71 + 35;
+	y = 0;
+	w = 40;
+	h = 40;
+	image = LoadGraph("images/Apple_2.png");
+	speed = GetRand(9) + 1;
+	score = 0;
+	isShow = true;
 }
 
 //-------------------------

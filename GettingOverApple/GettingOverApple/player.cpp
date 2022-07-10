@@ -10,8 +10,8 @@ CPlayer::CPlayer(CController* pController) {
 	//controller‚ÌƒAƒhƒŒƒXŠi”[
 	controller = pController;
 	//‰æ‘œƒf[ƒ^
-	graphic[false] = LoadGraph("images/car1.bmp");
-	graphic[true] = LoadGraph("images/car1pol.bmp");
+	image[false] = LoadGraph("images/car1.bmp");
+	image[true] = LoadGraph("images/car1pol.bmp");
 	//‰æ‘œî•ñ‰Šú‰»
 	width = D_PLAYER_WIDTH;
 	height = D_PLAYER_HEIGHT;
@@ -52,7 +52,7 @@ void CPlayer::Update() {
 // •`‰æ
 //-------------------------
 void CPlayer::Render()const {
-	DrawRotaGraph((int)x, (int)y, 1.0f, 0, graphic[isMove], FALSE);
+	DrawRotaGraph((int)x, (int)y, 1.0f, 0, image[isMove], FALSE);
 
 	DrawFormatString(0, 20, 0xFFFFFF, "%lf", this->x);
 	DrawFormatString(0, 40, 0xFFFFFF, "%lf", this->speed);

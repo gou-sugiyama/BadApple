@@ -19,7 +19,7 @@ private:
 	CController* controller;
 
 	//画像データ格納
-	int graphic[D_PLAYER_GRAPHIC_NUM];
+	int image[D_PLAYER_GRAPHIC_NUM];
 
 	//座標周辺情報
 	int width;

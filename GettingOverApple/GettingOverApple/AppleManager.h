@@ -3,7 +3,6 @@ class CApple;
 class CAppleManager
 {
 private:
-	int image;
 	CApple* apple;
 	
 public:
