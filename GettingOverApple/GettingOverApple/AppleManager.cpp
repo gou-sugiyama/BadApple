@@ -20,7 +20,7 @@ void CAppleManager::CreateApple()
 	//リンゴが非表示ならりんごを初期化する
 	for (int i = 0; i < D_APPLE_MAX; i++) {
 		if (apple[i].GetisShow() == false) {
-			apple[i].AppleInit(0);
+			apple[i].NewApple();
 			break;
 		}
 	}
@@ -41,13 +41,11 @@ void CAppleManager::Update() {
 
 		if (apple[i].GetisShow() == true) {
 			apple[i].Update();
-		
 		}
 		//画面外に出たら非表示にする
 		if (apple[i].GetY() >= D_SCREEN_HEIGHT && apple[i].GetisShow()) {
 			apple[i].ToggleisShow();
 		}
-
 	}
 }
 //-------------------------
@@ -61,6 +59,6 @@ void CAppleManager::Render()const {
 			apple[i].Render();
 		}
 		DrawFormatString(0, 100 + 20 * i, 0xFFFFFF, 
-			"apple[%d]:%d", i, (int)apple[i].GetisShow());
+			"apple[%d]:%d   y:%d", i, (int)apple[i].GetisShow(),apple[i].GetY());
 	}
 }

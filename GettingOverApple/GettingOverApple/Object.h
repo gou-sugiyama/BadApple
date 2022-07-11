@@ -14,6 +14,9 @@ protected:
 	int rangeX;
 	int rangeY;
 
+public:
+	virtual void HitAction() = 0;
 
 };
 
+void CheckHit(CObject* pObj1, CObject* pObj2);
