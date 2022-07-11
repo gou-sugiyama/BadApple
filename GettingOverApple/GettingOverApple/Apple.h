@@ -12,12 +12,12 @@ private:
 	int w;
 	int h;
 	int speed;
-	int image;
+	int image[4];
 	int score;
+	int type;
 	bool isShow;
-	double raz;
 public:
-	CApple(int* pimage);
+	CApple();
 	void Update();
 	void Render();
 	void toggleisShow();
@@ -25,5 +25,6 @@ public:
 	int getY() { return y; }
 	int getW() { return w; }
 	int getH() { return h; }
+	int getSpeed() { return speed; }
 	bool getisShow() { return isShow; };
 };

@@ -10,37 +10,23 @@
 ******************************************/
 CAppleManager::CAppleManager()
 {
-	image[0] = LoadGraph("images/Apple_2.png");
-	image[1] = LoadGraph("images/BlueApple4.png");
-	image[2] = LoadGraph("images/GoldApple.png");
-	image[3] = LoadGraph("images/PoisonApple.png");
 	for (int i = 0; i < APPLE_MAX; i++) {
-		Apple[i] = new CApple(image);
-	}
-}CAppleManager::~CAppleManager() { delete Apple[4]; }
-
-void CAppleManager::ControlApple() 
-{
-	for (int i = 0; i < APPLE_MAX; i++) {
-		if (Apple[i]->getisShow() == TRUE) {
-			//ƒŠƒ“ƒS‚Ì•\Ž¦
-			Apple[i]->Render();
-			if (Apple[i]->getisShow() == 4) {
-				Apple[i]->toggleisShow();
-			//	//‰æ–Ê‚ð‚Í‚Ýo‚µ‚½‚çÁ‹Ž
-			//	if (Apple[i]->getH() > D_SCREEN_HEIGHT)Apple[i]->getH() = FALSE;
-			}
-		}
+	Apple[i] = new CApple();
 	}
 }
 
+CAppleManager::~CAppleManager() { 
+	for (int i = 0; i < APPLE_MAX; i++) {
+		delete Apple[i];
+	}
+}
 
 void CAppleManager::CreateApple()
 {	
 	for (int i = 0; i < APPLE_MAX; i++) {
 			if (Apple[i]->getisShow() == FALSE) {
 				delete Apple[i];
-				Apple[i] = new CApple(image);
+				Apple[i] = new CApple();
 			}
 			if (Apple[i]->getY() >= D_SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
 				Apple[i]->toggleisShow();

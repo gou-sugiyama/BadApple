@@ -7,7 +7,7 @@ class CAppleManager
 private:
 	int isShow;
 public:
-	int image[4];
+	
 	CApple* Apple[10];
 	CAppleManager();
 	~CAppleManager();
