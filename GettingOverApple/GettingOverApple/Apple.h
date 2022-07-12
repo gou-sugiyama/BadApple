@@ -16,10 +16,11 @@ private:
 	int y;
 	int w;
 	int h;
-	int speed;
-	int image[4];
+	int speed;        //ˆÚ“®‘¬“x
+	int image[4];     //‰æ‘œ•Ï”
 	int score;
-	int type;
+	int type;         //í—Ş
+	int col;          //í—Ş‚²‚Æ‚Ì‰æ‘œ‚É•\¦‚³‚ê‚éŒÂ”
 	bool isShow;
 public:
 	CApple();

@@ -11,7 +11,7 @@
 CAppleManager::CAppleManager()
 {
 	for (int i = 0; i < APPLE_MAX; i++) {
-	Apple[i] = new CApple();
+	    Apple[i] = new CApple();
 	}
 }
 
@@ -43,7 +43,7 @@ void CAppleManager::Update(){
 			Apple[i]->toggleisShow();
 		}
 		static int WaitTime = 0;
-		if (!(++WaitTime % 25)) CreateApple();
+		if (!(++WaitTime % 25))CreateApple();
 		Apple[i]->Update();
 	}
 }
