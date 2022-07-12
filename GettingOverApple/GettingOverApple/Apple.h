@@ -3,6 +3,11 @@
 
 #define APPLE_WIDTH 40
 #define APPLE_HEIGHT 40
+#define SPEED_1 2
+#define SPEED_2 5
+#define SPEED_3 10
+#define SPEED_4 1
+#define APPLE_MAX 10
 
 class CAppleManager;
 class CApple {

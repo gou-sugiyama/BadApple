@@ -12,7 +12,6 @@ public:
 	CAppleManager();
 	~CAppleManager();
     void CreateApple();
-	void ControlApple();
 	void Update();
 	void Render();
 
