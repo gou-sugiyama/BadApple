@@ -9,6 +9,10 @@
 CAppleManager::CAppleManager()
 {
 	apple = new CApple[D_APPLE_MAX];
+	CreateApple();
+	CreateApple();
+	CreateApple();
+	CreateApple();
 }
 CAppleManager::~CAppleManager() { delete[] apple; }
 
@@ -59,6 +63,6 @@ void CAppleManager::Render()const {
 			apple[i].Render();
 		}
 		DrawFormatString(0, 100 + 20 * i, 0xFFFFFF, 
-			"apple[%d]:%d   y:%d", i, (int)apple[i].GetisShow(),apple[i].GetY());
+			"apple[%d]:%d   y:%.0f y:%.0f", i, (int)apple[i].GetisShow(),apple[i].GetY(),apple[i].GetX());
 	}
 }
