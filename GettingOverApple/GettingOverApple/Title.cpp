@@ -36,7 +36,7 @@ CScene* CTitle::Update() {
 			return new CRanking(controller);	//ランキングシーンに移行
 			break;
 		case D_HELP:
-			return new CHelp(controller);		//TODO:ヘルプ画面に移行
+			return new CHelp(controller);		//ヘルプ画面に移行
 			break;
 		case D_END:
 			return new CEnd(controller);		//エンド画面に移行

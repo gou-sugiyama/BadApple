@@ -28,7 +28,7 @@ bool CUI::Update() {
 		timeLimit = 0;
 
 		return false;
-		//TODO　制限時間が0になったら3秒後に画面遷移
+		//TODO:制限時間が0になったら3秒後に画面遷移
 		//次のゲームステートを返すorゲームステートを変更する
 	}
 

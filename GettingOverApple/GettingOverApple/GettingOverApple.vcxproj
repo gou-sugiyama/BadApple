@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Controller.h" />
     <ClInclude Include="Apple.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="AppleManager.h" />
     <ClInclude Include="End.h" />
     <ClInclude Include="Help.h" />

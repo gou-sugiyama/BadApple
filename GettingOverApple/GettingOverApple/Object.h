@@ -1,21 +1,23 @@
 #pragma once
 class CObject
 {
-protected:
+public:
 	//‰æ‘œ
-	int* image;
+	int* image = 0;
 	//À•W
-	float x;
-	float y;
+	float x = 0;
+	float y = 0;
 
 	//“–‚½‚è”»’è
-	int width;
-	int height;
-	int rangeX;
-	int rangeY;
+	int width = 0;
+	int height = 0;
+	int rangeX = 0; 
+	int rangeY = 0;
 
 public:
+	CObject() {}
 	virtual void HitAction() = 0;
+
 
 };
 

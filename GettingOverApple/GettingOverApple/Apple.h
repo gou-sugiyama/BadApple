@@ -1,4 +1,5 @@
 #pragma once
+#include"Object.h"
 
 #define D_APPLE_MAX 10
 #define D_APPLE_WIDTH 40
@@ -19,17 +20,14 @@
 #define D_PROPORTION_B D_PROPORTION_A + 2
 #define D_PROPORTION_C D_PROPORTION_B + 1
 #define D_PROPORTION_D D_PROPORTION_C + 1
+#define D_CREATE_POINT_NUM 7
 #define IMAGE_MAX 4
 
 class CAppleManager;
-class CApple {
+class CApple : 
+	public CObject {
 private:
-	int x;
-	int y;
-	int w;
-	int h;
 	int speed;
-	int* image;
 	int imgHandle;
 	int score;
 	bool isShow;
@@ -42,11 +40,15 @@ public:
 	void CreateAppleB();
 	void CreateAppleC();
 	void CreateAppleD();
+
 	void Render()const;
+
+	void HitAction();
+
 	void ToggleisShow() { isShow = !isShow; }
-	int GetX() { return x; }
-	int GetY() { return y; }
-	int GetW() { return w; }
-	int GetH() { return h; }
+	float GetX() { return x; }
+	float GetY() { return y; }
+	int GetW() { return width; }
+	int GetH() { return height; }
 	bool GetisShow() { return isShow; };
 };

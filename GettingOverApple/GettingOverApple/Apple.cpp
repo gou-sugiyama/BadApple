@@ -1,15 +1,17 @@
 #include"DxLib.h"
 #include"Apple.h"
 #include"AppleManager.h"
+#include"define.h"
 
 //-----------------------
 // ÉRÉìÉXÉgÉâÉNÉ^
 //-----------------------
 CApple::CApple() {
-	x = GetRand(6) * 71 + 35;
+	//0Å`ê∂ê¨â”èäÇÃêîÇ∆Å{ó]îíï™ÇÃ0.5 * ÉQÅ[ÉÄóÃàÊÇìØÇ∂ïùÇ≈ï™ÇØÇÈ
+	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
-	w = 40;
-	h = 40;
+	width = 40;
+	height = 40;
 	image = new int[IMAGE_MAX];
 	image[D_APPLE_A] = LoadGraph("images/ringoA.png");
 	image[D_APPLE_B] = LoadGraph("images/ringoB.png");
@@ -59,7 +61,7 @@ void CApple::NewApple() {
 // ÉäÉìÉSAÇÃê∂ê¨
 //---------------------
 void CApple::CreateAppleA() {
-	x = GetRand(6) * 71 + 35;
+	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
 	speed = D_APPLE_A_SPEED;
 	score = D_APPLE_A_SCORE;
@@ -70,7 +72,7 @@ void CApple::CreateAppleA() {
 // ÉäÉìÉSBÇÃê∂ê¨
 //---------------------
 void CApple::CreateAppleB() {
-	x = GetRand(6) * 71 + 35;
+	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
 	speed = D_APPLE_B_SPEED;
 	score = D_APPLE_B_SCORE;
@@ -81,7 +83,7 @@ void CApple::CreateAppleB() {
 // ÉäÉìÉSCÇÃê∂ê¨
 //---------------------
 void CApple::CreateAppleC() {
-	x = GetRand(6) * 71 + 35;
+	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
 	speed = D_APPLE_C_SPEED;
 	score = D_APPLE_C_SCORE;
@@ -92,7 +94,7 @@ void CApple::CreateAppleC() {
 // ÉäÉìÉSDÇÃê∂ê¨
 //---------------------
 void CApple::CreateAppleD() {
-	x = GetRand(6) * 71 + 35;
+	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
 	speed = D_APPLE_D_SPEED;
 	score = D_APPLE_D_SCORE;
@@ -104,6 +106,13 @@ void CApple::CreateAppleD() {
 // ï`âÊ
 //-------------------------
 void CApple::Render()const {
-	DrawGraph(x, y, image[imgHandle], TRUE);
+	DrawRotaGraphF(x, y, 1.0f, 0, image[imgHandle], TRUE);
+}
+
+//-------------------------
+// ìñÇΩÇ¡ÇΩéû
+//-------------------------
+void CApple::HitAction() {
+
 }
 
