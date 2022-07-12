@@ -13,10 +13,10 @@ private:
 	XINPUT_STATE OldKey;
 	XINPUT_STATE data;
 
-	bool ControlFlg=TRUE;
+	bool ControlFlg=FALSE;
 
 public:
-	XINPUT_STATE control(bool data);
+	void control(bool data);
 
 	XINPUT_STATE GetControl() const;
 

@@ -18,7 +18,7 @@ bool CUI::Update() {
 		--timeLimit;
 	}
 
-	if (controller->control(false).Buttons[4]) {	
+	if (controller->GetControl().Buttons[4]) {	
 		isPause = !isPause;
 	}
 

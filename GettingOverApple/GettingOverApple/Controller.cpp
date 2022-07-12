@@ -1,7 +1,7 @@
 #include "Controller.h"
 
 
-XINPUT_STATE CController::control(bool isChattering)
+void CController::control(bool isChattering)
 {
 
 	if (!isChattering) {
@@ -19,18 +19,15 @@ XINPUT_STATE CController::control(bool isChattering)
 		data.ThumbRX = input.ThumbRX & ~OldKey.ThumbRX;
 		data.ThumbRY = input.ThumbRY & ~OldKey.ThumbRY;
 
-		return data;
-
 	}
 	else {
 
-
-		GetJoypadXInputState(DX_INPUT_PAD1, &data);
+		OldKey = input;
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
+		data = input;
 		for (int i = 0; i < MAX_BUTTON; i++) {
 			data.Buttons[i] = input.Buttons[i] & ~OldKey.Buttons[i];
 		}
-
-		return data;
 
 	}
 

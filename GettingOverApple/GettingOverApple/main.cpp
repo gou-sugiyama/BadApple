@@ -23,16 +23,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//管理システムを動的確保
 	CSceneManager* manager;
-	manager = new CSceneManager(new CTitle());
+	manager = new CSceneManager(new CTitle(&controller));
 
 	//ゲームループ
 	while (ProcessMessage() == 0 
-		&& manager->Update() != nullptr&& controller.GetControl().Buttons[5] != TRUE) {
+		&& manager->Update() != nullptr&& controller.GetControl().Buttons[5]!= TRUE) {
 		
-		ClearDrawScreen();		//画面の初期化
-
-
 		controller.control(controller.GetControlFlg());
+
+		ClearDrawScreen();		//画面の初期化
 
 		manager->Render();
 

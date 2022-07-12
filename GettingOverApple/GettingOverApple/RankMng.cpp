@@ -104,7 +104,7 @@ void CRankMng::TrueUpdate()
 {
 	int i;
 	XINPUT_STATE data;
-	data = controller->control(false);
+	data = controller->GetControl();
 
 	i = JudgeRanking();
 	InsertRanking(data,i);

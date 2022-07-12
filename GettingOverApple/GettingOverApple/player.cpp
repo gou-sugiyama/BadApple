@@ -55,7 +55,7 @@ void CPlayer::playerspeed() {
 }
 
 int CPlayer::KeyControl() {
-	short int key = (controller->control(true)).ThumbLX;
+	short int key = (controller->GetControl()).ThumbLX;
 
 	if ( D_KEY_CONTROL_RIGHT< key) {
 		return 1;//‰E
