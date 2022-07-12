@@ -10,9 +10,10 @@ CPlayer::CPlayer(CController* pController) {
 	//controllerのアドレス格納
 	controller = pController;
 	//画像データ
+	image = new int[D_PLAYER_IMAGE_MAX];
 	image[false] = LoadGraph("images/car1.bmp");
 	image[true] = LoadGraph("images/car1pol.bmp");
-	//画像情報初期化
+	//画像情報
 	width = D_PLAYER_WIDTH;
 	height = D_PLAYER_HEIGHT;
 
@@ -25,7 +26,7 @@ CPlayer::CPlayer(CController* pController) {
 }
 
 CPlayer::~CPlayer() {
-
+	delete[] image;
 }
 
 //------------------------
@@ -132,4 +133,11 @@ int CPlayer::KeyControl() {
 	else {
 		return 0;
 	}
+}
+
+//------------------
+// 当たった時
+//------------------
+void CPlayer::HitAction() {
+
 }

@@ -21,7 +21,7 @@
 #define D_PROPORTION_C D_PROPORTION_B + 1
 #define D_PROPORTION_D D_PROPORTION_C + 1
 #define D_CREATE_POINT_NUM 7
-#define IMAGE_MAX 4
+#define D_APPLE_IMAGE_MAX 4
 
 class CAppleManager;
 class CApple : 

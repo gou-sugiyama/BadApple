@@ -1,4 +1,5 @@
 #pragma once
+#include"Object.h"
 #define D_PLAYER_WIDTH (40)
 #define D_PLAYER_HEIGHT (100)
 #define D_PLAYER_WIDTH_MOVE (60)
@@ -9,23 +10,16 @@
 #define D_PLAYER_GRAPHIC_NUM (2)
 #define D_KEY_CONTROL_LEFT -2000
 #define D_KEY_CONTROL_RIGHT 2000
+#define D_PLAYER_IMAGE_MAX 2
 
 class CController;
 
-class CPlayer
+class CPlayer :
+	public CObject
 {
 private:
 	//コントローラ
 	CController* controller;
-
-	//画像データ格納
-	int image[D_PLAYER_GRAPHIC_NUM];
-
-	//座標周辺情報
-	int width;
-	int height;
-	float x;
-	float y;
 
 	//移動周辺情報
 	float speed;
@@ -49,5 +43,9 @@ private:
 	void SetWH();
 	//入力キーの制御
 	int KeyControl();
+
+private:
+	//当たった時
+	void HitAction();
 };
 

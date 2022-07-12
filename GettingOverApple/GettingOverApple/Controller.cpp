@@ -1,8 +1,8 @@
 #include "Controller.h"
 
 CController::CController() {
-	oldKey = input;
 	GetJoypadXInputState(DX_INPUT_PAD1, &input);
+	oldKey = input;
 	data = input;
 }
 

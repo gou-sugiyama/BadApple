@@ -12,7 +12,7 @@ CApple::CApple() {
 	y = 0;
 	width = 40;
 	height = 40;
-	image = new int[IMAGE_MAX];
+	image = new int[D_APPLE_IMAGE_MAX];
 	image[D_APPLE_A] = LoadGraph("images/ringoA.png");
 	image[D_APPLE_B] = LoadGraph("images/ringoB.png");
 	image[D_APPLE_C] = LoadGraph("images/ringoC.png");
