@@ -5,7 +5,7 @@
 #include"RankMng.h"
 #include "Ranking.h"
 #include "UI.h"
-
+#include"CString.h"
 
 
 //--------------------------------
@@ -25,34 +25,23 @@ CRankMng::CRankMng(CController* pController):CScene(pController) {
 
 		rankdata[i] = new CRanking(data1,data2,data3);
 	}
-
-
 	//ファイルクローズ
 	fclose(fp);
 
+	for (int i = 0; i < STR_MAX; i++) {
+		StrData[i] = new CString(i);
+	}
+
+	Score = controller->GetScore();
+
 	WaitTime = 0;
 	Type = 0;
-	Str = 0;
+	Str = 13;
 	Count = 0;
 
 	JudgeFlg = TRUE;
 
-	for (int i = 0; i < STR_TYPE; i++) {
-		for (int j = 0; j < STR_MAX; j++) {
-			rankstr[i][j].str_X = j*30+60;
-			rankstr[i][j].str_Y = i*60+80;
-			rankstr[i][j].image = LoadGraph("images/Test.png");
-			rankstr[i][j].bigimage = LoadGraph("images/Test2.png");
-			rankstr[i][j].string = i * 26 + j;
-			rankstr[i][j].strflg = FALSE;
-		}
-	}
-	for (int i = 0; i < STR_TYPE; i++) {
-		for (int j = 0; j < STR_MAX+2; j++) {
-			rankcrsr[i][j].crsr_X = j;
-			rankcrsr[i][j].crsr_Y = i;
-		}
-	}
+	
 }
 
 CRankMng::~CRankMng()
@@ -66,17 +55,16 @@ CRankMng::~CRankMng()
 
 int CRankMng::JudgeRanking() const
 {
-	for (int i = 4; i >= 0; i--) {
-		if (rankdata[i - 1]->ShowRankScore() > Score&&Score > rankdata[i]->ShowRankScore()) {
-			if (InsertJudge() == TRUE) {
-				return i;
-				break;
-			}
-		}
-		else {
-			
+	if (rankdata[4]->ShowRankScore() < Score) {
+		if (InsertJudge() == TRUE) {
+			return 4;
+		}	
+		else
+		{
+			return -1;
 		}
 	}
+
 	return -1;
 }
 
@@ -123,87 +111,51 @@ void CRankMng::ToggleJudge()
 
 void CRankMng::InsertRanking(XINPUT_STATE data,int i)
 {
-
+	
+	for (int j = 0; j < STR_MAX; j++) {
+		StrData[j]->SetStrFlg(FALSE);
+	}
 	
 	if (data.ThumbLX>=CONTROL_STICK)
 	{
-		if (0 < Str&&Str < STR_MAX/2|| STR_MAX/2 < Str&&Str < STR_MAX-1) {
+		if (0 <= Str%13&&Str%13 < 13) {
 			Str++;
 		}
 		else if (Str == 12) {
-			Str = 0;
-		}
-		else if (Str == 25) {
-			Str = 13;
-		}else if (Str==26)
-		{
-			Str = 27;
-		}
-		else if (Str == 27) {
-			Str = 26;
+			Str -= 12;
 		}
 	}
 	else if (data.ThumbLX <= CONTROL_STICK*-1) {
-		if (STR_MAX / 2 >Str&&Str >= 0 || STR_MAX-1 > Str&&Str > STR_MAX / 2) {
+		if (12 >= Str&&Str > 0) {
 			Str--;
 		}
 		else if(Str==0){
-			Str = 12;
-		}
-		else if (Str == 13) {
-			Str = 25;
-		}else if (Str==26)
-		{
-			Str = 27;
-		}
-		else if (Str == 27) {
-			Str = 26;
+			Str += 12;
 		}
 	}
 	else if (data.ThumbLY>=CONTROL_STICK)
 	{
-		if (Str < STR_MAX/2) {
-			Str = 26;
-		}
-		else if(STR_MAX / 2<= Str&&Str < STR_MAX) {
-			Str = -13;
-		}
-		else if(Str==26||Str==27)
-		{
-			Str = 25;
+		if (Str < Str + 13) {
+			Str += 13;
 		}
 	}
 	else if (data.ThumbLY >= CONTROL_STICK*-1)
 	{
-		if (Str < STR_MAX / 2) {
-			Str += 13;
-		}
-		else if (STR_MAX / 2 <= Str||Str < STR_MAX) {
-			Str = 26;
-		}
-		else if (Str == 26 || Str == 27)
-		{
-			Str = 0;
+		if (Str < Str-13) {
+			Str -= 13;
 		}
 	}
-	ToggleStrFlg(Type, Count);
+
+	ToggleStrFlg(Str);
 
 	if (0 <= Str&&Str < STR_MAX) {
 		if (Count< 9) {
 			if (data.Buttons[XINPUT_BUTTON_A] == TRUE) {
-				RememberName[Count++] = rankstr[Type][Str].string;
+				RememberName[Count++] = StrData[Str]->GetStr();
 			}
 		}
 		else {
 			Count = 8;
-		}
-	}
-	else if (Str == STR_MAX) {
-		if (Type >= 2) {
-			Type = 0;
-		}
-		else {
-			Type++;
 		}
 	}
 	else if (Str == STR_MAX + 1) {
@@ -218,9 +170,9 @@ void CRankMng::InsertRanking(XINPUT_STATE data,int i)
 
 }
 
-void CRankMng::ToggleStrFlg(int i,int j)
+void CRankMng::ToggleStrFlg(int i)
 {
-	rankstr[i][j].strflg = !rankstr[i][j].strflg;
+	StrData[i]->SetStrFlg(TRUE);
 }
 
 void CRankMng::SetScore(int i)
@@ -242,29 +194,24 @@ bool CRankMng::FalseUpdate()
 //--------------------------------
 // 描画
 //--------------------------------
-void CRankMng::Render() {
+void CRankMng::Render() const{
 	if (JudgeRanking()!=-1) {
 		
-		
-		for (int i = 0; i < 3; i++)
-		{
-			for (int j = 0; j < 26; j++) {
-				if (rankstr[i][j].strflg == TRUE) {
-					DrawGraph(rankstr[i][j].str_X, rankstr[i][j].str_Y, rankstr[i][j].bigimage, TRUE);
-					ToggleStrFlg(i,j);
+			for (int i = 0; i < STR_MAX; i++) {
+				if (StrData[i]->GetStrFlg() == TRUE) {
+					DrawGraph(StrData[i]->GetStrX(), StrData[i]->GetStrY(), StrData[i]->GetBigImage(), TRUE);
 				}
 				else {
-					DrawGraph(rankstr[i][j].str_X, rankstr[i][j].str_Y, rankstr[i][j].image, TRUE);
+					DrawGraph(StrData[i]->GetStrX(), StrData[i]->GetStrY(), StrData[i]->GetImage(), TRUE);
 				}
 			}
-		}
 		
 	}
 	else {
-		if (WaitTime <= 240) {
+		
 			SetFontSize(28);
 			DrawString(10, 10, "ランキング表示", 0xFFFFFF);
-		}
+	
 	}
 	
 }

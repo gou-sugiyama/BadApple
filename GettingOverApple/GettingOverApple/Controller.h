@@ -9,6 +9,8 @@
 class CController
 {
 private:
+	int Score;
+
 	XINPUT_STATE input;
 	XINPUT_STATE OldKey;
 	XINPUT_STATE data;
@@ -22,6 +24,9 @@ public:
 
 	bool GetControlFlg() const;
 	void ToggleControlFlg();
+
+	void SetScore(int data);
+	int GetScore();
 };
 
 

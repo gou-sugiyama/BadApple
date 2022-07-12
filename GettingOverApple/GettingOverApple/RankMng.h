@@ -1,9 +1,9 @@
 #pragma once
 #pragma warning(disable:4996)
-#define STR_MAX 28
+#define STR_MAX 65
 #define STR_TYPE 3
 
-
+class CString;
 class CRanking;
 class CUI;
 
@@ -12,6 +12,7 @@ class CRankMng:
 {
 private:
     CRanking* rankdata[5];
+    CString* StrData[STR_MAX];
     CUI* ui;
     FILE* fp;
 
@@ -23,24 +24,6 @@ private:
     int Count;
 
     bool JudgeFlg;
-
-    struct RankString
-    {
-        int str_X;
-        int str_Y;
-        int image;
-        int bigimage;
-        char string;
-        bool strflg;
-    };
-    RankString rankstr[STR_TYPE][STR_MAX];
-
-    struct RankCursor
-    {
-        int crsr_X;
-        int crsr_Y;
-    };
-    RankCursor  rankcrsr[STR_TYPE][STR_MAX];
 
     char RememberName[9];
 
@@ -60,10 +43,10 @@ public:
     void ToggleJudge();
     void InsertRanking(XINPUT_STATE data,int i);
 
-    void ToggleStrFlg(int i,int j);
+    void ToggleStrFlg(int i);
     void SetScore(int i);
 
-    void Render();
+    void Render()const;
 
 
 };

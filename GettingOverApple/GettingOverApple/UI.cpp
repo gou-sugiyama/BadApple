@@ -8,7 +8,7 @@ CUI::CUI(CController* pController) {
 		appleCount[i] = 0;
 	}
 
-	score = 0;
+	score = 200000;
 	timeLimit = 60 * 5;			//60ƒtƒŒ[ƒ€*30•b
 	isPause = false;
 }

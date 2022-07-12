@@ -22,6 +22,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Apple.h" />
     <ClInclude Include="AppleManager.h" />
+    <ClInclude Include="CString.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hit.h" />
@@ -35,6 +36,7 @@
   <ItemGroup>
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AppleManager.cpp" />
+    <ClCompile Include="CString.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ranking.cpp" />

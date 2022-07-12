@@ -47,3 +47,13 @@ void CController::ToggleControlFlg()
 {
 	ControlFlg = !(ControlFlg);
 }
+
+void CController::SetScore(int data)
+{
+	Score = data;
+}
+
+int CController::GetScore()
+{
+	return Score;
+}

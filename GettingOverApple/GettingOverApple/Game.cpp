@@ -50,8 +50,8 @@ CScene* CGame::Update() {
 		static int WaitTime = 0;
 		if (++WaitTime > 180) {
 			WaitTime = 0;
+			controller->SetScore(UI->GetScore());
 			return new CRankMng(controller);
-			rankmng->SetScore(UI->GetScore());
 		}
 		
 	}

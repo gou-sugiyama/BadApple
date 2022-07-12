@@ -11,6 +11,8 @@ private:
     char* Name[9];
     int Score = 0;
 
+
+
 public:
     CRanking(int data1,char* data2,int data3);
 
