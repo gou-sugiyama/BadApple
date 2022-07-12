@@ -4,13 +4,15 @@
 #include"Title.h"
 #include"player.h"
 #include"AppleManager.h"
-#include"Ranking.h"
+#include"RankMng.h"
 #include"UI.h"
 #include"Hit.h"
 
 CGame::CGame(CController* pController):CScene(pController){ 
 	//受け取ったコントローラの格納
 	controller = pController;
+	//コントローラーのフラグを変更
+	controller->ToggleControlFlg();		//フラグをFALSEへ変更
 	//プレイヤーを動的確保
 	player = new CPlayer(controller);
 	//アップルマネージャーを動的確保
@@ -23,6 +25,10 @@ CGame::CGame(CController* pController):CScene(pController){
 
 CGame::~CGame() {
 	//動的確保したものを解放する
+
+	//コントローラーのフラグを変更
+	controller->ToggleControlFlg();		//フラグをTRUEへ変更
+
 	delete player;
 	delete applemanager;
 	delete UI;
@@ -45,6 +51,7 @@ CScene* CGame::Update() {
 		if (++WaitTime > 180) {
 			WaitTime = 0;
 			return new CRankMng(controller);
+			rankmng->SetScore(UI->GetScore());
 		}
 		
 	}

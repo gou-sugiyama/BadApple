@@ -40,10 +40,10 @@
     <ClCompile Include="Game.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Ranking.cpp">
+    <ClCompile Include="RankMng.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Rank.cpp">
+    <ClCompile Include="Ranking.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,10 +78,10 @@
     <ClInclude Include="Hit.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Ranking.h">
+    <ClInclude Include="RankMng.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Rank.h">
+    <ClInclude Include="Ranking.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

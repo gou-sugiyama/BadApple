@@ -4,6 +4,7 @@ class CAppleManager;
 class CUI;
 class CController;
 class CHitBoxCheck;
+class CRankMng;
 
 class CGame :
     public CScene
@@ -17,6 +18,8 @@ private:
     CUI* UI;
     //Hit
     CHitBoxCheck* hit;
+    //Rank
+    CRankMng* rankmng;
 
 public:
     CGame(CController* pController);

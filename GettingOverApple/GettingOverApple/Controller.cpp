@@ -35,3 +35,18 @@ XINPUT_STATE CController::control(bool isChattering)
 	}
 
 }
+
+XINPUT_STATE CController::GetControl() const
+{
+	return data;
+}
+
+bool CController::GetControlFlg() const
+{
+	return ControlFlg;
+}
+
+void CController::ToggleControlFlg()
+{
+	ControlFlg = !(ControlFlg);
+}

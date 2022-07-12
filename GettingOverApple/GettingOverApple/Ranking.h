@@ -1,69 +1,25 @@
 #pragma once
-#pragma warning(disable:4996)
-#define STR_MAX 26
-#define STR_TYPE 3
+class CRankMng;
 
 
-class CRanking;
-class CUI;
-
-class CRankMng:
-    public CScene
+class CRanking
 {
 private:
-    CRanking* rankdata[5];
-    CUI* ui;
-    FILE* fp;\
+    XINPUT_STATE input;
 
-    int WaitTime;
-    
-    int Type;
-    int Str;
-    int Count;
-
-    bool JudgeFlg;
-
-    struct RankString
-    {
-        int str_X;
-        int str_Y;
-        int image;
-        int bigimage;
-        char string;
-        bool strflg;
-    };
-    RankString rankstr[STR_TYPE][STR_MAX];
-
-    struct RankCursor
-    {
-        int crsr_X;
-        int crsr_Y;
-    };
-    RankCursor  rankcrsr[STR_TYPE][STR_MAX+2];
-
-    char RememberName[9];
+    int Rank = 0;
+    char* Name[9];
+    int Score = 0;
 
 public:
-    CRankMng(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
+    CRanking(int data1,char* data2,int data3);
 
-    ~CRankMng() { delete []rankdata; }
+    int ShowRankScore() const { return Score; }
 
+    void InsertRankChar(char* data);
 
-    CScene* Update();
+    void Update();
 
-    int JudgeRanking() const;
-
-    void TrueUpdate();
-    bool FalseUpdate();
-
-    bool InsertJudge() const;
-    void ToggleJudge();
-    void InsertRanking(XINPUT_STATE data,int i);
-
-    void ToggleStrFlg(int i,int j);
-
-    void Render();
-
-
+    void Render() const;
 };
 

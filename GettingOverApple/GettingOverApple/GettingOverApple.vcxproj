@@ -25,8 +25,8 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hit.h" />
-    <ClInclude Include="Rank.h" />
     <ClInclude Include="Ranking.h" />
+    <ClInclude Include="RankMng.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="Title.h" />
@@ -37,8 +37,8 @@
     <ClCompile Include="AppleManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Rank.cpp" />
     <ClCompile Include="Ranking.cpp" />
+    <ClCompile Include="RankMng.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -123,6 +123,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\dxlib</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -142,6 +143,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\dxlib</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -157,6 +159,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\dxlib</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -176,6 +179,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\dxlib</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,7 +5,7 @@
 #include"Game.h"
 
 CScene* CTitle::Update() {
-	if ((controller->control(false)).Buttons[4] == true) {
+	if ((controller->GetControl().Buttons[4] == true)) {
 		//ゲームシーンに移行
 		return new CGame(controller);
 	}
