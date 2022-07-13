@@ -24,7 +24,7 @@ CApple::CApple() {
 	
 	if (0 == col <= 6)type = 0;
 	if (7 == col <= 8)type = 1;
-	if (col <= 9)type = 2;
+	if (9 == col <= 9)type = 2;
 	if (10 == col <= 10)type = 3;
 }
 

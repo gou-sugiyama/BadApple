@@ -5,7 +5,6 @@ class CApple;
 class CAppleManager
 {
 private:
-	int isShow;
 public:
 	
 	CApple* Apple[10];
