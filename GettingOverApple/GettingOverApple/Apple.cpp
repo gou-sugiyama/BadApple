@@ -18,16 +18,14 @@ CApple::CApple() {
 	col = GetRand(9)+1;   
 
 	if (type == 0)speed = 2;
-	if (type == 1)speed = 5;
-	if (type == 2)speed = 10;
+	if (type == 1)speed = 4;
+	if (type == 2)speed = 7;
 	if (type == 3)speed = 1;
 	
-	if (type < 4) {
-		if (type == 0)col <= 6;
-		if (type == 1)col <= 2;
-		if (type == 2)col <= 1;
-		if (type == 3)col <= 1;
-	}
+	if (0 == col <= 6)type = 0;
+	if (7 == col <= 8)type = 1;
+	if (col <= 9)type = 2;
+	if (10 == col <= 10)type = 3;
 }
 
 void CApple::Update() {
