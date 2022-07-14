@@ -38,10 +38,10 @@
     <ClCompile Include="AppleManager.cpp" />
     <ClCompile Include="End.cpp" />
     <ClCompile Include="Help.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Title.cpp" />
