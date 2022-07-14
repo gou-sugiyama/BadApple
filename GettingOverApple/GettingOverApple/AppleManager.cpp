@@ -1,5 +1,6 @@
 #include"Apple.h"
 #include"AppleManager.h"
+#include"define.h"
 
 /******************************************
 
@@ -76,6 +77,9 @@ void CAppleManager::CreateApple()
 					Apple[i] = new CApple(type);
 					Apple[i]->SetApple(images4);
 				}
+			}
+			if (Apple[i]->getY() >= D_SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
+				Apple[i]->toggleisShow();
 			}
 	}
 }
