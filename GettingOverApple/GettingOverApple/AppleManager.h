@@ -5,14 +5,21 @@ class CApple;
 class CAppleManager
 {
 private:
+
+	int image[4];     //‰æ‘œ•Ï”
+	int WaitTime;
+
+
+	CApple* Apple[10];
+
 public:
 	
-	CApple* Apple[10];
 	CAppleManager();
 	~CAppleManager();
     void CreateApple();
 	void Update();
-	void Render();
+	void Render() const;
 
+	int GetImage(int i);
 	CApple* getpApple(int i) { return Apple[i]; }
 };

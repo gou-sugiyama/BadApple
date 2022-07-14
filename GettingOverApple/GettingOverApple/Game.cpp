@@ -35,7 +35,7 @@ CScene* CGame::Update() {
 		applemanager->Update();
 		player->Update();
 		if (hit->HitBox(player, applemanager->getpApple(0))
-			&& applemanager->getpApple(0)->getisShow()) {
+			&& applemanager->getpApple(0)->GetAppleFlg()) {
 			applemanager->getpApple(0)->toggleisShow();
 
 		}

@@ -17,20 +17,21 @@ private:
 	int w;
 	int h;
 	int speed;        //ˆÚ“®‘¬“x
-	int image[4];     //‰æ‘œ•Ï”
 	int score;
 	int type;         //í—Ş
 	int col;          //í—Ş‚²‚Æ‚Ì‰æ‘œ‚É•\¦‚³‚ê‚éŒÂ”
-	bool isShow;
+	int image[4];
+	bool appleFlg;
+
 public:
 	CApple();
 	void Update();
-	void Render();
+	void Render() const;
 	void toggleisShow();
 	int getX() { return x; }
 	int getY() { return y; }
 	int getW() { return w; }
 	int getH() { return h; }
 	int getSpeed() { return speed; }
-	bool getisShow() { return isShow; };
+	bool GetAppleFlg() { return appleFlg; };
 };

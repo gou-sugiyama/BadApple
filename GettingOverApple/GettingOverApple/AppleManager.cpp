@@ -10,7 +10,9 @@
 ******************************************/
 CAppleManager::CAppleManager()
 {
-	for (int i = 0; i < APPLE_MAX; i++) {
+	WaitTime = 0;
+
+	for (int i = 0; i < 4; i++) {
 	    Apple[i] = new CApple();
 	}
 }
@@ -24,32 +26,44 @@ CAppleManager::~CAppleManager() {
 void CAppleManager::CreateApple()
 {	
 	for (int i = 0; i < APPLE_MAX; i++) {
-			if (Apple[i]->getisShow() == FALSE) {
+			if (Apple[i]->GetAppleFlg() == FALSE) {
 				delete Apple[i];
 				Apple[i] = new CApple();
 			}
-			if (Apple[i]->getY() >= D_SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
+			/*if (Apple[i]->getY() >= D_SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
 				Apple[i]->toggleisShow();
-			}
+			}*/
 	}
 }
+
+
 
 void CAppleManager::Update(){
 
-	for (int i = 0; i < APPLE_MAX; i++) 
+	for (int i = 0; i < APPLE_MAX; i++)
 	{
-		if (Apple[i]->getY() >= D_SCREEN_HEIGHT) 
+		Apple[i]->Update();
+
+		if (Apple[i]->getY() >= D_SCREEN_HEIGHT)
 		{
 			Apple[i]->toggleisShow();
 		}
-		static int WaitTime = 0;
-		if (!(++WaitTime % 25))CreateApple();
-		Apple[i]->Update();
+	
+		if (!(++WaitTime % 25)){
+			CreateApple();
+			WaitTime = 0;
+		}
+	
 	}
 }
 
-void CAppleManager::Render() {
+void CAppleManager::Render() const {
 	for (int i = 0; i < APPLE_MAX; i++) {
-	Apple[i]->Render();
+			Apple[i]->Render();
     }
+}
+
+int CAppleManager::GetImage(int i)
+{
+	return image[i];
 }
