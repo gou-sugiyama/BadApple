@@ -10,6 +10,7 @@
 #define APPLE_MAX 10
 
 class CAppleManager;
+
 class CApple {
 private:
 	int x;
@@ -20,18 +21,20 @@ private:
 	int score;
 	int type;         //í—Ş
 	int col;          //í—Ş‚²‚Æ‚Ì‰æ‘œ‚É•\¦‚³‚ê‚éŒÂ”
-	int image[4];
+	int image;
 	bool appleFlg;
 
 public:
-	CApple();
+	CApple(int i);
 	void Update();
-	void Render() const;
+	void Render()const;
 	void toggleisShow();
 	int getX() { return x; }
 	int getY() { return y; }
 	int getW() { return w; }
 	int getH() { return h; }
 	int getSpeed() { return speed; }
-	bool GetAppleFlg() { return appleFlg; };
+	bool GetAppleFlg() { return appleFlg; }
+
+	void SetApple(int i) { image = i; }
 };

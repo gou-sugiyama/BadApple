@@ -1,25 +1,35 @@
 #pragma once
+#include"DxLib.h"
+
 #define APPLE_MAX 10
 
 class CApple;
 class CAppleManager
 {
 private:
-
-	int image[4];     //‰æ‘œ•Ï”
+	//‰æ‘œ•Ï”
 	int WaitTime;
-
+	/*int image1;
+	int image2;
+	int image3;
+	int image4;*/
+	int images1;
+	int images2;
+	int images3;
+	int images4;
 
 	CApple* Apple[10];
 
 public:
-	
+
 	CAppleManager();
 	~CAppleManager();
-    void CreateApple();
+	void CreateApple();
 	void Update();
 	void Render() const;
 
-	int GetImage(int i);
 	CApple* getpApple(int i) { return Apple[i]; }
+
+
+	int GetImage(int i);
 };
