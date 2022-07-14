@@ -41,26 +41,26 @@ void CApple::Update() {
 //------------------------
 // ÉäÉìÉSÇÃê∂ê¨
 //------------------------
-void CApple::NewApple() {
+void CApple::NewApple(float x) {
 	int selectApple = GetRand(9) + 1;
 	if (selectApple <= D_PROPORTION_A) {
-		CreateAppleA();
+		CreateAppleA(x);
 	}
 	else if (selectApple <= D_PROPORTION_B) {
-		CreateAppleB();
+		CreateAppleB(x);
 	}
 	else if (selectApple <= D_PROPORTION_C) {
-		CreateAppleC();
+		CreateAppleC(x);
 	}
 	else if (selectApple <= D_PROPORTION_D) {
-		CreateAppleD();
+		CreateAppleD(x);
 	}
 }
 
 //---------------------
 // ÉäÉìÉSAÇÃê∂ê¨
 //---------------------
-void CApple::CreateAppleA() {
+void CApple::CreateAppleA(float x) {
 	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
 	speed = D_APPLE_A_SPEED;
@@ -71,7 +71,7 @@ void CApple::CreateAppleA() {
 //---------------------
 // ÉäÉìÉSBÇÃê∂ê¨
 //---------------------
-void CApple::CreateAppleB() {
+void CApple::CreateAppleB(float x) {
 	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
 	speed = D_APPLE_B_SPEED;
@@ -82,7 +82,7 @@ void CApple::CreateAppleB() {
 //---------------------
 // ÉäÉìÉSCÇÃê∂ê¨
 //---------------------
-void CApple::CreateAppleC() {
+void CApple::CreateAppleC(float x) {
 	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
 	speed = D_APPLE_C_SPEED;
@@ -93,7 +93,7 @@ void CApple::CreateAppleC() {
 //---------------------
 // ÉäÉìÉSDÇÃê∂ê¨
 //---------------------
-void CApple::CreateAppleD() {
+void CApple::CreateAppleD(float x) {
 	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
 	y = 0;
 	speed = D_APPLE_D_SPEED;

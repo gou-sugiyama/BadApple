@@ -1,4 +1,5 @@
 #pragma once
+#define D_STARTER_APPLE (4)
 class CApple;
 class CAppleManager
 {
@@ -8,10 +9,12 @@ private:
 public:
 	CAppleManager();
 	~CAppleManager();
-    void CreateApple();
 	
 	void Update();
 	void Render()const;
+private:
+    void CreateApple(int tasks);
+	int CountApple();
 
 	CApple* getpApple() { return apple; }
 };

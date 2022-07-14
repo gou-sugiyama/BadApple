@@ -35,11 +35,11 @@ public:
 	CApple();
 	~CApple();
 	void Update();
-	void NewApple();
-	void CreateAppleA();
-	void CreateAppleB();
-	void CreateAppleC();
-	void CreateAppleD();
+	void NewApple(float x);
+	void CreateAppleA(float x);
+	void CreateAppleB(float x);
+	void CreateAppleC(float x);
+	void CreateAppleD(float x);
 
 	void Render()const;
 
