@@ -22,7 +22,8 @@ CPlayer::CPlayer(CController* pController) {
 	g_playerh = PLAYER_HIGHT;
 	g_player = LoadGraph("images/taiki.png");
 	g_playerRun = LoadGraph("images/run.png");
-	g_playerflg = TRUE;;
+	g_playerflg = TRUE;
+	g_playerflg = FALSE;
 	mv = 0.05f;
 
 	cmx = 0.0;
@@ -37,7 +38,7 @@ void CPlayer::Update() {
 	Hitplayer();
 	if (tnos > 0) {
 		if (tnos % 20 == 0) {
-
+			g_playerflg = !g_playerflg;
 		}
 	}
 
@@ -52,14 +53,16 @@ void CPlayer::Update() {
 	}
 }
 void CPlayer::Render() {
-	if (cmx > 0) {
-		DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, TRUE);//右
-	}
-	if (cmx < 0) {
-		DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, FALSE);//左
-	}
-	if (cmx == 0) {
-		DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_player, TRUE, FALSE);//待機
+	if (g_playerflg) {
+		if (cmx > 0) {
+			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, TRUE);//右
+		}
+		if (cmx < 0) {
+			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, FALSE);//左
+		}
+		if (cmx == 0) {
+			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_player, TRUE, FALSE);//待機
+		}
 	}
 	//DrawFormatString(0, 20, 0xFFFFFF, "%d", controller->control(true).ThumbLX);
 }
