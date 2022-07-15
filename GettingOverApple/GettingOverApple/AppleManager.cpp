@@ -6,10 +6,23 @@
 //-------------------------------------------------
 // 乱数テーブルの作成　　本来ならヘッター分けます
 //-------------------------------------------------
-int* GetRandTable(int t[]) {
-	int tMax = sizeof(t);
+int* GetRandTable(int* t, int size,int randMax) {
+	int i = 0;
+	int retake;
+	while (i < size) {
+		retake = 0;
+		t[i] = GetRand(randMax);
+		for (int j = 0; j < i; j++) {
+			if (t[j] == t[i]) {
+				retake = 1;
+				break;
+			}
+		}
 
-	return nullptr;
+		if (retake == 1)continue;
+		i++;
+	}
+	return t;
 }
 
 //-----------------------
@@ -70,14 +83,20 @@ void CAppleManager::Render()const {
 //-------------------------
 void CAppleManager::CreateApple(int tasks)
 {	
-	//リンゴが非表示ならりんごを初期化する
-	for (int i = 0; i < D_APPLE_MAX; i++) {
-		if (apple[i].GetisShow() == false) {
-			apple[i].NewApple((float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM)));
-			if (--tasks <= 0)break;
+	if (tasks) {
+		int* RandTable = new int[tasks];
+		GetRandTable(RandTable, tasks, D_CREATE_POINT_NUM - 1);
+
+		//リンゴが非表示ならりんごを初期化する
+		for (int i = 0; i < D_APPLE_MAX; i++) {
+			if (apple[i].GetisShow() == false) {
+				apple[i].NewApple((float)((RandTable[--tasks] + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM)));
+				if (tasks <= 0)break;
+			}
 		}
+
+		delete[] RandTable;
 	}
-	
 }
 
 //------------------------
