@@ -12,10 +12,10 @@ CAppleManager::CAppleManager()
 	WaitTime = 0;
 	int col;
 	int type;
-	images1 = LoadGraph("images/Apple_2.png");
-	images2 = LoadGraph("images/BlueApple4.png");
-	images3 = LoadGraph("images/GoldApple.png");
-	images4 = LoadGraph("images/PoisonApple.png");
+	images[0] = LoadGraph("images/Apple_2.png");
+	images[1] = LoadGraph("images/BlueApple4.png");
+	images[2] = LoadGraph("images/GoldApple.png");
+	images[3] = LoadGraph("images/PoisonApple.png");
 
 	for (int i = 0; i < APPLE_MAX; i++) {
 	    
@@ -23,22 +23,22 @@ CAppleManager::CAppleManager()
 		if (0 <= col && col <= 5) {
 			type = 0;
 			Apple[i] = new CApple(type);
-			Apple[i]->SetApple(images1);
+			Apple[i]->SetApple(images[0]);
 		}
 		else if (6 <= col && col <= 7) {
 			type = 1;
 			Apple[i] = new CApple(type);
-			Apple[i]->SetApple(images2);
+			Apple[i]->SetApple(images[1]);
 		}
 		else if (col == 8) {
 			type = 2;
 			Apple[i] = new CApple(type);
-			Apple[i]->SetApple(images3);
+			Apple[i]->SetApple(images[2]);
 		}
 		else {
 			type = 3;
 			Apple[i] = new CApple(type);
-			Apple[i]->SetApple(images4);
+			Apple[i]->SetApple(images[3]);
 		}
 	}
 }
@@ -60,22 +60,22 @@ void CAppleManager::CreateApple()
 				if (0 <= col && col <= 5) {
 					type = 0;
 					Apple[i] = new CApple(type);
-					Apple[i]->SetApple(images1);
+					Apple[i]->SetApple(images[0]);
 				}
 				else if (6 <= col && col <= 7) {
 					type = 1;
 					Apple[i] = new CApple(type);
-					Apple[i]->SetApple(images2);
+					Apple[i]->SetApple(images[1]);
 				}
 				else if (col == 8) {
 					type = 2;
 					Apple[i] = new CApple(type);
-					Apple[i]->SetApple(images3);
+					Apple[i]->SetApple(images[2]);
 				}
 				else {
 					type = 3;
 					Apple[i] = new CApple(type);
-					Apple[i]->SetApple(images4);
+					Apple[i]->SetApple(images[3]);
 				}
 			}
 			if (Apple[i]->getY() >= D_SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
@@ -118,16 +118,16 @@ void CAppleManager::Render() const{
 int CAppleManager::GetImage(int i)
 {
 	if (i == 0) {
-		return images1;
+		return images[0];
 	}
 	else if (i == 1) {
-		return images2;
+		return images[1];
 	}
 	else if (i == 2) {
-		return images3;
+		return images[2];
 	}
 	else {
-		return images4;
+		return images[3];
 	}
 }
 

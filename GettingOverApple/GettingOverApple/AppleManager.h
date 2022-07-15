@@ -9,14 +9,7 @@ class CAppleManager
 private:
 	//‰æ‘œ•Ï”
 	int WaitTime;
-	/*int image1;
-	int image2;
-	int image3;
-	int image4;*/
-	int images1;
-	int images2;
-	int images3;
-	int images4;
+	int images[4];
 
 	CApple* Apple[10];
 

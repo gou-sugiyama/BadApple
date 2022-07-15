@@ -4,8 +4,6 @@
 CAppleManager applemng;
 
 CApple::CApple(int i) {
-
-
 	x = GetRand(6) * 71 + 35;
 	y = 0;
 	w = 40;
