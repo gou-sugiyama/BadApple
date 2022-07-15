@@ -2,7 +2,7 @@
 
  float abs(void* num) {
 		 float buf;
-	 if ((float*)num < 0) {
+	 if (*(float*)num < 0) {
 		 buf = *(float*)num * -1;
 	 }
 	 else {

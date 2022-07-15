@@ -11,8 +11,8 @@ CPlayer::CPlayer(CController* pController) {
 	controller = pController;
 	//画像データ
 	image = new int[D_PLAYER_IMAGE_MAX];
-	image[false] = LoadGraph("images/car1.bmp");
-	image[true] = LoadGraph("images/car1pol.bmp");
+	image[false] = LoadGraph("images/taiki.png");
+	image[true] = LoadGraph("images/run.png");
 	//画像情報
 	width = D_PLAYER_WIDTH;
 	height = D_PLAYER_HEIGHT;
@@ -26,6 +26,7 @@ CPlayer::CPlayer(CController* pController) {
 	rangeY = (float)(height / 2);
 
 	speed = 0;
+	direction = 0;
 	isMove = false;
 }
 
@@ -57,7 +58,8 @@ void CPlayer::Update() {
 // 描画
 //-------------------------
 void CPlayer::Render()const {
-	DrawRotaGraph((int)x, (int)y, 1.0f, 0, image[isMove], FALSE);
+	DrawRotaGraph((int)x, (int)y, 1.0f, 0, image[isMove],
+		TRUE, TRUE * direction);
 
 	DrawFormatString(0, 20, 0xFFFFFF, "%lf", this->x);
 	DrawFormatString(0, 40, 0xFFFFFF, "%lf", this->speed);
@@ -70,7 +72,7 @@ void CPlayer::Render()const {
 //-----------------------
 void CPlayer::AddSpeed() {
 	//左へキー入力中speedをxマイナス方向に加算
-	if (KeyControl() < 0) {
+	if (KeyControl() == 0) {
 		speed -= D_PLAYER_ADD_SPEED;
 		isMove = true;
 	}
@@ -129,13 +131,15 @@ int CPlayer::KeyControl() {
 	short int key = (controller->GetKey()).ThumbLX;
 
 	if (D_KEY_CONTROL_RIGHT < key) {			//スティックが右に倒されたら
+		direction = 1;
 		return 1;//右
 	}
 	else if (key < D_KEY_CONTROL_LEFT) {		//スティックが左に倒されたら
-		return -1;//左
+		direction = 0;
+		return 0;//左
 	}
 	else {
-		return 0;
+		return -1;
 	}
 }
 

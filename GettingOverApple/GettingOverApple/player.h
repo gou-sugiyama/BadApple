@@ -23,6 +23,8 @@ private:
 
 	//ˆÚ“®ü•Óî•ñ
 	float speed;
+
+	int direction;
 	bool isMove;	//ˆÚ“®‚µ‚Ä‚¢‚é‚©H
 
 public:

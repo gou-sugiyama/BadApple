@@ -48,6 +48,7 @@ public:
 	void ToggleisShow() { isShow = !isShow; }
 	float GetX() { return x; }
 	float GetY() { return y; }
+	int GetS() { return speed; }
 	int GetType() { return imgHandle; }
 	int GetScore() { return score; }
 	bool GetisShow() { return isShow; };
