@@ -6,7 +6,7 @@
 #include"AppleManager.h"
 #include"UI.h"
 #include"Controller.h"
-
+#include"Object.h"
 
 //--------------------------------
 // コンストラクタ
@@ -18,6 +18,8 @@ CGame::CGame(CController* pController):CScene(pController){
 	player = new CPlayer(controller);
 	//アップルマネージャーを動的確保
 	applemanager = new CAppleManager();
+	//アップルマネージャーからリンゴを取得
+	apple = applemanager->GetpApple();
 	//UIを動的確保
 	UI = new CUI(controller);
 }
@@ -43,6 +45,9 @@ CScene* CGame::Update() {
 		if (UI->GetisPause() != true) {
 			applemanager->Update();
 			player->Update();
+			for (int i = 0; i < D_APPLE_MAX; i++) {
+				if (CheckHit(&apple[i], player)) HitAction(&apple[i],player);
+			}
 		}
 	}
 	else {
@@ -64,4 +69,12 @@ void CGame::Render()const {
 	applemanager->Render();
 	player->Render();
 	UI->Render();
+}
+
+//-----------------------
+// 衝突処理
+//-----------------------
+void CGame::HitAction(CApple* apple, CPlayer* player) {
+	UI->SetScore(apple->GetScore());
+	UI->SetCount(apple->GetType());
 }

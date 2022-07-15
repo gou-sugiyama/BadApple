@@ -4,6 +4,7 @@ class CAppleManager;
 class CUI;
 class CController;
 class CHitBoxCheck;
+class CApple;
 
 class CGame :
     public CScene
@@ -15,6 +16,8 @@ private:
     CAppleManager* applemanager;
     //UIを管理するポインタ
     CUI* UI;
+    //アップルを呼び出すためのポインタ
+    CApple* apple;
 
 public:
     CGame(CController* pController);
@@ -22,5 +25,8 @@ public:
 
     CScene* Update()override;
     void Render()const override;
+
+private:
+    void HitAction(CApple* apple,CPlayer*player);
 };
 

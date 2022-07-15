@@ -7,8 +7,8 @@
 //--------------------------------
 CUI::CUI(CController* pController) {
 	controller = pController;
-	for (int i = 0; i < 4; i++) {
-		appleCount[i] = 0;
+	for (int i = 0; i < D_COUNT_OBJECT; i++) {
+		objectCount[i] = 0;
 	}
 
 	score = 0;
@@ -59,9 +59,9 @@ void CUI::Render()const {
 	DrawFormatString(545, StrMargin * 5, Black, "%02d", timeLimit / 60);//”’l’²®Ï‚Ý
 	SetFontSize(16);
 
-	DrawFormatString(510, StrMargin * 12, White, "%03d", appleCount[0]);
-	DrawFormatString(560, StrMargin * 12, White, "%03d", appleCount[1]);
-	DrawFormatString(610, StrMargin * 12, White, "%03d", appleCount[2]);
+	DrawFormatString(510, StrMargin * 12, White, "%03d", objectCount[0]);
+	DrawFormatString(560, StrMargin * 12, White, "%03d", objectCount[1]);
+	DrawFormatString(610, StrMargin * 12, White, "%03d", objectCount[2]);
 
 	DrawString(510, StrMargin * 14, "SCORE:", White);
 	DrawFormatString(580, StrMargin * 14, White, "%06d", score);

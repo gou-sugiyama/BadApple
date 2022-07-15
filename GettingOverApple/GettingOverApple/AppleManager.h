@@ -12,9 +12,9 @@ public:
 	
 	void Update();
 	void Render()const;
+	CApple* GetpApple() { return apple; }
 private:
     void CreateApple(int tasks);
 	int CountApple();
 
-	CApple* getpApple() { return apple; }
 };

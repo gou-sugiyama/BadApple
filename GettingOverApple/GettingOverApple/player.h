@@ -44,7 +44,7 @@ private:
 	//“ü—ÍƒL[‚Ì§Œä
 	int KeyControl();
 
-private:
+public:
 	//“–‚½‚Á‚½
 	void HitAction();
 };

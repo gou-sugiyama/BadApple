@@ -21,6 +21,10 @@ CPlayer::CPlayer(CController* pController) {
 	x = (float)(D_GAME_AREA / 2);
 	y = (float)(D_SCREEN_HEIGHT - (height / 2));	//RotaGraphで描画するため画像サイズの2分の一にする
 
+	//当たり判定用変数
+	rangeX = (float)(width / 2);
+	rangeY = (float)(height / 2);
+
 	speed = 0;
 	isMove = false;
 }

@@ -11,8 +11,8 @@ public:
 	//“–‚½‚è”»’è
 	int width = 0;
 	int height = 0;
-	int rangeX = 0; 
-	int rangeY = 0;
+	float rangeX = 0; 
+	float rangeY = 0;
 
 public:
 	CObject() {}
@@ -21,4 +21,4 @@ public:
 
 };
 
-void CheckHit(CObject* pObj1, CObject* pObj2);
+bool CheckHit(CObject* pObj1, CObject* pObj2);

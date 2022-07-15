@@ -8,10 +8,12 @@
 //-----------------------
 CApple::CApple() {
 	//0`¶¬‰ÓŠ‚Ì”‚Æ{—]”’•ª‚Ì0.5 * ƒQ[ƒ€—Ìˆæ‚ğ“¯‚¶•‚Å•ª‚¯‚é
-	x = (float)((GetRand(D_CREATE_POINT_NUM - 1) + 0.5) * (D_GAME_AREA / D_CREATE_POINT_NUM));
+	x = 0;
 	y = 0;
-	width = 40;
-	height = 40;
+	width = D_APPLE_WIDTH;
+	height = D_APPLE_HEIGHT;
+	rangeX = (float)(width / 2);
+	rangeY = (float)(height / 2);
 	image = new int[D_APPLE_IMAGE_MAX];
 	image[D_APPLE_A] = LoadGraph("images/ringoA.png");
 	image[D_APPLE_B] = LoadGraph("images/ringoB.png");
@@ -113,6 +115,7 @@ void CApple::Render()const {
 // “–‚½‚Á‚½
 //-------------------------
 void CApple::HitAction() {
-
+	isShow = false;
+	y = 0;
 }
 

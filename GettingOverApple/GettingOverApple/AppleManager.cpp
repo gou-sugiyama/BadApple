@@ -8,18 +8,18 @@
 //-------------------------------------------------
 int* GetRandTable(int* t, int size,int randMax) {
 	int i = 0;
-	int retake;
+	bool retake;
 	while (i < size) {
-		retake = 0;
+		retake = false;
 		t[i] = GetRand(randMax);
 		for (int j = 0; j < i; j++) {
 			if (t[j] == t[i]) {
-				retake = 1;
+				retake = true;
 				break;
 			}
 		}
 
-		if (retake == 1)continue;
+		if (retake == true)continue;
 		i++;
 	}
 	return t;

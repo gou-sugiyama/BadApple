@@ -1,11 +1,12 @@
 #pragma once
+#define D_COUNT_OBJECT 3
 class CController;
 
 class CUI
 {
 private:
 	CController* controller;
-	int appleCount[4];
+	int objectCount[D_COUNT_OBJECT];
 	int score;
 	int timeLimit;
 	bool isPause;
@@ -24,6 +25,11 @@ public:
 
 	void SetScore(int add) {
 		score += add;
+	}
+
+	void SetCount(int num) {
+		if(0<=num&&num<=D_COUNT_OBJECT)
+		objectCount[num]++;
 	}
 };
 

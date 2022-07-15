@@ -48,7 +48,7 @@ public:
 	void ToggleisShow() { isShow = !isShow; }
 	float GetX() { return x; }
 	float GetY() { return y; }
-	int GetW() { return width; }
-	int GetH() { return height; }
+	int GetType() { return imgHandle; }
+	int GetScore() { return score; }
 	bool GetisShow() { return isShow; };
 };
