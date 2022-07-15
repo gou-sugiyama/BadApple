@@ -14,7 +14,16 @@ void CController::control(bool isChattering)
 		}
 		data.LeftTrigger = input.LeftTrigger & ~OldKey.LeftTrigger;
 		data.RightTrigger = input.RightTrigger & ~OldKey.RightTrigger;
-		data.ThumbLX = input.ThumbLX & ~OldKey.ThumbLX;
+		if (OldKey.ThumbLX == input.ThumbLX) {
+			FlgCount = 1;
+			data.ThumbLX = input.ThumbLX;
+		}
+
+		if (FlgCount == 1) {
+			FlgCount = 0;
+			data.ThumbLX = input.ThumbLX & ~OldKey.ThumbLX;
+		}
+
 		data.ThumbLY = input.ThumbLY & ~OldKey.ThumbLY;
 		data.ThumbRX = input.ThumbRX & ~OldKey.ThumbRX;
 		data.ThumbRY = input.ThumbRY & ~OldKey.ThumbRY;
@@ -32,6 +41,7 @@ void CController::control(bool isChattering)
 	}
 
 }
+
 
 XINPUT_STATE CController::GetControl() const
 {

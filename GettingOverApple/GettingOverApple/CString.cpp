@@ -1,4 +1,4 @@
-#include "CString.h"
+#include "RankMng.h"
 
 CString::CString(int i)
 {
@@ -6,41 +6,27 @@ CString::CString(int i)
 		str_Y = i / 13 * 60;
 		image = LoadGraph("images/Test.png");
 		bigimage = LoadGraph("images/Test2.png");
-		string = 'A'+i;
+		if (i / 26 == 0) {
+			string = 'A' + i % 26;
+		}
+		else if (i / 26 == 1) {
+			string = 'a' + i % 26;
+		}
+		else if(i/26==2){
+			if (i % 26 < 10) {
+				string = '0' + i % 26;
+			}
+			else if (i % 26 == 10) {
+				string = '(';
+			}
+			else if (i % 26 == 11) {
+				string = ')';
+			}
+			else {
+
+			}
+		}
+		
+		
 		strflg = FALSE;
-}
-
-bool CString::GetStrFlg()
-{
-	return strflg;
-}
-
-void CString::SetStrFlg(bool i)
-{
-	strflg = i;
-}
-
-int CString::GetStrX()
-{
-	return str_X;
-}
-
-int CString::GetStrY()
-{
-	return str_Y;
-}
-
-int CString::GetImage()
-{
-	return image;
-}
-
-int CString::GetBigImage()
-{
-	return bigimage;
-}
-
-char CString::GetStr()
-{
-	return string;
 }

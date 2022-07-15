@@ -17,12 +17,15 @@ private:
 
 	bool ControlFlg=FALSE;
 
+	int FlgCount;
+
 public:
 	void control(bool data);
 
 	XINPUT_STATE GetControl() const;
 
 	bool GetControlFlg() const;
+	int GetFlgCount() { return FlgCount; }
 	void ToggleControlFlg();
 
 	void SetScore(int data);

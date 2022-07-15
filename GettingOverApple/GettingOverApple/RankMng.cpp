@@ -1,12 +1,7 @@
-#include"DxLib.h"
 #include<stdio.h>
-#include "SceneManager.h"
 #include"Controller.h"
 #include"RankMng.h"
-#include "Ranking.h"
-#include "UI.h"
-#include"CString.h"
-
+#include<string>
 
 //--------------------------------
 // コンストラクタ
@@ -18,12 +13,7 @@ CRankMng::CRankMng(CController* pController):CScene(pController) {
 
 	//ファイルロード
 	for (int i = 0; i < 5; i++) {
-		int data1 = 0;
-		char data2[9];
-		int data3 = 0;
-		fscanf_s(fp, "%2d %9s %10d", &data1, data2, 8, &data3);
-
-		rankdata[i] = new CRanking(data1,data2,data3);
+		fscanf_s(fp, "%2d %9s %10d", &rankdata[i].Rank,rankdata[i].Name, 8, &rankdata[i].Score);
 	}
 	//ファイルクローズ
 	fclose(fp);
@@ -36,38 +26,35 @@ CRankMng::CRankMng(CController* pController):CScene(pController) {
 
 	WaitTime = 0;
 	Type = 0;
-	Str = 13;
+	Str = 0;
 	Count = 0;
 
 	JudgeFlg = TRUE;
 
-	
+	controller->ToggleControlFlg();
 }
 
 CRankMng::~CRankMng()
 {
-	for (int i = 0; i < 5; i++) {
-		delete rankdata[i];
-	}
 }
 
 
 
 int CRankMng::JudgeRanking() const
 {
-	if (rankdata[4]->ShowRankScore() < Score) {
-		if (InsertJudge() == TRUE) {
-			return 4;
-		}	
-		else
-		{
+	if (rankdata[4].Score < Score) {
+		if (JudgeFlg == TRUE) {
+			return 1;
+		}
+		else {
+
 			return -1;
 		}
 	}
-
-	return -1;
+	else{
+		return -1;
+	}
 }
-
 
 //--------------------------------
 // 更新
@@ -83,6 +70,7 @@ CScene* CRankMng::Update() {
 			return this;
 		}
 		else {
+			controller->ToggleControlFlg();
 			return nullptr;
 		}
 	}
@@ -90,18 +78,10 @@ CScene* CRankMng::Update() {
 
 void CRankMng::TrueUpdate()
 {
-	int i;
-	XINPUT_STATE data;
 	data = controller->GetControl();
 
-	i = JudgeRanking();
-	InsertRanking(data,i);
+	ControlRanking(data);
 
-}
-
-bool CRankMng::InsertJudge() const
-{
-	return JudgeFlg;
 }
 
 void CRankMng::ToggleJudge()
@@ -109,68 +89,80 @@ void CRankMng::ToggleJudge()
 	JudgeFlg = !(JudgeFlg);
 }
 
-void CRankMng::InsertRanking(XINPUT_STATE data,int i)
+void CRankMng::ControlRanking(XINPUT_STATE data)
 {
 	
+	int Cntller = DelayCNTL();
+
 	for (int j = 0; j < STR_MAX; j++) {
 		StrData[j]->SetStrFlg(FALSE);
 	}
 	
-	if (data.ThumbLX>=CONTROL_STICK)
+	if (data.Buttons[XINPUT_BUTTON_DPAD_RIGHT]|| Cntller ==1)
 	{
-		if (0 <= Str%13&&Str%13 < 13) {
+		if (0 <= Str%13&&Str%13 < 12) {
 			Str++;
+			FlgCount = 1;
 		}
-		else if (Str == 12) {
+		else if (Str%13 == 12) {
 			Str -= 12;
+			FlgCount = 1;
 		}
+
 	}
-	else if (data.ThumbLX <= CONTROL_STICK*-1) {
-		if (12 >= Str&&Str > 0) {
+	else {
+		FlgCount = 0;
+	}
+	if (data.Buttons[XINPUT_BUTTON_DPAD_LEFT] || Cntller == 2) {
+		if (12 >= Str%13&&Str%13 > 0) {
 			Str--;
 		}
-		else if(Str==0){
+		else if(Str%13==0){
 			Str += 12;
 		}
 	}
-	else if (data.ThumbLY>=CONTROL_STICK)
+	if (data.Buttons[XINPUT_BUTTON_DPAD_DOWN] || Cntller == 3)
 	{
-		if (Str < Str + 13) {
+		if (Str+13 < STR_MAX ) {
 			Str += 13;
 		}
 	}
-	else if (data.ThumbLY >= CONTROL_STICK*-1)
+	if (data.Buttons[XINPUT_BUTTON_DPAD_UP] || Cntller == 4)
 	{
-		if (Str < Str-13) {
+		if (Str-13 >= 0) {
 			Str -= 13;
 		}
 	}
 
-	ToggleStrFlg(Str);
+	SetStrImageFlg(Str);
 
-	if (0 <= Str&&Str < STR_MAX) {
+	if (0 <= Str&&Str < STR_MAX-1&& data.Buttons[XINPUT_BUTTON_A]) {
 		if (Count< 9) {
-			if (data.Buttons[XINPUT_BUTTON_A] == TRUE) {
 				RememberName[Count++] = StrData[Str]->GetStr();
-			}
 		}
 		else {
-			Count = 8;
+			Count = 9;
 		}
 	}
-	else if (Str == STR_MAX + 1) {
-		rankdata[i]->InsertRankChar(RememberName);
+
+	if (Str == STR_MAX-1&&data.Buttons[XINPUT_BUTTON_A]) {
+		InsertRankChar(RememberName);
 		ToggleJudge();
 	}
 
-	if (data.Buttons[XINPUT_BUTTON_B] == TRUE) {
-		RememberName[Count - 1] = '\0';
-		Count--;
+	if (data.Buttons[XINPUT_BUTTON_B]) {
+		if (Count > 0) {
+			RememberName[Count - 1] = '\0';
+			Count--;
+		}
+		else {
+
+		}
 	}
 
 }
 
-void CRankMng::ToggleStrFlg(int i)
+void CRankMng::SetStrImageFlg(int i)
 {
 	StrData[i]->SetStrFlg(TRUE);
 }
@@ -178,6 +170,64 @@ void CRankMng::ToggleStrFlg(int i)
 void CRankMng::SetScore(int i)
 {
 	Score = i;
+}
+
+void CRankMng::InsertRankChar(char* data1)
+{
+	strcpy(rankdata[4].Name, data1);
+	rankdata[4].Score = this->Score;
+}
+
+void CRankMng::SortRanking()
+{
+	int work;
+	char SaveStorage[9];
+	// 選択法ソート
+	for (int i = 0; i < 3; i++) {
+		for (int j = i + 1; j < 4; j++) {
+			if (rankdata[i].Score <= rankdata[j].Score) {
+				work = rankdata[i].Score;
+				strcpy(SaveStorage, rankdata[i].Name);
+				rankdata[i].Score = rankdata[j].Score;
+				strcpy(rankdata[i].Name, rankdata[j].Name);
+				rankdata[j].Score = work;
+				strcpy(rankdata[j].Name, rankdata[i].Name);
+			}
+		}
+	}
+
+	// 順位付け
+	for (int i = 0; i < 4; i++) {
+		rankdata[i].Rank = 1;
+	}
+}
+
+int CRankMng::DelayCNTL()
+{
+	if (CntlTime++ % 30==0) {
+		if (data.ThumbLX > CONTROLLER_STICK_MAX) {
+			kanning = 1;
+		}
+		if (data.ThumbLX < -CONTROLLER_STICK_MAX - 1) {
+			kanning = 2;
+		}
+		if (data.ThumbLY < -CONTROLLER_STICK_MAX - 1) {
+			kanning = 3;
+		}
+		if (data.ThumbLY > CONTROLLER_STICK_MAX) {
+			kanning = 4;
+		}
+		if (data.ThumbLX < CONTROLLER_STICK_MAX&& data.ThumbLX > -CONTROLLER_STICK_MAX
+			&& data.ThumbLY < CONTROLLER_STICK_MAX&& data.ThumbLY > -CONTROLLER_STICK_MAX)
+		{
+			kanning = 0;
+			CntlTime = 0;
+		}
+	}
+	else {
+		kanning = 0;
+	}
+	return kanning;
 }
 
 bool CRankMng::FalseUpdate()
@@ -199,19 +249,33 @@ void CRankMng::Render() const{
 		
 			for (int i = 0; i < STR_MAX; i++) {
 				if (StrData[i]->GetStrFlg() == TRUE) {
-					DrawGraph(StrData[i]->GetStrX(), StrData[i]->GetStrY(), StrData[i]->GetBigImage(), TRUE);
+					DrawGraph(StrData[i]->GetStrX()+i%13*13, StrData[i]->GetStrY()+i/13*5+125, StrData[i]->GetBigImage(), TRUE);
 				}
 				else {
-					DrawGraph(StrData[i]->GetStrX(), StrData[i]->GetStrY(), StrData[i]->GetImage(), TRUE);
+					DrawGraph(StrData[i]->GetStrX() + i%13 * 13, StrData[i]->GetStrY() + i / 13 * 5+125, StrData[i]->GetImage(), TRUE);
 				}
 			}
-		
+			DrawString(360, 20, RememberName,0xffffff);
+			DrawFormatString(360, 400, 0xffffff, "%d", kanning);
+			
 	}
 	else {
-		
-			SetFontSize(28);
-			DrawString(10, 10, "ランキング表示", 0xFFFFFF);
+		for (int i = 0; i < 5; i++) {
+			DrawFormatString(200, i * 90, 0xffffff,
+				"%d,%s,%d",
+				rankdata[i].Rank,
+				rankdata[i].Name,
+				rankdata[i].Score);
+
+			}
+			/*SetFontSize(28);
+			DrawString(10, 10, "ランキング表示", 0xFFFFFF);*/
 	
 	}
 	
 }
+
+
+//if (data.ThumbLX == kanning) {
+//
+//}
