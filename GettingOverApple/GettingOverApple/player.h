@@ -6,6 +6,7 @@ public:
 	void Update();
 	void Render();
 	void playerspeed();
+	void Hitplayer();
 	int KeyControl();
 	int GetPlayerX() { return g_playerx; };
 	int GetPlayerY() { return g_playery; };
@@ -19,10 +20,11 @@ private:
 	float g_playery;//座標y
 	int g_playerw;//高さ
 	int g_playerh;//幅
-	int g_playerflg;//フラグ
-	int g_playercount;//カウント
+	bool g_playerflg;//フラグ
 	int angle;//方向
+	int tnos;//点滅秒数
 	float mv;//加速度
 	float cmx;//移動量
 	float fcos[180];
+	float bk;//点滅フレーム
 };
