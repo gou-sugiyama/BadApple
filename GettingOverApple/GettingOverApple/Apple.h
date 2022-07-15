@@ -19,8 +19,8 @@ private:
 	int h;
 	int speed;        //ˆÚ“®‘¬“x
 	int score;
+	int col;
 	int type;         //í—Ş
-	int col;          //í—Ş‚²‚Æ‚Ì‰æ‘œ‚É•\¦‚³‚ê‚éŒÂ”
 	int image;
 	bool appleFlg;
 

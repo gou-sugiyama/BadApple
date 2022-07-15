@@ -18,7 +18,6 @@ CAppleManager::CAppleManager()
 	images[3] = LoadGraph("images/PoisonApple.png");
 
 	for (int i = 0; i < APPLE_MAX; i++) {
-	    
 		col = GetRand(9);
 		if (0 <= col && col <= 5) {
 			type = 0;
@@ -78,7 +77,7 @@ void CAppleManager::CreateApple()
 					Apple[i]->SetApple(images[3]);
 				}
 			}
-			if (Apple[i]->getY() >= D_SCREEN_HEIGHT - APPLE_HEIGHT / 2) {
+			if (Apple[i]->getY() >= D_GAME_AREA - APPLE_HEIGHT / 2) {
 				Apple[i]->toggleisShow();
 			}
 	}
@@ -103,7 +102,6 @@ void CAppleManager::Update(){
 			CreateApple();
 			WaitTime = 0;
 		}
-	
 	}
 }
 
@@ -130,7 +128,5 @@ int CAppleManager::GetImage(int i)
 		return images[3];
 	}
 }
-
-
 
 

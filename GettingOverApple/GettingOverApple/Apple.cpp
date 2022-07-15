@@ -4,15 +4,15 @@
 CAppleManager applemng;
 
 CApple::CApple(int i) {
-	x = GetRand(6) * 71 + 35;
-	y = 0;
+	x = GetRand(6) * 70 + 35;
+	y = -40;
 	w = 40;
 	h = 40;
 	score = 0;
 	appleFlg = TRUE;
-	
+	image = i;
 	type = i;
-
+	col = i;
 	if (type == 0) {
 		speed = 2;
 	}
