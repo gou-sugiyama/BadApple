@@ -49,7 +49,7 @@ private:
 
     typedef struct RankingData {
         int Rank;
-        char Name[9];
+        char Name[10];
         int Score;
     };
 
@@ -70,7 +70,7 @@ private:
 
     bool JudgeFlg;
 
-    char RememberName[9];
+    char RememberName[10];
 
 public:
     CRankMng(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。

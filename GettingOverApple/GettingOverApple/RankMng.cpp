@@ -47,7 +47,7 @@ int CRankMng::JudgeRanking() const
 			return 1;
 		}
 		else {
-
+			
 			return -1;
 		}
 	}
@@ -146,6 +146,7 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 	}
 
 	if (Str == STR_MAX-1&&data.Buttons[XINPUT_BUTTON_A]) {
+		RememberName[9] = '\0';
 		InsertRankChar(RememberName);
 		ToggleJudge();
 	}
@@ -176,29 +177,31 @@ void CRankMng::InsertRankChar(char* data1)
 {
 	strcpy(rankdata[4].Name, data1);
 	rankdata[4].Score = this->Score;
+
+	SortRanking();
 }
 
 void CRankMng::SortRanking()
 {
 	int work;
-	char SaveStorage[9];
+	char SaveStorage[10];
 	// 選択法ソート
-	for (int i = 0; i < 3; i++) {
-		for (int j = i + 1; j < 4; j++) {
+	for (int i = 3; i >= 0; i--) {
+		for (int j = i + 1; j > 0; j--) {
 			if (rankdata[i].Score <= rankdata[j].Score) {
 				work = rankdata[i].Score;
 				strcpy(SaveStorage, rankdata[i].Name);
 				rankdata[i].Score = rankdata[j].Score;
 				strcpy(rankdata[i].Name, rankdata[j].Name);
 				rankdata[j].Score = work;
-				strcpy(rankdata[j].Name, rankdata[i].Name);
+				strcpy(rankdata[j].Name, SaveStorage);
 			}
 		}
 	}
 
 	// 順位付け
 	for (int i = 0; i < 4; i++) {
-		rankdata[i].Rank = 1;
+		rankdata[i].Rank = i+1;
 	}
 }
 
