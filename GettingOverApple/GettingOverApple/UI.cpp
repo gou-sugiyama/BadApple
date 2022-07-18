@@ -9,7 +9,7 @@ CUI::CUI(CController* pController) {
 	}
 
 	score = 0;
-	timeLimit = 60 * 5;			//60フレーム*30秒
+	timeLimit = 60 * 20;			//60フレーム*30秒
 	isPause = false;
 }
 

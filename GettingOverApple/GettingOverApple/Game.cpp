@@ -9,6 +9,8 @@
 #include"Hit.h"
 
 CGame::CGame(CController* pController):CScene(pController){ 
+	//画像の格納
+	image = LoadGraph("images/haikei.png");
 	//受け取ったコントローラの格納
 	controller = pController;
 	//コントローラーのフラグを変更
@@ -16,7 +18,9 @@ CGame::CGame(CController* pController):CScene(pController){
 	//プレイヤーを動的確保
 	player = new CPlayer(controller);
 	//アップルマネージャーを動的確保
-	applemanager = new CAppleManager();
+	appleManager = new CAppleManager();
+	//アップルマネージャーからリンゴを取得
+	apple = appleManager->GetpApple();
 	//UIを動的確保
 	UI = new CUI(controller);
 	//Hit
@@ -30,38 +34,41 @@ CGame::~CGame() {
 	controller->ToggleControlFlg();		//フラグをTRUEへ変更
 
 	delete player;
-	delete applemanager;
+	delete appleManager;
 	delete UI;
 	delete hit;
 }
 
 CScene* CGame::Update() {
+	//ゲーム中(制限時間内、ポーズ中ではない)なら更新する
+	if (UI->Update()) {//ゲーム中(制限時間内、ポーズ中ではない)かどうかを返す
+		if (UI->GetisPause() != true) {
+			appleManager->Update();
+			player->Update();
+			for (int i = 0; i < D_APPLE_MAX; i++) {
+				if (hit->HitBox(player, &apple[i])) {
+					//スコアとかの処理いれる？
+				}
 
-	if (UI->Update()) {
-		applemanager->Update();
-		player->Update();
-		if (hit->HitBox(player, applemanager->getpApple())
-			&& applemanager->getpApple()->getisShow()) {
-			applemanager->getpApple()->toggleisShow();
-
+			}
 		}
 	}
 	else {
+		//制限時間切れの時、3秒後に画面遷移
 		static int WaitTime = 0;
 		if (++WaitTime > 180) {
 			WaitTime = 0;
 			return new CRankMng(controller);
 			rankmng->SetScore(UI->GetScore());
-		}
-		
-	}
 
+		}
+	}
 	return this;
 }
 
 void CGame::Render()const {
-	//DrawFormatString(0, 0, GetColor(255, 255, 255),"ゲーム");
-	applemanager->Render();
+	DrawGraph(0, 0, image, FALSE);
+	appleManager->Render();
 	player->Render();
 	UI->Render();
 }

@@ -1,18 +1,20 @@
 #pragma once
+#define D_STARTER_APPLE (4)
 class CApple;
 class CAppleManager
 {
 private:
-	int image;
-	CApple* Apple;
+	CApple* apple;
 	
 public:
 	CAppleManager();
 	~CAppleManager();
-    bool CreateApple();
 	
 	void Update();
-	void Render();
+	void Render()const;
+	CApple* GetpApple() { return apple; }
+private:
+    void CreateApple(int tasks);
+	int CountApple();
 
-	CApple* getpApple() { return Apple; }
 };

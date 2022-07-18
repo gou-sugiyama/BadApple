@@ -1,6 +1,7 @@
 #pragma once
 class CPlayer;
 class CAppleManager;
+class CApple;
 class CUI;
 class CController;
 class CHitBoxCheck;
@@ -10,13 +11,17 @@ class CGame :
     public CScene
 {
 private:
+    //画像格納用変数
+    int image;
     //プレイヤーのポインタ
     CPlayer* player;
     //リンゴを管理するクラスのポインタ
-    CAppleManager* applemanager;
+    CAppleManager* appleManager;
+    //リンゴを扱うためのポインタ
+    CApple* apple;
     //UIを管理するポインタ
     CUI* UI;
-    //Hit
+    //当たり判定クラス
     CHitBoxCheck* hit;
     //Rank
     CRankMng* rankmng;

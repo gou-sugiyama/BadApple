@@ -110,7 +110,7 @@ void CPlayer::playerspeed() {
 	
 }
 
-void CPlayer::Hitplayer() {//“_–Å
+void CPlayer::HitAction() {//“_–Å
 	tnos = 120;
 }
 

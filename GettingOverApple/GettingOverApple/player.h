@@ -6,7 +6,7 @@ public:
 	void Update();
 	void Render();
 	void playerspeed();
-	void Hitplayer();
+	void HitAction();
 	int KeyControl();
 	int GetPlayerX() { return g_playerx; };
 	int GetPlayerY() { return g_playery; };
