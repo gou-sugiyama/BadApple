@@ -36,5 +36,6 @@ public:
 	int getSpeed() { return speed; }
 	bool GetAppleFlg() { return appleFlg; }
 
+
 	void SetApple(int i) { image = i; }
 };
