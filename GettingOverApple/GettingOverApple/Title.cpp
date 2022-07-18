@@ -84,6 +84,4 @@ void CTitle::DrawMenu()const {
 				, D_WIDTH / 2, D_HEIGHT / 2, 1.0, 0, menuImage[i], TRUE);
 		}
 	}
-
-	DrawFormatString(0, 0, 0XFFFFFF, "%d", menuCursor);
 }

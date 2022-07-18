@@ -50,7 +50,6 @@ public:
 	float GetY() { return y; }
 	float GetW() { return width; }
 	float GetH() { return height; }
-	int GetS() { return speed; }
 	int GetType() { return imgHandle; }
 	int GetScore() { return score; }
 	bool GetisShow() { return isShow; };
