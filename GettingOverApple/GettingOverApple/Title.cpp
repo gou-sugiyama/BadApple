@@ -1,7 +1,7 @@
 #include"DxLib.h"
 #include"SceneManager.h"
 #include"Title.h"
-#include"Ranking.h"
+#include"RankMng.h"
 #include"Controller.h"
 #include"Game.h"
 #include"End.h"
@@ -11,11 +11,11 @@
 // コンストラクタ
 //-------------------------------
 CTitle::CTitle(CController* pController) :CScene(pController) {
-	titleImage = LoadGraph("images/Title.bmp");
-	menuImage[D_START] = LoadGraph("images/start_m.bmp");
-	menuImage[D_RANKING] = LoadGraph("images/ranking_m.bmp");;
-	menuImage[D_HELP] = LoadGraph("images/help_m.bmp");
-	menuImage[D_END] = LoadGraph("images/end_m.bmp");
+	titleImage = LoadGraph("images/title.png");
+	menuImage[D_START] = LoadGraph("images/start_m.png");
+	menuImage[D_RANKING] = LoadGraph("images/ranking_m.png");;
+	menuImage[D_HELP] = LoadGraph("images/help_m.png");
+	menuImage[D_END] = LoadGraph("images/end_m.png");
 	menuCursor = 0;
 	keyInput = controller->control(true);
 }
@@ -34,7 +34,7 @@ CScene* CTitle::Update() {
 			return new CGame(controller);		//ゲームシーンに移行
 			break;
 		case D_RANKING:
-			return new CRanking(controller);	//ランキングシーンに移行
+			return new CRankMng(controller);	//ランキングシーンに移行
 			break;
 		case D_HELP:
 			return new CHelp(controller);		//TODO:ヘルプ画面に移行
