@@ -2,7 +2,6 @@
 #include"DxLib.h"
 
 #define APPLE_MAX 10
-
 class CApple;
 class CAppleManager
 {
@@ -10,6 +9,10 @@ private:
 	//‰æ‘œ•Ï”
 	int WaitTime;
 	int images[4];
+	int AppleCount1;
+	int AppleCount2;
+	int AppleCount3;
+	int count;
 
 	CApple* Apple[10];
 
