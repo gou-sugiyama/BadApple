@@ -1,10 +1,10 @@
 #include"DxLib.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include"player.h"
 #include"Controller.h"
 #define D_KEY_CONTROL_LEFT -2000
 #define D_KEY_CONTROL_RIGHT 2000
-
-int i = 0;
 //定数の宣言
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -20,37 +20,94 @@ CPlayer::CPlayer(CController* pController) {
 	g_playery = PLAYER_POS_Y;
 	g_playerw = PLAYER_WIDTH;
 	g_playerh = PLAYER_HIGHT;
-	speed = 3;
 	g_player = LoadGraph("images/taiki.png");
+	g_playerRun = LoadGraph("images/run.png");
+	g_playerflg = TRUE;
+	g_playerflg = FALSE;
+	mv = 0.05f;
+
+	cmx = 0.0;
+	angle = -1;
+	tnos = 120;//2秒
 }
 
 void CPlayer::Update() {
-	if (KeyControl() < 0)g_playerx -= speed; 
-	if (0 < KeyControl())g_playerx += speed;
-
-	//playerspeed();
+	//if (KeyControl() < 0)g_playerx -= cmx; 
+	//if (0 < KeyControl())g_playerx += cmx;
+	playerspeed();
+	Hitplayer();
+	if (tnos > 0) {
+		if (tnos % 20 == 0) {
+			g_playerflg = !g_playerflg;
+		}
+	}
 
 	//画面をはみ出さないようにする
-	if (g_playerx < 32)g_playerx = 32;
-	if (g_playerx > SCREEN_WIDTH - 180)g_playerx = SCREEN_WIDTH - 180;
+	if (g_playerx < 32) {
+		g_playerx = 32;
+		cmx = 0;
+	}
+	if (g_playerx > SCREEN_WIDTH - 180) {
+		g_playerx = SCREEN_WIDTH - 180;
+		cmx = 0;
+	}
 }
-void CPlayer::Render()const {
-	DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_player, TRUE, FALSE);
+void CPlayer::Render() {
+	if (g_playerflg) {
+		if (cmx > 0) {
+			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, TRUE);//右
+		}
+		if (cmx < 0) {
+			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, FALSE);//左
+		}
+		if (cmx == 0) {
+			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_player, TRUE, FALSE);//待機
+		}
+	}
 	//DrawFormatString(0, 20, 0xFFFFFF, "%d", controller->control(true).ThumbLX);
 }
 
 void CPlayer::playerspeed() {
-	if (KeyControl()<0) {// g_OldKey == 0 && g_NowKey == 0
-		if (i < 25) {
-			speed += i * 0.01f;
-			i++;
-		}
+	int i;
+	for (i = 0; i < 180; i++) {//iの方向へどれくらい進むか
+		fcos[i] = (float)cos(i * M_PI / 180);
 	}
-	else if(0 < KeyControl()){
-		if (i < 0) {
-			speed -= i * 0.01f;
-			i--;
-		}
+	if (KeyControl() < 0) { //右
+		angle = 179;
+	}
+
+	else if (KeyControl() > 0) { //左
+		angle = 0;
+	}
+	else {
+		angle = -1;
+	}
+	//angleが変わったら移動量を変更する
+	if (angle != -1) {
+		cmx += fcos[angle] * mv;
+	}
+	else if (angle == -1) {
+		cmx -= fcos[angle] * mv;
+	}
+	if ((0.5 > cmx && KeyControl() != 1) && (cmx > -0.5 && KeyControl() != -1)) {
+		cmx = 0;
+	}
+	//キャラクターの座標を毎フレーム移動させる
+	g_playerx += cmx;
+	
+}
+
+void CPlayer::Hitplayer() {//点滅
+	if (tnos % 20 == 0) { //表示しない
+		//if (cmx > 0) {
+		//	DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, TRUE);//右
+		//}
+		//if (cmx < 0) {
+		//	DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, FALSE);//左
+		//}
+		//if (cmx == 0) {
+		//	DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_player, TRUE, FALSE);//待機
+		//}
 	}
 }
 
@@ -66,5 +123,5 @@ int CPlayer::KeyControl() {
 	else {
 		return 0;
 	}
-	
 }
+ 
