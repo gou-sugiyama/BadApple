@@ -11,8 +11,8 @@ CPlayer::CPlayer(CController* pController) {
 	controller = pController;
 	//画像データ
 	image = new int[D_PLAYER_IMAGE_MAX];
-	image[false] = LoadGraph("images/taiki.png");
-	image[true] = LoadGraph("images/run.png");
+	image[false] = LoadGraph("images/stop.png");
+	image[true] = LoadGraph("images/move.png");
 	//画像情報
 	width = D_PLAYER_WIDTH;
 	height = D_PLAYER_HEIGHT;
@@ -50,8 +50,8 @@ void CPlayer::Update() {
 	//位置情報の更新
 	x += speed;
 	//ゲーム領域の端で止める
-	if (x < D_PLAYER_WIDTH_MOVE) x = D_PLAYER_WIDTH_MOVE;		//左端
-	if (x > D_GAME_AREA - D_PLAYER_WIDTH_MOVE)x = D_GAME_AREA - D_PLAYER_WIDTH_MOVE;		//左端
+	if (x < D_PLAYER_WIDTH_MOVE / 2) x = D_PLAYER_WIDTH_MOVE / 2;		//左端
+	if (x > D_GAME_AREA - (D_PLAYER_WIDTH_MOVE / 2))x = D_GAME_AREA - (D_PLAYER_WIDTH_MOVE / 2);		//右端
 }
 
 //-------------------------
@@ -116,11 +116,21 @@ void CPlayer::SetWH() {
 	if (isMove) {
 		width = D_PLAYER_WIDTH_MOVE;
 		height = D_PLAYER_HEIGHT_MOVE;
+		y = (float)(D_SCREEN_HEIGHT - (height / 2));
+
+		rangeX = (float)(width / 2);
+		rangeY = (float)(height / 2);
+
 	}
 	//待機中
 	else {
 		width = D_PLAYER_WIDTH;
 		height = D_PLAYER_HEIGHT;
+		y = (float)(D_SCREEN_HEIGHT - (height / 2));
+
+		rangeX = (float)(width / 2);
+		rangeY = (float)(height / 2);
+
 	}
 }
 

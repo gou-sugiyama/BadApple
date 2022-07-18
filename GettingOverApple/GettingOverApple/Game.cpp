@@ -22,6 +22,8 @@ CGame::CGame(CController* pController):CScene(pController){
 	apple = applemanager->GetpApple();
 	//UI‚ğ“®“IŠm•Û
 	UI = new CUI(controller);
+	//”wŒi‰æ‘œ‚Ì“Ç‚İ‚İ
+	image = LoadGraph("images/haikei.png");
 }
 
 //--------------------------------
@@ -65,7 +67,7 @@ CScene* CGame::Update() {
 // •`‰æ
 //--------------------------------
 void CGame::Render()const {
-	//DrawFormatString(0, 0, GetColor(255, 255, 255),"ƒQ[ƒ€");
+	DrawGraph(0, 0, image, FALSE);
 	applemanager->Render();
 	player->Render();
 	UI->Render();

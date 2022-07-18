@@ -1,9 +1,9 @@
 #pragma once
 #include"Object.h"
-#define D_PLAYER_WIDTH (40)
+#define D_PLAYER_WIDTH (52)
 #define D_PLAYER_HEIGHT (100)
-#define D_PLAYER_WIDTH_MOVE (60)
-#define D_PLAYER_HEIGHT_MOVE (80)
+#define D_PLAYER_WIDTH_MOVE (80)
+#define D_PLAYER_HEIGHT_MOVE (65)
 #define D_PLAYER_ADD_SPEED 0.3f
 #define D_PLAYER_SUB_SPEED 0.15f
 #define D_PLAYER_MAX_SPEED 5.0f//(-5)

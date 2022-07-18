@@ -18,6 +18,8 @@ private:
     CUI* UI;
     //アップルを呼び出すためのポインタ
     CApple* apple;
+    //画僧変数
+    int image;
 
 public:
     CGame(CController* pController);
