@@ -24,8 +24,9 @@ XINPUT_STATE CController::control(bool isChattering)
 	}
 	else {
 
-
-		GetJoypadXInputState(DX_INPUT_PAD1, &data);
+		OldKey = input;
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
+		data = input;
 		for (int i = 0; i < MAX_BUTTON; i++) {
 			data.Buttons[i] = input.Buttons[i] & ~OldKey.Buttons[i];
 		}
