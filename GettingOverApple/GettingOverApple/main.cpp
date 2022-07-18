@@ -23,7 +23,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//管理システムを動的確保
 	CSceneManager* manager;
-	manager = new CSceneManager(new CTitle());
+	manager = new CSceneManager(new CTitle(&controller));
 
 	//ゲームループ
 	while (ProcessMessage() == 0 
