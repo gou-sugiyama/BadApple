@@ -73,9 +73,9 @@ void CAppleManager::Render()const {
 		if (apple[i].GetisShow() == true) {
 			apple[i].Render();
 		}
-		DrawFormatString(0, 100 + 20 * i, 0xFFFFFF, 
+		DrawFormatString(0, 100 + 20 * i, 0x000000, 
 			"apple[%d]:%d   y:%.0f x:%.0f", 
-			i, (int)apple[i].GetS(),apple[i].GetY(),apple[i].GetX());
+			i, (int)apple[i].GetScore(),apple[i].GetY(),apple[i].GetX());
 	}
 }
 

@@ -1,42 +1,58 @@
 #include"DxLib.h"
 #include "UI.h"
 #include"Controller.h"
+#include"Apple.h"
+#include"define.h"
 
+int White = 0xFFFFFF;
+int Black = 0x000000;
+int const StrMargin = 20;
+
+//--------------------------------
+// コンストラクタ
+//--------------------------------
 CUI::CUI(CController* pController) {
 	controller = pController;
-	for (int i = 0; i < 4; i++) {
-		appleCount[i] = 0;
+	for (int i = 0; i < D_COUNT_OBJECT; i++) {
+		objectCount[i] = 0;
 	}
+	objectImage[D_APPLE_A] = LoadGraph("images/ringoA.png");
+	objectImage[D_APPLE_B] = LoadGraph("images/ringoB.png");
+	objectImage[D_APPLE_C] = LoadGraph("images/ringoC.png");
 
 	score = 0;
-	timeLimit = 60 * 20;			//60フレーム*30秒
+	timeLimit = 60 * 30;			//60フレーム*30秒
 	isPause = false;
 }
 
+//--------------------------------
+// 更新
+//--------------------------------
 bool CUI::Update() {
 	if (isPause == false) {
 		--timeLimit;
-	}
-
-	if (controller->control(false).Buttons[4]) {	
-		isPause = !isPause;
 	}
 
 	if (timeLimit <= 0) {
 		timeLimit = 0;
 
 		return false;
-		//TODO　制限時間が0になったら3秒後に画面遷移
+		//TODO:制限時間が0になったら3秒後に画面遷移
 		//次のゲームステートを返すorゲームステートを変更する
 	}
 
+	//スタートボタンが押されたらPAUSE
+	if (controller->GetControl().Buttons[4]) {	
+		isPause = !isPause;
+	}
 	return true;
 }
 
+//--------------------------------
+// 描画
+//--------------------------------
 void CUI::Render()const {
-	int White = 0xFFFFFF;
-	int Black = 0x000000;
-	int const StrMargin = 20;
+	
 
 	if (isPause) {
 		SetFontSize(50);
@@ -50,21 +66,23 @@ void CUI::Render()const {
 	DrawFormatString(545, StrMargin * 5, Black, "%02d", timeLimit / 60);//数値調整済み
 	SetFontSize(16);
 
-	DrawFormatString(510, StrMargin * 12, White, "%03d", appleCount[0]);
-	DrawFormatString(560, StrMargin * 12, White, "%03d", appleCount[1]);
-	DrawFormatString(610, StrMargin * 12, White, "%03d", appleCount[2]);
+	DrawObjectCount();
 
 	DrawString(510, StrMargin * 14, "SCORE:", White);
 	DrawFormatString(580, StrMargin * 14, White, "%06d", score);
 
-	//デバッグ用数値 (500,300+20*n)
+}
 
+//--------------------------------
+// 獲得したオブジェクトのカウント
+//--------------------------------
+void CUI::DrawObjectCount()const {
+	const int DRAW_OBJECT = 510;
+	for (int i = 0; i < D_COUNT_OBJECT; i++) {
+		DrawGraph(D_GAME_AREA + 50 * i, 
+			StrMargin * 10, objectImage[i], TRUE);
 
-	/*
-	DrawFormatString(510, 200, 0x000000, "走行距離");
-	DrawFormatString(555, 220, 0xFFFFFF, "%08d", g_Mileage / 10);
-	DrawFormatString(510, 240, 0x000000, "スピード");
-	DrawFormatString(555, 260, 0xFFFFFF, "%08d", g_player.speed);*/
-
-
+		DrawFormatString(DRAW_OBJECT + 50 * i, 
+			StrMargin * 12, White, "%03d", objectCount[i]);
+	}
 }

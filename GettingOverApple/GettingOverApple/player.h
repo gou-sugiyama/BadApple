@@ -12,6 +12,7 @@ public:
 	int GetPlayerY() { return g_playery; };
 	int GetPlayerW() { return g_playerw; };
 	int GetPlayerH() { return g_playerh; };
+	int GetTnos()const { return tnos; }
 private:
 	CController* controller;
 	int g_player;//ƒvƒŒƒCƒ„[‰æ‘œ•Ï”

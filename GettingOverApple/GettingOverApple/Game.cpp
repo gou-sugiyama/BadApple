@@ -25,6 +25,8 @@ CGame::CGame(CController* pController):CScene(pController){
 	UI = new CUI(controller);
 	//Hit
 	hit = new CHitBoxCheck;
+
+	keyInput = controller->control(false);
 }
 
 CGame::~CGame() {
@@ -40,14 +42,16 @@ CGame::~CGame() {
 }
 
 CScene* CGame::Update() {
+	keyInput = controller->control(false);
 	//ゲーム中(制限時間内、ポーズ中ではない)なら更新する
 	if (UI->Update()) {//ゲーム中(制限時間内、ポーズ中ではない)かどうかを返す
 		if (UI->GetisPause() != true) {
 			appleManager->Update();
 			player->Update();
 			for (int i = 0; i < D_APPLE_MAX; i++) {
-				if (hit->HitBox(player, &apple[i])) {
-					//スコアとかの処理いれる？
+				if (player->GetTnos() <= 0 && hit->HitBox(player, &apple[i])) {
+					UI->SetCount(apple[i].GetType());
+					UI->SetScore(apple[i].GetScore());
 				}
 
 			}
