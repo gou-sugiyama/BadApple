@@ -66,8 +66,8 @@ CScene* CGame::Update() {
 		if (++WaitTime > 180) {
 			WaitTime = 0;
 			StopSoundMem(GameBGM);
+			controller->SetScore(UI->GetScore());
 			return new CRankMng(controller);
-			rankmng->SetScore(UI->GetScore());
 		}
 	}
 	return this;
