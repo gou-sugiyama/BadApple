@@ -25,6 +25,7 @@ CGame::CGame(CController* pController):CScene(pController){
 	UI = new CUI(controller);
 	//Hit
 	hit = new CHitBoxCheck;
+	GameBGM = LoadSoundMem("sounds/BGM/魔王魂 サイバー31 (online-audio-converter.com).wav");
 
 	KeyInput = controller->GetControl();
 }
@@ -41,7 +42,10 @@ CGame::~CGame() {
 }
 
 CScene* CGame::Update() {
-	KeyInput = controller->GetControl();
+	keyInput = controller->GetControl();
+	if (CheckSoundMem(GameBGM) == 0) {
+		PlaySoundMem(GameBGM, DX_PLAYTYPE_BACK, TRUE);
+	}
 	//ゲーム中(制限時間内、ポーズ中ではない)なら更新する
 	if (UI->Update()) {//ゲーム中(制限時間内、ポーズ中ではない)かどうかを返す
 		if (UI->GetisPause() != true) {
@@ -61,6 +65,7 @@ CScene* CGame::Update() {
 		static int WaitTime = 0;
 		if (++WaitTime > 180) {
 			WaitTime = 0;
+			StopSoundMem(GameBGM);
 			return new CRankMng(controller);
 			rankmng->SetScore(UI->GetScore());
 		}
