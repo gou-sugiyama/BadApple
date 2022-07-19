@@ -27,7 +27,7 @@ CGame::CGame(CController* pController):CScene(pController){
 	hit = new CHitBoxCheck;
 	GameBGM = LoadSoundMem("sounds/BGM/魔王魂 サイバー31 (online-audio-converter.com).wav");
 
-	KeyInput = controller->GetControl();
+	keyInput = controller->GetControl();
 }
 
 CGame::~CGame() {
