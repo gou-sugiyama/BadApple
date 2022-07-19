@@ -15,7 +15,6 @@ CEnd::CEnd(CController* pController) :CScene(pController) {
 //--------------------------------
 CScene* CEnd::Update() {
 	static int limit = 180;
-
 	if (limit-- < 0) {
 		return nullptr;
 	}

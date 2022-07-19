@@ -10,19 +10,25 @@
 //--------------------------------
 CHelp::CHelp(CController* pController) :CScene(pController) {
 	image = LoadGraph("images/help.png");
+	HelpBGM = LoadSoundMem("sounds/BGM/魔王魂 サイバー41 (online-audio-converter.com).wav");
 }
 
 //--------------------------------
 // 更新
 //--------------------------------
 CScene* CHelp::Update() {
-	if (controller->GetControl().Buttons[XINPUT_BUTTON_B])
+	if (CheckSoundMem(HelpBGM) == 0) {
+		PlaySoundMem(HelpBGM, DX_PLAYTYPE_BACK, TRUE);
+	}
+
+	if (controller->GetControl().Buttons[XINPUT_BUTTON_B]) {
+		StopSoundMem(HelpBGM);
 		return new CTitle(controller);
-
-
-	if (controller->GetControl().Buttons[XINPUT_BUTTON_A])
+	}
+	if (controller->GetControl().Buttons[XINPUT_BUTTON_A]) {
+		StopSoundMem(HelpBGM);
 		return new CGame(controller);
-
+	}
 	return this;
 }
 
