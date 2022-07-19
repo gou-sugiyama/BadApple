@@ -1,5 +1,5 @@
 1       rty      31650
 2 **x******      10000
 3 **x******      10000
-4 xxxxxxxxx          0
-0 U***XXXXx          0
+4 aa***llzz      10000
+5 xxxxxxxxx          0

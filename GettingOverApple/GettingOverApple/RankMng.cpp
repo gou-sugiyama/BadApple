@@ -313,7 +313,7 @@ void CRankMng::SortRanking()
 	}
 
 	// ‡ˆÊ•t‚¯
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		rankdata[i].Rank = i + 1;
 	}
 }
