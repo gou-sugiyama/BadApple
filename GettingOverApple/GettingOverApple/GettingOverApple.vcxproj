@@ -36,8 +36,8 @@
   <ItemGroup>
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AppleManager.cpp" />
-    <ClCompile Include="End.cpp" />
     <ClCompile Include="CString.cpp" />
+    <ClCompile Include="End.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="main.cpp" />
