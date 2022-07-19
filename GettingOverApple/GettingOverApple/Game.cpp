@@ -30,11 +30,10 @@ CGame::CGame(CController* pController):CScene(pController){
 }
 
 CGame::~CGame() {
-	//動的確保したものを解放する
-
 	//コントローラーのフラグを変更
 	controller->ToggleControlFlg();		//フラグをTRUEへ変更
 
+	//動的確保したものを解放する
 	delete player;
 	delete appleManager;
 	delete UI;
