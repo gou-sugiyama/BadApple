@@ -28,7 +28,7 @@ CScene* CTitle::Update() {
 
 	SelectMenu();
 
-	if (keyInput.Buttons[XINPUT_BUTTON_START] == TRUE) {
+	if (keyInput.Buttons[XINPUT_BUTTON_A] == TRUE) {
 		switch (menuCursor) {
 		case D_START:
 			return new CGame(controller);		//ゲームシーンに移行
