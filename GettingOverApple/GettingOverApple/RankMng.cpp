@@ -34,6 +34,7 @@ CRankMng::CRankMng(CController* pController):CScene(pController) {
 
 CRankMng::~CRankMng()
 {
+	delete StrData[STR_MAX];
 }
 
 
