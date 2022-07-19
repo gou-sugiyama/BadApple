@@ -42,7 +42,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="RankMng.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Title.cpp" />
