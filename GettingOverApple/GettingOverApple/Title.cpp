@@ -17,18 +17,18 @@ CTitle::CTitle(CController* pController) :CScene(pController) {
 	menuImage[D_HELP] = LoadGraph("images/help_m.png");
 	menuImage[D_END] = LoadGraph("images/end_m.png");
 	menuCursor = 0;
-	KeyInput = controller->GetControl();
+	keyInput = controller->control(true);
 }
 
 //-----------------------------
 // 更新
 //-----------------------------
 CScene* CTitle::Update() {
-	KeyInput = controller->GetControl();
+	keyInput = controller->control(true);
 
 	SelectMenu();
 
-	if (KeyInput.Buttons[XINPUT_BUTTON_START] == TRUE) {
+	if (keyInput.Buttons[XINPUT_BUTTON_A] == TRUE) {
 		switch (menuCursor) {
 		case D_START:
 			return new CGame(controller);		//ゲームシーンに移行
@@ -54,10 +54,10 @@ CScene* CTitle::Update() {
 // メニュー選択
 //-----------------------------------
 void CTitle::SelectMenu() {
-	if (KeyInput.Buttons[XINPUT_BUTTON_DPAD_UP] == TRUE) {
+	if (keyInput.Buttons[XINPUT_BUTTON_DPAD_UP] == TRUE) {
 		if (--menuCursor < D_START)menuCursor = D_END;
 	}
-	if (KeyInput.Buttons[XINPUT_BUTTON_DPAD_DOWN] == TRUE) {
+	if (keyInput.Buttons[XINPUT_BUTTON_DPAD_DOWN] == TRUE) {
 		if (++menuCursor > D_END)menuCursor = D_START;
 	}
 }
