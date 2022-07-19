@@ -20,7 +20,7 @@ class CTitle :
     public CScene
 {
 private:
-    XINPUT_STATE KeyInput;
+    XINPUT_STATE keyInput;
     int titleImage;
     int menuImage[4];
     int menuCursor;
