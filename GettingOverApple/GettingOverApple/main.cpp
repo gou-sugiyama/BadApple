@@ -31,7 +31,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		
 		ClearDrawScreen();		//‰æ–Ê‚Ì‰Šú‰»
 
-
 		controller.control(controller.GetControlFlg());
 
 		manager->Render();
