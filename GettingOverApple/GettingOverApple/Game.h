@@ -26,7 +26,7 @@ private:
     //Rank
     CRankMng* rankmng;
 
-    XINPUT_STATE keyInput;
+    XINPUT_STATE KeyInput;
 public:
     CGame(CController* pController);
 
