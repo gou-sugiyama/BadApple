@@ -27,11 +27,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//ƒQ[ƒ€ƒ‹[ƒv
 	while (ProcessMessage() == 0 
-		&& manager->Update() != nullptr&& controller.GetControl().Buttons[5]!= TRUE) {
+		&& manager->Update() != nullptr&& controller.GetControl().Buttons[5] != TRUE) {
 		
-		controller.control(controller.GetControlFlg());
-
 		ClearDrawScreen();		//‰æ–Ê‚Ì‰Šú‰»
+
+
+		controller.control(controller.GetControlFlg());
 
 		manager->Render();
 

@@ -1,7 +1,12 @@
+#include"DxLib.h"
 #include<stdio.h>
+#include "SceneManager.h"
 #include"Controller.h"
 #include"RankMng.h"
-#include<string>
+#include "Ranking.h"
+#include "UI.h"
+
+
 
 //--------------------------------
 // コンストラクタ
@@ -13,16 +18,17 @@ CRankMng::CRankMng(CController* pController):CScene(pController) {
 
 	//ファイルロード
 	for (int i = 0; i < 5; i++) {
-		fscanf_s(fp, "%2d %9s %10d", &rankdata[i].Rank,rankdata[i].Name, 8, &rankdata[i].Score);
+		int data1 = 0;
+		char data2[9];
+		int data3 = 0;
+		fscanf_s(fp, "%2d %9s %10d", &data1, data2, 8, &data3);
+
+		rankdata[i] = new CRanking(data1,data2,data3);
 	}
+
+
 	//ファイルクローズ
 	fclose(fp);
-
-	for (int i = 0; i < STR_MAX; i++) {
-		StrData[i] = new CString(i);
-	}
-
-	Score = controller->GetScore();
 
 	WaitTime = 0;
 	Type = 0;
@@ -31,30 +37,49 @@ CRankMng::CRankMng(CController* pController):CScene(pController) {
 
 	JudgeFlg = TRUE;
 
-	controller->ToggleControlFlg();
+	for (int i = 0; i < STR_TYPE; i++) {
+		for (int j = 0; j < STR_MAX; j++) {
+			rankstr[i][j].str_X = j*30+60;
+			rankstr[i][j].str_Y = i*60+80;
+			rankstr[i][j].image = LoadGraph("images/Test.png");
+			rankstr[i][j].bigimage = LoadGraph("images/Test2.png");
+			rankstr[i][j].string = i * 26 + j;
+			rankstr[i][j].strflg = FALSE;
+		}
+	}
+	for (int i = 0; i < STR_TYPE; i++) {
+		for (int j = 0; j < STR_MAX+2; j++) {
+			rankcrsr[i][j].crsr_X = j;
+			rankcrsr[i][j].crsr_Y = i;
+		}
+	}
 }
 
 CRankMng::~CRankMng()
 {
+	for (int i = 0; i < 5; i++) {
+		delete rankdata[i];
+	}
 }
 
 
 
 int CRankMng::JudgeRanking() const
 {
-	if (rankdata[4].Score < Score) {
-		if (JudgeFlg == TRUE) {
-			return 1;
+	for (int i = 4; i >= 0; i--) {
+		if (rankdata[i - 1]->ShowRankScore() > Score&&Score > rankdata[i]->ShowRankScore()) {
+			if (InsertJudge() == TRUE) {
+				return i;
+				break;
+			}
 		}
 		else {
 			
-			return -1;
 		}
 	}
-	else{
-		return -1;
-	}
+	return -1;
 }
+
 
 //--------------------------------
 // 更新
@@ -70,7 +95,6 @@ CScene* CRankMng::Update() {
 			return this;
 		}
 		else {
-			controller->ToggleControlFlg();
 			return nullptr;
 		}
 	}
@@ -78,10 +102,18 @@ CScene* CRankMng::Update() {
 
 void CRankMng::TrueUpdate()
 {
-	data = controller->GetControl();
+	int i;
+	XINPUT_STATE data;
+	data = controller->control(false);
 
-	ControlRanking(data);
+	i = JudgeRanking();
+	InsertRanking(data,i);
 
+}
+
+bool CRankMng::InsertJudge() const
+{
+	return JudgeFlg;
 }
 
 void CRankMng::ToggleJudge()
@@ -89,148 +121,111 @@ void CRankMng::ToggleJudge()
 	JudgeFlg = !(JudgeFlg);
 }
 
-void CRankMng::ControlRanking(XINPUT_STATE data)
+void CRankMng::InsertRanking(XINPUT_STATE data,int i)
 {
-	
-	int Cntller = DelayCNTL();
 
-	for (int j = 0; j < STR_MAX; j++) {
-		StrData[j]->SetStrFlg(FALSE);
-	}
 	
-	if (data.Buttons[XINPUT_BUTTON_DPAD_RIGHT]|| Cntller ==1)
+	if (data.ThumbLX>=CONTROL_STICK)
 	{
-		if (0 <= Str%13&&Str%13 < 12) {
+		if (0 < Str&&Str < STR_MAX/2|| STR_MAX/2 < Str&&Str < STR_MAX-1) {
 			Str++;
-			FlgCount = 1;
 		}
-		else if (Str%13 == 12) {
-			Str -= 12;
-			FlgCount = 1;
+		else if (Str == 12) {
+			Str = 0;
 		}
-
+		else if (Str == 25) {
+			Str = 13;
+		}else if (Str==26)
+		{
+			Str = 27;
+		}
+		else if (Str == 27) {
+			Str = 26;
+		}
 	}
-	else {
-		FlgCount = 0;
-	}
-	if (data.Buttons[XINPUT_BUTTON_DPAD_LEFT] || Cntller == 2) {
-		if (12 >= Str%13&&Str%13 > 0) {
+	else if (data.ThumbLX <= CONTROL_STICK*-1) {
+		if (STR_MAX / 2 >Str&&Str >= 0 || STR_MAX-1 > Str&&Str > STR_MAX / 2) {
 			Str--;
 		}
-		else if(Str%13==0){
-			Str += 12;
+		else if(Str==0){
+			Str = 12;
+		}
+		else if (Str == 13) {
+			Str = 25;
+		}else if (Str==26)
+		{
+			Str = 27;
+		}
+		else if (Str == 27) {
+			Str = 26;
 		}
 	}
-	if (data.Buttons[XINPUT_BUTTON_DPAD_DOWN] || Cntller == 3)
+	else if (data.ThumbLY>=CONTROL_STICK)
 	{
-		if (Str+13 < STR_MAX ) {
+		if (Str < STR_MAX/2) {
+			Str = 26;
+		}
+		else if(STR_MAX / 2<= Str&&Str < STR_MAX) {
+			Str = -13;
+		}
+		else if(Str==26||Str==27)
+		{
+			Str = 25;
+		}
+	}
+	else if (data.ThumbLY >= CONTROL_STICK*-1)
+	{
+		if (Str < STR_MAX / 2) {
 			Str += 13;
 		}
-	}
-	if (data.Buttons[XINPUT_BUTTON_DPAD_UP] || Cntller == 4)
-	{
-		if (Str-13 >= 0) {
-			Str -= 13;
+		else if (STR_MAX / 2 <= Str||Str < STR_MAX) {
+			Str = 26;
+		}
+		else if (Str == 26 || Str == 27)
+		{
+			Str = 0;
 		}
 	}
+	ToggleStrFlg(Type, Count);
 
-	SetStrImageFlg(Str);
-
-	if (0 <= Str&&Str < STR_MAX-1&& data.Buttons[XINPUT_BUTTON_A]) {
+	if (0 <= Str&&Str < STR_MAX) {
 		if (Count< 9) {
-				RememberName[Count++] = StrData[Str]->GetStr();
+			if (data.Buttons[XINPUT_BUTTON_A] == TRUE) {
+				RememberName[Count++] = rankstr[Type][Str].string;
+			}
 		}
 		else {
-			Count = 9;
+			Count = 8;
 		}
 	}
-
-	if (Str == STR_MAX-1&&data.Buttons[XINPUT_BUTTON_A]) {
-		RememberName[9] = '\0';
-		InsertRankChar(RememberName);
+	else if (Str == STR_MAX) {
+		if (Type >= 2) {
+			Type = 0;
+		}
+		else {
+			Type++;
+		}
+	}
+	else if (Str == STR_MAX + 1) {
+		rankdata[i]->InsertRankChar(RememberName);
 		ToggleJudge();
 	}
 
-	if (data.Buttons[XINPUT_BUTTON_B]) {
-		if (Count > 0) {
-			RememberName[Count - 1] = '\0';
-			Count--;
-		}
-		else {
-
-		}
+	if (data.Buttons[XINPUT_BUTTON_B] == TRUE) {
+		RememberName[Count - 1] = '\0';
+		Count--;
 	}
 
 }
 
-void CRankMng::SetStrImageFlg(int i)
+void CRankMng::ToggleStrFlg(int i,int j)
 {
-	StrData[i]->SetStrFlg(TRUE);
+	rankstr[i][j].strflg = !rankstr[i][j].strflg;
 }
 
 void CRankMng::SetScore(int i)
 {
 	Score = i;
-}
-
-void CRankMng::InsertRankChar(char* data1)
-{
-	strcpy(rankdata[4].Name, data1);
-	rankdata[4].Score = this->Score;
-
-	SortRanking();
-}
-
-void CRankMng::SortRanking()
-{
-	int work;
-	char SaveStorage[10];
-	// 選択法ソート
-	for (int i = 3; i >= 0; i--) {
-		for (int j = i + 1; j > 0; j--) {
-			if (rankdata[i].Score <= rankdata[j].Score) {
-				work = rankdata[i].Score;
-				strcpy(SaveStorage, rankdata[i].Name);
-				rankdata[i].Score = rankdata[j].Score;
-				strcpy(rankdata[i].Name, rankdata[j].Name);
-				rankdata[j].Score = work;
-				strcpy(rankdata[j].Name, SaveStorage);
-			}
-		}
-	}
-
-	// 順位付け
-	for (int i = 0; i < 4; i++) {
-		rankdata[i].Rank = i+1;
-	}
-}
-
-int CRankMng::DelayCNTL()
-{
-	if (CntlTime++ % 30==0) {
-		if (data.ThumbLX > CONTROLLER_STICK_MAX) {
-			kanning = 1;
-		}
-		if (data.ThumbLX < -CONTROLLER_STICK_MAX - 1) {
-			kanning = 2;
-		}
-		if (data.ThumbLY < -CONTROLLER_STICK_MAX - 1) {
-			kanning = 3;
-		}
-		if (data.ThumbLY > CONTROLLER_STICK_MAX) {
-			kanning = 4;
-		}
-		if (data.ThumbLX < CONTROLLER_STICK_MAX&& data.ThumbLX > -CONTROLLER_STICK_MAX
-			&& data.ThumbLY < CONTROLLER_STICK_MAX&& data.ThumbLY > -CONTROLLER_STICK_MAX)
-		{
-			kanning = 0;
-			CntlTime = 0;
-		}
-	}
-	else {
-		kanning = 0;
-	}
-	return kanning;
 }
 
 bool CRankMng::FalseUpdate()
@@ -247,38 +242,29 @@ bool CRankMng::FalseUpdate()
 //--------------------------------
 // 描画
 //--------------------------------
-void CRankMng::Render() const{
+void CRankMng::Render() {
 	if (JudgeRanking()!=-1) {
 		
-			for (int i = 0; i < STR_MAX; i++) {
-				if (StrData[i]->GetStrFlg() == TRUE) {
-					DrawGraph(StrData[i]->GetStrX()+i%13*13, StrData[i]->GetStrY()+i/13*5+125, StrData[i]->GetBigImage(), TRUE);
+		
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 26; j++) {
+				if (rankstr[i][j].strflg == TRUE) {
+					DrawGraph(rankstr[i][j].str_X, rankstr[i][j].str_Y, rankstr[i][j].bigimage, TRUE);
+					ToggleStrFlg(i,j);
 				}
 				else {
-					DrawGraph(StrData[i]->GetStrX() + i%13 * 13, StrData[i]->GetStrY() + i / 13 * 5+125, StrData[i]->GetImage(), TRUE);
+					DrawGraph(rankstr[i][j].str_X, rankstr[i][j].str_Y, rankstr[i][j].image, TRUE);
 				}
 			}
-			DrawString(360, 20, RememberName,0xffffff);
-			DrawFormatString(360, 400, 0xffffff, "%d", kanning);
-			
+		}
+		
 	}
 	else {
-		for (int i = 0; i < 5; i++) {
-			DrawFormatString(200, i * 90, 0xffffff,
-				"%d,%s,%d",
-				rankdata[i].Rank,
-				rankdata[i].Name,
-				rankdata[i].Score);
-
-			}
-			/*SetFontSize(28);
-			DrawString(10, 10, "ランキング表示", 0xFFFFFF);*/
-	
+		if (WaitTime <= 240) {
+			SetFontSize(28);
+			DrawString(10, 10, "ランキング表示", 0xFFFFFF);
+		}
 	}
 	
 }
-
-
-//if (data.ThumbLX == kanning) {
-//
-//}
