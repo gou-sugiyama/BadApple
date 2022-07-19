@@ -11,17 +11,18 @@ const int SCREEN_HEIGHT = 480;
 //自機の初期値
 const int PLAYER_POS_X = SCREEN_WIDTH / 2;
 const int PLAYER_POS_Y = SCREEN_HEIGHT - 100;
-const int PLAYER_WIDTH = 40;
+const int PLAYER_WIDTH = 52;
 const int PLAYER_HIGHT = 100;
-
+const int MOVE_PLAYER_HIGHT = 80;
+const int MOVE_PLAYER_WIDTH = 65;
 CPlayer::CPlayer(CController* pController) {
 	controller = pController;
-	g_playerx = PLAYER_POS_X;
 	g_playery = PLAYER_POS_Y;
+	g_playerx = PLAYER_POS_X;
 	g_playerw = PLAYER_WIDTH;
 	g_playerh = PLAYER_HIGHT;
-	g_player = LoadGraph("images/taiki.png");
-	g_playerRun = LoadGraph("images/run.png");
+	g_player = LoadGraph("images/stop.png");
+	g_playerRun = LoadGraph("images/move.png");
 	g_playerflg = TRUE;
 	g_playerflg = FALSE;
 	mv = 0.05f;
@@ -31,6 +32,10 @@ CPlayer::CPlayer(CController* pController) {
 	for (i = 0; i < 180; i++) {//iの方向へどれくらい進むか
 		fcos[i] = (float)cos(i * M_PI / 180);
 	}
+	//x座標制限の調整-
+	
+
+
 
 	cmx = 0.0;
 	angle = -1;
@@ -51,9 +56,12 @@ void CPlayer::Update() {
 		g_playerflg = true;
 	}
 
+	
+	//キャラクターの座標を毎フレーム移動させる
+	g_playerx += cmx;
 	//画面をはみ出さないようにする
 	if (g_playerx < 32) {
-		g_playerx = 32;
+		g_playerx= 32;
 		cmx = 0;
 	}
 	if (g_playerx > SCREEN_WIDTH - 180) {
@@ -62,20 +70,21 @@ void CPlayer::Update() {
 	}
 
 
-	//キャラクターの座標を毎フレーム移動させる
-	g_playerx += cmx;
 }
 
 void CPlayer::Render() {
 	if (g_playerflg) {
-		if (cmx > 0) {
+		if (KeyControl() > 0) {
 			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, TRUE);//右
+			g_playery= SCREEN_HEIGHT - (MOVE_PLAYER_HIGHT / 2);//移動時、待機時の座標変更
 		}
-		if (cmx < 0) {
+		if (KeyControl() < 0) {
 			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_playerRun, TRUE, FALSE);//左
+			g_playery = SCREEN_HEIGHT - (MOVE_PLAYER_HIGHT / 2);//移動時、待機時の座標変更
 		}
-		if (cmx == 0) {
+		if (KeyControl() == 0) {
 			DrawRotaGraph((int)g_playerx, g_playery, 1.0f, 0, g_player, TRUE, FALSE);//待機
+			g_playery = SCREEN_HEIGHT - (g_playerh / 2);//移動時、待機時の座標変更
 		}
 	}
 	//DrawFormatString(0, 20, 0xFFFFFF, "%d", controller->control(true).ThumbLX);

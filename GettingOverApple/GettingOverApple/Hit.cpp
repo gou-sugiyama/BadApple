@@ -9,8 +9,8 @@ bool CHitBoxCheck::HitBox(CPlayer* pPlayer, CApple* pApple)
 	int sx2 = sx1 + pPlayer->GetPlayerW();
 	int sy2 = sy1 + pPlayer->GetPlayerH();
 
-	int dx1 = pApple->GetX();
-	int dy1 = pApple->GetY();
+	int dx1 = pApple->GetX() - pApple->GetW() / 2;
+	int dy1 = pApple->GetY() - pApple->GetH() / 2;
 	int dx2 = dx1 + pApple->GetW();
 	int dy2 = dy1 + pApple->GetH();
 

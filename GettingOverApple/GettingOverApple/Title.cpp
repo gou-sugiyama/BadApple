@@ -74,7 +74,10 @@ void CTitle::Render()const {
 // ƒƒjƒ…[‚Ì•`‰æ
 //-------------------------------
 void CTitle::DrawMenu()const {
-	for (int i = 0; i <= D_END; i++) {
+	for (int i = 0; i <= D_END; i++) {/*
+		SetDrawBlendMode(DX_BLENDMODE_SUB, 185);
+		for(int j=0;)
+		DrawLine(D_POS_X-)*/
 		if (i == menuCursor) {
 			DrawRotaGraph2(D_POS_X, D_POS_Y + D_HEIGHT * i
 				, D_WIDTH / 2, D_HEIGHT / 2, D_ENLARGEMENT, 0, menuImage[i], TRUE);
