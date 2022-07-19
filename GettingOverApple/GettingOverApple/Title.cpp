@@ -77,7 +77,7 @@ void CTitle::DrawMenu()const {
 	for (int i = 0; i <= D_END; i++) {
 		if (i == menuCursor) {
 		for (int j = 0; j < D_HEIGHT / 2; j++) {
-			SetDrawBlendMode(DX_BLENDMODE_SUB, 100);
+			SetDrawBlendMode(DX_BLENDMODE_SUB, 200);
 			DrawLine(D_POS_X - j * 2, D_POS_Y + D_HEIGHT * i + j,
 				D_POS_X + D_WIDTH, D_POS_Y + D_HEIGHT * i + j, 0x00DDFF);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
