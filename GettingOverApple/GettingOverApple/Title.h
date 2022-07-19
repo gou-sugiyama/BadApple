@@ -24,7 +24,7 @@ private:
     int titleImage;
     int menuImage[4];
     int menuCursor;
-
+    int TitleBGM;
 public:
     CTitle(CController* pController);      //基底クラスの引数付きコンストラクタを呼ぶには、実装時に: <基底クラス名>(<実引数リスト>) と書く。
     ~CTitle() {}
