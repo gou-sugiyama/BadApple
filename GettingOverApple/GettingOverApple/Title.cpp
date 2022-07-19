@@ -67,11 +67,6 @@ CScene* CTitle::Update() {
 // メニュー選択
 //-----------------------------------
 void CTitle::SelectMenu() {
-	//タイトルBGMをスタート
-	if (CheckSoundMem(TitleBGM) == 0) {
-		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK, TRUE);
-	}
-
 	if (keyInput.Buttons[XINPUT_BUTTON_DPAD_UP] == TRUE) {
 		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK, TRUE);
 		if (--menuCursor < D_START)menuCursor = D_END;
