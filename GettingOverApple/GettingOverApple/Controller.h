@@ -9,19 +9,27 @@
 class CController
 {
 private:
+	int Score;
+
 	XINPUT_STATE input;
 	XINPUT_STATE OldKey;
 	XINPUT_STATE data;
 
-	bool ControlFlg=TRUE;
+	bool ControlFlg=FALSE;
+
+	int FlgCount;
 
 public:
-	XINPUT_STATE control(bool data);
+	void control(bool data);
 
 	XINPUT_STATE GetControl() const;
 
 	bool GetControlFlg() const;
+	int GetFlgCount() { return FlgCount; }
 	void ToggleControlFlg();
+
+	void SetScore(int data);
+	int GetScore();
 };
 
 
