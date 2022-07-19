@@ -28,4 +28,6 @@ private:
 	float cmx;//ˆÚ“®—Ê
 	float fcos[180];
 	float bk;//“_–ÅƒtƒŒ[ƒ€
+
+	void HitAreaUpdate();
 };

@@ -42,7 +42,7 @@ CGame::~CGame() {
 }
 
 CScene* CGame::Update() {
-	keyInput = controller->GetControl();
+	keyInput = controller->control(true);
 	if (CheckSoundMem(GameBGM) == 0) {
 		PlaySoundMem(GameBGM, DX_PLAYTYPE_BACK, TRUE);
 	}
@@ -52,11 +52,12 @@ CScene* CGame::Update() {
 			appleManager->Update();
 			player->Update();
 			for (int i = 0; i < D_APPLE_MAX; i++) {
-				if (player->GetTnos() <= 0 && hit->HitBox(player, &apple[i])) {
-					UI->SetCount(apple[i].GetType());
-					UI->SetScore(apple[i].GetScore());
+				if (apple[i].GetisShow() == true) {
+					if (player->GetTnos() <= 0 && hit->HitBox(player, &apple[i])) {
+						UI->SetCount(apple[i].GetType());
+						UI->SetScore(apple[i].GetScore());
+					}
 				}
-
 			}
 		}
 	}

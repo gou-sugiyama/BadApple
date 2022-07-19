@@ -58,7 +58,7 @@ void CAppleManager::Update() {
 			apple[i].Update();
 		}
 		//‰æ–ÊŠO‚Éo‚½‚ç”ñ•\Ž¦‚É‚·‚é
-		if (apple[i].GetY() >= D_SCREEN_HEIGHT && apple[i].GetisShow()) {
+		if (apple[i].GetY() - apple[i].GetH() / 2 >= D_SCREEN_HEIGHT && apple[i].GetisShow()) {
 			apple[i].ToggleisShow();
 		}
 	}
