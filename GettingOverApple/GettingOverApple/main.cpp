@@ -27,8 +27,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	manager = new CSceneManager(new CTitle(&controller));
 
 	//ƒQ[ƒ€ƒ‹[ƒv
-	while (ProcessMessage() == 0 
-		&& manager->Update() != nullptr&& (controller.GetKey()).Buttons[5] != TRUE) {
+	while (ProcessMessage() == 0 && (controller.GetKey()).Buttons[5] != TRUE
+		&& manager->Update() != nullptr) {
 
 		ClearDrawScreen();		//‰æ–Ê‚Ì‰Šú‰»
 
