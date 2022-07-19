@@ -27,7 +27,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Hit.h" />
-    <ClInclude Include="Ranking.h" />
     <ClInclude Include="RankMng.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="player.h" />
@@ -38,10 +37,10 @@
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AppleManager.cpp" />
     <ClCompile Include="End.cpp" />
+    <ClCompile Include="CString.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="RankMng.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Title.cpp" />
