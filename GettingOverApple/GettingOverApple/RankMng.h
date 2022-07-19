@@ -69,7 +69,15 @@ private:
 
     int stick;
     int FlgCount;
+
+
     int backimage;
+    int alldeleteimage;
+    int selectimage;
+    int spaceimage;
+
+    int selectSE;
+    int deleteSE;
 
     int WaitTime;
     int CntlTime;

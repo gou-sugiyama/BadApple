@@ -19,13 +19,30 @@ CRankMng::CRankMng(CController* pController) :CScene(pController) {
 	//ファイルクローズ
 	fclose(fp);
 
+	selectSE = LoadSoundMem("sounds/selectSE.wav");
+	deleteSE = LoadSoundMem("sounds/deleteSE.wav");
+
+	ChangeVolumeSoundMem(80,selectSE);
+	ChangeVolumeSoundMem(80,deleteSE);
 
 	LoadDivGraph("images/FontImage.png", 62, 62, 1, 30, 60, FontImage);
+	alldeleteimage = LoadGraph("images/alldelete.png");
+	selectimage = LoadGraph("images/select.png");
+	spaceimage = LoadGraph("images/space.png");
 
 	for (int i = 0; i < STR_MAX; i++) {
 		StrData[i] = new CString(i);
 		if (i < 62) {
 			StrData[i]->SetFontImage(FontImage[i]);
+		}
+		else if (i == 62) {
+			StrData[i]->SetFontImage(spaceimage);
+		}
+		else if (i == 63) {
+			StrData[i]->SetFontImage(alldeleteimage);
+		}
+		else if (i == 64) {
+			StrData[i]->SetFontImage(selectimage);
 		}
 	}
 
@@ -154,20 +171,39 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 
 	SetStrImageFlg(Str);
 
-	if (0 <= Str && Str < STR_MAX - 1 && data.Buttons[XINPUT_BUTTON_A]) {
+	if (0 <= Str && Str < STR_MAX - 2 && data.Buttons[XINPUT_BUTTON_A]) {
 		if (Count < 9) {
-			RememberName[Count++] = StrData[Str]->GetStr();
-			NameImage[Count] = StrData[Str]->GetImage();
+			if (Str == STR_MAX - 3) {
+				RememberName[Count++] = ' ';
+			}
+			else {
+				RememberName[Count++] = StrData[Str]->GetStr();
+				NameImage[Count] = StrData[Str]->GetImage();
+			}
+
+			PlaySoundMem(selectSE,DX_PLAYTYPE_BACK,TRUE);
 		}
 		else {
 			Count = 9;
 		}
 	}
 
+	if (Str == STR_MAX - 2 && data.Buttons[XINPUT_BUTTON_A]) {
+		memset(RememberName, '\0', sizeof(RememberName));
+		for (int i=0; i <10; i++) {
+			NameImage[i] = -1;
+		}
+		Count = 0;
+		PlaySoundMem(deleteSE, DX_PLAYTYPE_BACK, TRUE);
+
+	}
+
 	if (Str == STR_MAX - 1 && data.Buttons[XINPUT_BUTTON_A]) {
 		RememberName[9] = '\0';
 		InsertRankChar(RememberName);
 		ToggleJudge();
+		PlaySoundMem(selectSE, DX_PLAYTYPE_BACK, TRUE);
+
 	}
 
 	if (data.Buttons[XINPUT_BUTTON_B]) {
@@ -179,6 +215,8 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 		else {
 
 		}
+		PlaySoundMem(deleteSE, DX_PLAYTYPE_BACK, TRUE);
+
 	}
 
 }
@@ -328,12 +366,14 @@ void CRankMng::Render() const {
 
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 50);
 	DrawBox(0, 0, D_SCREEN_WIDTH, D_SCREEN_HEIGHT, 0x0f00f5, TRUE);
-	DrawBox(300, 30, 600, 90, 0xff00ff, TRUE);
-
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL, 0);
 
 	if (JudgeRanking() != FALSE) {
 
+
+		SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 50);
+		DrawBox(300, 30, 600, 90, 0xff00ff, TRUE);
+		SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL, 0);
 		for (int i = 0; i < STR_MAX; i++) {
 			if (StrData[i]->GetStrFlg() == TRUE) {
 				DrawRotaGraph2(StrData[i]->GetStrX() + i % 13 * 13, StrData[i]->GetStrY() + i / 13 * 5 + 125
