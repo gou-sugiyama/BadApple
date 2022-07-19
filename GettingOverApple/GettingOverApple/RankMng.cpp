@@ -202,6 +202,9 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 	if (Str == STR_MAX - 1 && data.Buttons[XINPUT_BUTTON_A]) {
 		RememberName[9] = '\0';
 		if (CheckName(RememberName)) {
+			for (Count; Count < REMEMBER_STR_MAX - 2; Count++) {
+				RememberName[Count] = '*';
+			}
 			InsertRankChar(RememberName);
 			ToggleJudge();
 			PlaySoundMem(selectSE, DX_PLAYTYPE_BACK, TRUE);
