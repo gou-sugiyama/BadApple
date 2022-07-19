@@ -115,6 +115,8 @@ public:
     void SortRanking();     //ランキングのソート
     void SaveRanking();
 
+    bool CheckName(char* name);
+
     int DelayCNTL();        //コントローラーのディレイ
 
     void Render()const;

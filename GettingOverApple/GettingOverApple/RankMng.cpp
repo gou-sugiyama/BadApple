@@ -201,9 +201,14 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 
 	if (Str == STR_MAX - 1 && data.Buttons[XINPUT_BUTTON_A]) {
 		RememberName[9] = '\0';
-		InsertRankChar(RememberName);
-		ToggleJudge();
-		PlaySoundMem(selectSE, DX_PLAYTYPE_BACK, TRUE);
+		if (CheckName(RememberName)) {
+			InsertRankChar(RememberName);
+			ToggleJudge();
+			PlaySoundMem(selectSE, DX_PLAYTYPE_BACK, TRUE);
+		}
+		else {
+
+		}
 
 	}
 
@@ -254,6 +259,9 @@ void CRankMng::ChangeImage()
 			for (int j = 0; j < STR_MAX; j++) {
 				if (rankdata[i].Name[x] == StrData[j]->GetStr()) {
 					rankdataimg[i].NameImge[x] = StrData[j]->GetImage();
+				}
+				else if (rankdata[i].Name[x] == '*'){
+					rankdataimg[i].NameImge[x] = 0;
 				}
 			}
 		}
@@ -317,6 +325,17 @@ void CRankMng::SaveRanking()
 	}
 	//ファイルクローズ
 	fclose(fp);
+}
+
+bool CRankMng::CheckName(char* name)
+{
+	for (int i = 0; i < REMEMBER_STR_MAX; i++) {
+		if (name[i] != '*' && name[i] != '\0') {
+			return TRUE;
+			break;
+		}
+	}
+	return false;
 }
 
 int CRankMng::DelayCNTL()
