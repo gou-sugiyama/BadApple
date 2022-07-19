@@ -26,7 +26,7 @@ CGame::CGame(CController* pController):CScene(pController){
 	//Hit
 	hit = new CHitBoxCheck;
 
-	keyInput = controller->control(false);
+	KeyInput = controller->GetControl();
 }
 
 CGame::~CGame() {
@@ -42,7 +42,7 @@ CGame::~CGame() {
 }
 
 CScene* CGame::Update() {
-	keyInput = controller->control(false);
+	KeyInput = controller->GetControl();
 	//ゲーム中(制限時間内、ポーズ中ではない)なら更新する
 	if (UI->Update()) {//ゲーム中(制限時間内、ポーズ中ではない)かどうかを返す
 		if (UI->GetisPause() != true) {
@@ -64,7 +64,6 @@ CScene* CGame::Update() {
 			WaitTime = 0;
 			return new CRankMng(controller);
 			rankmng->SetScore(UI->GetScore());
-
 		}
 	}
 	return this;
