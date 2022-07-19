@@ -174,7 +174,8 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 	if (0 <= Str && Str < STR_MAX - 2 && data.Buttons[XINPUT_BUTTON_A]) {
 		if (Count < 9) {
 			if (Str == STR_MAX - 3) {
-				RememberName[Count++] = ' ';
+				RememberName[Count++] = '*';
+				NameImage[Count] = 0;
 			}
 			else {
 				RememberName[Count++] = StrData[Str]->GetStr();
