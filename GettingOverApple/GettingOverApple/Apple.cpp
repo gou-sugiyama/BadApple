@@ -20,6 +20,10 @@ CApple::CApple() {
 	image[D_APPLE_C] = LoadGraph("images/ringoC.png");
 	image[D_APPLE_D] = LoadGraph("images/ringoD.png");
 	imgHandle = 0;
+	AppleSE[D_APPLE_A] = LoadSoundMem("sounds/SE/魔王魂 効果音 システム46.wav");
+	AppleSE[D_APPLE_B] = LoadSoundMem("sounds/SE/魔王魂 効果音 システム46.wav");
+	AppleSE[D_APPLE_C] = LoadSoundMem("sounds/SE/魔王魂 効果音 システム46.wav");
+	AppleSE[D_APPLE_D] = LoadSoundMem("sounds/SE/魔王魂 効果音 システム02.wav");
 	speed = 0;
 	score = 0;
 	isShow = false;
@@ -117,5 +121,6 @@ void CApple::Render()const {
 void CApple::HitAction() {
 	isShow = false;
 	y = 0;
+	PlaySoundMem(AppleSE[imgHandle], DX_PLAYTYPE_BACK, TRUE);
 }
 

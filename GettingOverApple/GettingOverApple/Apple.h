@@ -31,6 +31,7 @@ private:
 	int imgHandle;
 	int score;
 	bool isShow;
+	int AppleSE[D_APPLE_IMAGE_MAX];
 public:
 	CApple();
 	~CApple();

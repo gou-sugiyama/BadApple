@@ -18,6 +18,8 @@ CTitle::CTitle(CController* pController) :CScene(pController) {
 	menuImage[D_END] = LoadGraph("images/end_m.png");
 	//タイトルBGM
 	TitleBGM = LoadSoundMem("sounds/BGM/魔王魂 8bit29 (online-audio-converter.com) (1).wav");
+	//選択SE
+	MenuSE= LoadSoundMem("sounds/SE/魔王魂 効果音 システム08.wav");
 	menuCursor = 0;
 	keyInput = controller->control(true);
 }
@@ -67,12 +69,15 @@ CScene* CTitle::Update() {
 void CTitle::SelectMenu() {
 	//タイトルBGMをスタート
 	if (CheckSoundMem(TitleBGM) == 0) {
-		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK,FALSE);
+		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK, TRUE);
 	}
+
 	if (keyInput.Buttons[XINPUT_BUTTON_DPAD_UP] == TRUE) {
+		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK, TRUE);
 		if (--menuCursor < D_START)menuCursor = D_END;
 	}
 	if (keyInput.Buttons[XINPUT_BUTTON_DPAD_DOWN] == TRUE) {
+		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK, TRUE);
 		if (++menuCursor > D_END)menuCursor = D_START;
 	}
 }
