@@ -1,57 +1,76 @@
 #include<stdio.h>
 #include"Controller.h"
 #include"RankMng.h"
+#include"Title.h"
 #include<string>
 
 //--------------------------------
 // コンストラクタ
 //--------------------------------
-CRankMng::CRankMng(CController* pController):CScene(pController) {
+CRankMng::CRankMng(CController* pController) :CScene(pController) {
 #pragma warning(disable:4996)
 	//ファイルオープン
-	fopen_s(&fp,"dat/rankingdata.txt", "r");
+	fopen_s(&fp, "dat/rankingdata.txt", "r");
 
 	//ファイルロード
 	for (int i = 0; i < 5; i++) {
-		fscanf_s(fp, "%2d %9s %10d", &rankdata[i].Rank,rankdata[i].Name, 8, &rankdata[i].Score);
+		fscanf(fp, "%1d %9s %10d", &rankdata[i].Rank, rankdata[i].Name, &rankdata[i].Score);
 	}
 	//ファイルクローズ
 	fclose(fp);
 
+
+	LoadDivGraph("images/FontImage.png", 62, 62, 1, 30, 60, FontImage);
+
 	for (int i = 0; i < STR_MAX; i++) {
 		StrData[i] = new CString(i);
+		if (i < 62) {
+			StrData[i]->SetFontImage(FontImage[i]);
+		}
 	}
+
+	for (int i = 0; i < REMEMBER_STR_MAX; i++) {
+		RememberName[i] = '\0';
+	}
+
+	backimage = LoadGraph("images/haikei.png");
 
 	WaitTime = 0;
 	Type = 0;
 	Str = 0;
 	Count = 0;
 
+	Score = controller->GetScore();
+
+
 	JudgeFlg = TRUE;
 
 	controller->ToggleControlFlg();
+	ChangeImage();
 }
 
 CRankMng::~CRankMng()
 {
-	delete StrData[STR_MAX];
+	delete StrData[STR_MAX - 1];
+	SaveRanking();
+	controller->SetScore(0);
 }
 
 
 
-int CRankMng::JudgeRanking() const
+bool CRankMng::JudgeRanking() const
 {
 	if (rankdata[4].Score < Score) {
 		if (JudgeFlg == TRUE) {
-			return 1;
+			return TRUE;
 		}
 		else {
-			
-			return -1;
+
+			return FALSE;
 		}
 	}
-	else{
-		return -1;
+	else {
+		return FALSE;
 	}
 }
 
@@ -60,7 +79,7 @@ int CRankMng::JudgeRanking() const
 //--------------------------------
 CScene* CRankMng::Update() {
 	//controller->control(false);
-	if (JudgeRanking()!=-1) {
+	if (JudgeRanking() != FALSE) {
 		TrueUpdate();
 		return this;
 	}
@@ -70,7 +89,7 @@ CScene* CRankMng::Update() {
 		}
 		else {
 			controller->ToggleControlFlg();
-			return nullptr;
+			return new CTitle(controller);
 		}
 	}
 }
@@ -90,20 +109,20 @@ void CRankMng::ToggleJudge()
 
 void CRankMng::ControlRanking(XINPUT_STATE data)
 {
-	
+
 	int Cntller = DelayCNTL();
 
 	for (int j = 0; j < STR_MAX; j++) {
 		StrData[j]->SetStrFlg(FALSE);
 	}
-	
-	if (data.Buttons[XINPUT_BUTTON_DPAD_RIGHT]|| Cntller ==1)
+
+	if (data.Buttons[XINPUT_BUTTON_DPAD_RIGHT] || Cntller == 1)
 	{
-		if (0 <= Str%13&&Str%13 < 12) {
+		if (0 <= Str % 13 && Str % 13 < 12) {
 			Str++;
 			FlgCount = 1;
 		}
-		else if (Str%13 == 12) {
+		else if (Str % 13 == 12) {
 			Str -= 12;
 			FlgCount = 1;
 		}
@@ -113,38 +132,39 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 		FlgCount = 0;
 	}
 	if (data.Buttons[XINPUT_BUTTON_DPAD_LEFT] || Cntller == 2) {
-		if (12 >= Str%13&&Str%13 > 0) {
+		if (12 >= Str % 13 && Str % 13 > 0) {
 			Str--;
 		}
-		else if(Str%13==0){
+		else if (Str % 13 == 0) {
 			Str += 12;
 		}
 	}
 	if (data.Buttons[XINPUT_BUTTON_DPAD_DOWN] || Cntller == 3)
 	{
-		if (Str+13 < STR_MAX ) {
+		if (Str + 13 < STR_MAX) {
 			Str += 13;
 		}
 	}
 	if (data.Buttons[XINPUT_BUTTON_DPAD_UP] || Cntller == 4)
 	{
-		if (Str-13 >= 0) {
+		if (Str - 13 >= 0) {
 			Str -= 13;
 		}
 	}
 
 	SetStrImageFlg(Str);
 
-	if (0 <= Str&&Str < STR_MAX-1&& data.Buttons[XINPUT_BUTTON_A]) {
-		if (Count< 9) {
-				RememberName[Count++] = StrData[Str]->GetStr();
+	if (0 <= Str && Str < STR_MAX - 1 && data.Buttons[XINPUT_BUTTON_A]) {
+		if (Count < 9) {
+			RememberName[Count++] = StrData[Str]->GetStr();
+			NameImage[Count] = StrData[Str]->GetImage();
 		}
 		else {
 			Count = 9;
 		}
 	}
 
-	if (Str == STR_MAX-1&&data.Buttons[XINPUT_BUTTON_A]) {
+	if (Str == STR_MAX - 1 && data.Buttons[XINPUT_BUTTON_A]) {
 		RememberName[9] = '\0';
 		InsertRankChar(RememberName);
 		ToggleJudge();
@@ -153,6 +173,7 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 	if (data.Buttons[XINPUT_BUTTON_B]) {
 		if (Count > 0) {
 			RememberName[Count - 1] = '\0';
+			NameImage[Count] = -1;
 			Count--;
 		}
 		else {
@@ -172,12 +193,52 @@ void CRankMng::SetScore(int i)
 	Score = i;
 }
 
+void CRankMng::ChangeImage()
+{
+	int allnumber;
+	int remembernumber[5];
+
+	for (int i = 0; i < 5; i++) {
+		allnumber = rankdata[i].Score;
+		remembernumber[0] = allnumber / 10000;
+		remembernumber[1] = (allnumber - remembernumber[0] * 10000) / 1000;
+		remembernumber[2] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000) / 100;
+		remembernumber[3] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000 - remembernumber[2] * 100) / 10;
+		remembernumber[4] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000 - remembernumber[2] * 100 - remembernumber[3] * 10);
+
+		for (int j = 0; j < STR_MAX; j++) {
+			if (rankdata[i].Rank == StrData[j]->GetNumber()) {
+				rankdataimg[i].RankImage = StrData[j]->GetImage();
+			}
+		}
+		for (int x = 0; x < 10; x++) {
+			for (int j = 0; j < STR_MAX; j++) {
+				if (rankdata[i].Name[x] == StrData[j]->GetStr()) {
+					rankdataimg[i].NameImge[x] = StrData[j]->GetImage();
+				}
+			}
+		}
+		for (int x = 0; x < 5; x++) {
+			for (int j = 0; j < STR_MAX; j++) {
+				if (remembernumber[x] == StrData[j]->GetNumber()) {
+					rankdataimg[i].ScoreImage[x] = StrData[j]->GetImage();
+				}
+			}
+
+		}
+	}
+}
+
 void CRankMng::InsertRankChar(char* data1)
 {
+
+	memset(rankdata[4].Name, '\0', sizeof(rankdata[4].Name));
+
 	strcpy(rankdata[4].Name, data1);
 	rankdata[4].Score = this->Score;
 
 	SortRanking();
+	ChangeImage();
 }
 
 void CRankMng::SortRanking()
@@ -191,8 +252,10 @@ void CRankMng::SortRanking()
 				work = rankdata[i].Score;
 				strcpy(SaveStorage, rankdata[i].Name);
 				rankdata[i].Score = rankdata[j].Score;
+				memset(rankdata[i].Name, '\0', sizeof(rankdata[i].Name));
 				strcpy(rankdata[i].Name, rankdata[j].Name);
 				rankdata[j].Score = work;
+				memset(rankdata[j].Name, '\0', sizeof(rankdata[j].Name));
 				strcpy(rankdata[j].Name, SaveStorage);
 			}
 		}
@@ -200,36 +263,49 @@ void CRankMng::SortRanking()
 
 	// 順位付け
 	for (int i = 0; i < 4; i++) {
-		rankdata[i].Rank = i+1;
+		rankdata[i].Rank = i + 1;
 	}
+}
+
+void CRankMng::SaveRanking()
+{
+#pragma warning(disable:4996)
+	fopen_s(&fp, "dat/rankingdata.txt", "w");
+
+	//ファイルロード
+	for (int i = 0; i < 5; i++) {
+		fprintf(fp, "%1d %9s %10d\n", rankdata[i].Rank, rankdata[i].Name, rankdata[i].Score);
+	}
+	//ファイルクローズ
+	fclose(fp);
 }
 
 int CRankMng::DelayCNTL()
 {
-	if (CntlTime++ % 30==0) {
+	if (CntlTime++ % 30 == 0) {
 		if (data.ThumbLX > CONTROLLER_STICK_MAX) {
-			kanning = 1;
+			stick = 1;
 		}
 		if (data.ThumbLX < -CONTROLLER_STICK_MAX - 1) {
-			kanning = 2;
+			stick = 2;
 		}
 		if (data.ThumbLY < -CONTROLLER_STICK_MAX - 1) {
-			kanning = 3;
+			stick = 3;
 		}
 		if (data.ThumbLY > CONTROLLER_STICK_MAX) {
-			kanning = 4;
+			stick = 4;
 		}
-		if (data.ThumbLX < CONTROLLER_STICK_MAX&& data.ThumbLX > -CONTROLLER_STICK_MAX
-			&& data.ThumbLY < CONTROLLER_STICK_MAX&& data.ThumbLY > -CONTROLLER_STICK_MAX)
+		if (data.ThumbLX < CONTROLLER_STICK_MAX && data.ThumbLX > -CONTROLLER_STICK_MAX
+			&& data.ThumbLY < CONTROLLER_STICK_MAX && data.ThumbLY > -CONTROLLER_STICK_MAX)
 		{
-			kanning = 0;
+			stick = 0;
 			CntlTime = 0;
 		}
 	}
 	else {
-		kanning = 0;
+		stick = 0;
 	}
-	return kanning;
+	return stick;
 }
 
 bool CRankMng::FalseUpdate()
@@ -246,38 +322,64 @@ bool CRankMng::FalseUpdate()
 //--------------------------------
 // 描画
 //--------------------------------
-void CRankMng::Render() const{
-	if (JudgeRanking()!=-1) {
-		
-			for (int i = 0; i < STR_MAX; i++) {
-				if (StrData[i]->GetStrFlg() == TRUE) {
-					DrawGraph(StrData[i]->GetStrX()+i%13*13, StrData[i]->GetStrY()+i/13*5+125, StrData[i]->GetBigImage(), TRUE);
-				}
-				else {
-					DrawGraph(StrData[i]->GetStrX() + i%13 * 13, StrData[i]->GetStrY() + i / 13 * 5+125, StrData[i]->GetImage(), TRUE);
-				}
+void CRankMng::Render() const {
+
+	DrawGraph(0, 0, backimage, FALSE);
+
+	SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 50);
+	DrawBox(0, 0, D_SCREEN_WIDTH, D_SCREEN_HEIGHT, 0x0f00f5, TRUE);
+	DrawBox(300, 30, 600, 90, 0xff00ff, TRUE);
+
+	SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL, 0);
+
+	if (JudgeRanking() != FALSE) {
+
+		for (int i = 0; i < STR_MAX; i++) {
+			if (StrData[i]->GetStrFlg() == TRUE) {
+				DrawRotaGraph2(StrData[i]->GetStrX() + i % 13 * 13, StrData[i]->GetStrY() + i / 13 * 5 + 125
+					, 30 / 2, 60 / 2, 1.2, 0, StrData[i]->GetImage(), TRUE);
 			}
-			DrawString(360, 20, RememberName,0xffffff);
-			DrawFormatString(360, 400, 0xffffff, "%d", kanning);
-			
+			else {
+				DrawRotaGraph2(StrData[i]->GetStrX() + i % 13 * 13, StrData[i]->GetStrY() + i / 13 * 5 + 125
+					, 30 / 2, 60 / 2, 1, 0, StrData[i]->GetImage(), TRUE);
+			}
+		}
+		//DrawString(360, 20, RememberName,0xffffff);
+
+		for (int i = 0; i < 10; i++) {
+			DrawRotaGraph2(300 + i * 30, 60
+				, 30 / 2, 60 / 2, 1, 0, NameImage[i], TRUE);
+		}
 	}
 	else {
+
+
+
+
 		for (int i = 0; i < 5; i++) {
-			DrawFormatString(200, i * 90, 0xffffff,
-				"%d,%s,%d",
-				rankdata[i].Rank,
-				rankdata[i].Name,
-				rankdata[i].Score);
+			/*	DrawFormatString(200, i * 90, 0xffffff,
+					"%d,%s,%d",
+					rankdata[i].Rank,
+					rankdata[i].Name,
+					rankdata[i].Score);*/
 
+
+
+			DrawRotaGraph2(50, i * 60 + 50
+				, 30 / 2, 60 / 2, 1, 0, rankdataimg[i].RankImage, TRUE);
+
+			for (int j = 0; j < 10; j++) {
+				DrawRotaGraph2(150 + j * 30, i * 60 + 50
+					, 30 / 2, 60 / 2, 1, 0, rankdataimg[i].NameImge[j], TRUE);
 			}
-			/*SetFontSize(28);
-			DrawString(10, 10, "ランキング表示", 0xFFFFFF);*/
-	
+			for (int j = 0; j < 5; j++) {
+				DrawRotaGraph2(450 + j * 30, i * 60 + 50
+					, 30 / 2, 60 / 2, 1, 0, rankdataimg[i].ScoreImage[j], TRUE);
+			}
+
+		}
+		/*SetFontSize(28);
+		DrawString(10, 10, "ランキング表示", 0xFFFFFF);*/
+
 	}
-	
 }
-
-
-//if (data.ThumbLX == kanning) {
-//
-//}

@@ -13,6 +13,8 @@ private:
 	XINPUT_STATE OldKey;
 	XINPUT_STATE data;
 
+	int Score;
+
 	bool ControlFlg=TRUE;
 
 public:
@@ -22,8 +24,7 @@ public:
 
 	bool GetControlFlg() const;
 	void ToggleControlFlg();
+
+	void SetScore(int i) { Score = i; }
+	int GetScore(){return Score;}
 };
-
-
-void* Hit(CPlayer* pPlayer, CApple* pApple);
-

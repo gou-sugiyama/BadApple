@@ -13,7 +13,7 @@
 CTitle::CTitle(CController* pController) :CScene(pController) {
 	titleImage = LoadGraph("images/title.png");
 	menuImage[D_START] = LoadGraph("images/start_m.png");
-	menuImage[D_RANKING] = LoadGraph("images/ranking_m.png");;
+	menuImage[D_RANKING] = LoadGraph("images/ranking_m.png");
 	menuImage[D_HELP] = LoadGraph("images/help_m.png");
 	menuImage[D_END] = LoadGraph("images/end_m.png");
 	menuCursor = 0;
