@@ -28,6 +28,7 @@ CRankMng::CRankMng(CController* pController) :CScene(pController) {
 	LoadDivGraph("images/FontImage.png", 62, 62, 1, 30, 60, FontImage);
 	alldeleteimage = LoadGraph("images/alldelete.png");
 	selectimage = LoadGraph("images/select.png");
+	selecta = LoadGraph("images/selecta.png");
 	spaceimage = LoadGraph("images/space.png");
 
 	for (int i = 0; i < STR_MAX; i++) {
@@ -372,13 +373,10 @@ int CRankMng::DelayCNTL()
 
 bool CRankMng::FalseUpdate()
 {
-	if (++WaitTime <= 240) {
-		return TRUE;
-	}
-	else {
+	if (controller->GetControl().Buttons[XINPUT_BUTTON_B] == TRUE)
 		return FALSE;
-	}
 
+	return TRUE;
 }
 
 //--------------------------------
@@ -400,6 +398,7 @@ void CRankMng::Render() const {
 		SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL, 0);
 		for (int i = 0; i < STR_MAX; i++) {
 			if (StrData[i]->GetStrFlg() == TRUE) {
+				DrawRotaGraph(StrData[i]->GetStrX() + i % 13 * 13, StrData[i]->GetStrY() + i / 13 * 5 + 125, 1.0,0,selecta, TRUE);
 				DrawRotaGraph2(StrData[i]->GetStrX() + i % 13 * 13, StrData[i]->GetStrY() + i / 13 * 5 + 125
 					, 30 / 2, 60 / 2, 1.2, 0, StrData[i]->GetImage(), TRUE);
 			}

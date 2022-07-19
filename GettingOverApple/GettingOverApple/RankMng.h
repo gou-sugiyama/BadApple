@@ -75,6 +75,7 @@ private:
     int alldeleteimage;
     int selectimage;
     int spaceimage;
+    int selecta;
 
     int selectSE;
     int deleteSE;
