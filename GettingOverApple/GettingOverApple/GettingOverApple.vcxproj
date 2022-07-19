@@ -28,7 +28,6 @@
     <ClInclude Include="Help.h" />
     <ClInclude Include="Hit.h" />
     <ClInclude Include="player.h" />
-    <ClInclude Include="Ranking.h" />
     <ClInclude Include="RankMng.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Title.h" />
@@ -43,7 +42,6 @@
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="RankMng.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Title.cpp" />

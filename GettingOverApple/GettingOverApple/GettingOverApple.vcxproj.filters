@@ -47,7 +47,7 @@
       <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="CString.cpp">
-	 <Filter>ソースファイル</Filter>
+      <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>ソースファイル</Filter>
@@ -89,9 +89,6 @@
     </ClInclude>
     <ClInclude Include="Help.h">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Ranking.h">
-	  <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>ヘッダー ファイル</Filter>
