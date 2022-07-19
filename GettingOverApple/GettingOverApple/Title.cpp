@@ -17,18 +17,17 @@ CTitle::CTitle(CController* pController) :CScene(pController) {
 	menuImage[D_HELP] = LoadGraph("images/help_m.png");
 	menuImage[D_END] = LoadGraph("images/end_m.png");
 	menuCursor = 0;
-	keyInput = controller->control(true);
 }
 
 //-----------------------------
 // 更新
 //-----------------------------
 CScene* CTitle::Update() {
-	keyInput = controller->control(true);
+	controller->control();
 
 	SelectMenu();
 
-	if (keyInput.Buttons[XINPUT_BUTTON_A] == TRUE) {
+	if (controller->GetControl().Buttons[XINPUT_BUTTON_A] == TRUE) {
 		switch (menuCursor) {
 		case D_START:
 			return new CGame(controller);		//ゲームシーンに移行

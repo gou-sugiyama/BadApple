@@ -12,16 +12,11 @@ private:
 	XINPUT_STATE input;
 	XINPUT_STATE OldKey;
 	XINPUT_STATE data;
-
-	bool ControlFlg=TRUE;
-
 public:
-	XINPUT_STATE control(bool data);
+	void control();
 
 	XINPUT_STATE GetControl() const;
 
-	bool GetControlFlg() const;
-	void ToggleControlFlg();
 };
 
 
