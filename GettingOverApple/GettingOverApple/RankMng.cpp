@@ -21,9 +21,10 @@ CRankMng::CRankMng(CController* pController) :CScene(pController) {
 
 	selectSE = LoadSoundMem("sounds/selectSE.wav");
 	deleteSE = LoadSoundMem("sounds/deleteSE.wav");
+	RankingBGM= LoadSoundMem("sounds/BGM/魔王魂 サイバー33 (online-audio-converter.com).wav");
 
-	ChangeVolumeSoundMem(80,selectSE);
-	ChangeVolumeSoundMem(80,deleteSE);
+	ChangeVolumeSoundMem(170,selectSE);
+	ChangeVolumeSoundMem(170,deleteSE);
 
 	LoadDivGraph("images/FontImage.png", 62, 62, 1, 30, 60, FontImage);
 	alldeleteimage = LoadGraph("images/alldelete.png");
@@ -78,12 +79,15 @@ CRankMng::~CRankMng()
 
 bool CRankMng::JudgeRanking() const
 {
+	//タイトルBGMをスタート
+	if (CheckSoundMem(RankingBGM) == 0) {
+		PlaySoundMem(RankingBGM, DX_PLAYTYPE_BACK, TRUE);
+	}
 	if (rankdata[4].Score < Score) {
 		if (JudgeFlg == TRUE) {
 			return TRUE;
 		}
 		else {
-
 			return FALSE;
 		}
 	}
@@ -107,6 +111,7 @@ CScene* CRankMng::Update() {
 		}
 		else {
 			controller->ToggleControlFlg();
+			StopSoundMem(RankingBGM);
 			return new CTitle(controller);
 		}
 	}
@@ -387,12 +392,11 @@ void CRankMng::Render() const {
 	DrawGraph(0, 0, backimage, FALSE);
 
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 50);
-	DrawBox(0, 0, D_SCREEN_WIDTH, D_SCREEN_HEIGHT, 0x0f00f5, TRUE);
+	DrawBox(0, 0, D_SCREEN_WIDTH, D_SCREEN_HEIGHT, 0x030aff, TRUE);
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL, 0);
 
 	if (JudgeRanking() != FALSE) {
-
-
+		
 		SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, 50);
 		DrawBox(300, 30, 600, 90, 0xff00ff, TRUE);
 		SetDrawBlendMode(DX_BLENDGRAPHTYPE_NORMAL, 0);
@@ -417,15 +421,12 @@ void CRankMng::Render() const {
 	else {
 
 
-
-
 		for (int i = 0; i < 5; i++) {
 			/*	DrawFormatString(200, i * 90, 0xffffff,
 					"%d,%s,%d",
 					rankdata[i].Rank,
 					rankdata[i].Name,
 					rankdata[i].Score);*/
-
 
 
 			DrawRotaGraph2(50, i * 60 + 50
@@ -439,10 +440,8 @@ void CRankMng::Render() const {
 				DrawRotaGraph2(450 + j * 30, i * 60 + 50
 					, 30 / 2, 60 / 2, 1, 0, rankdataimg[i].ScoreImage[j], TRUE);
 			}
-
 		}
 		/*SetFontSize(28);
 		DrawString(10, 10, "ランキング表示", 0xFFFFFF);*/
-
 	}
 }
