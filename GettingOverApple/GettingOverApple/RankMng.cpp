@@ -14,10 +14,13 @@ CRankMng::CRankMng(CController* pController) :CScene(pController) {
 
 	//ファイルロード
 	for (int i = 0; i < 5; i++) {
-		fscanf(fp, "%1d %9s %10d", &rankdata[i].Rank, rankdata[i].Name, &rankdata[i].Score);
+		fscanf(fp, "%1d %9s %6d", &rankdata[i].Rank, rankdata[i].Name, &rankdata[i].Score);
 	}
 	//ファイルクローズ
 	fclose(fp);
+
+	SortRanking();
+
 
 	selectSE = LoadSoundMem("sounds/selectSE.wav");
 	deleteSE = LoadSoundMem("sounds/deleteSE.wav");
@@ -65,7 +68,6 @@ CRankMng::CRankMng(CController* pController) :CScene(pController) {
 	JudgeFlg = TRUE;
 
 	controller->SetControlFlg(true);
-	ChangeImage();
 }
 
 CRankMng::~CRankMng()
@@ -79,10 +81,6 @@ CRankMng::~CRankMng()
 
 bool CRankMng::JudgeRanking() const
 {
-	//タイトルBGMをスタート
-	if (CheckSoundMem(RankingBGM) == 0) {
-		PlaySoundMem(RankingBGM, DX_PLAYTYPE_BACK, TRUE);
-	}
 	if (rankdata[4].Score < Score) {
 		if (JudgeFlg == TRUE) {
 			return TRUE;
@@ -100,13 +98,19 @@ bool CRankMng::JudgeRanking() const
 // 更新
 //--------------------------------
 CScene* CRankMng::Update() {
+	//タイトルBGMをスタート
+	if (CheckSoundMem(RankingBGM) == 0) {
+		PlaySoundMem(RankingBGM, DX_PLAYTYPE_BACK, TRUE);
+	}
 	//controller->control(false);
-	if (JudgeRanking() != FALSE) {
+	if (JudgeRanking() ==TRUE) {
 		TrueUpdate();
 		return this;
 	}
 	else {
 		if (FalseUpdate()) {
+			ChangeImage();
+
 			return this;
 		}
 		else {
@@ -252,38 +256,42 @@ void CRankMng::ChangeImage()
 	int allnumber;
 	int remembernumber[5];
 
+	
+
 	for (int i = 0; i < 5; i++) {
-		allnumber = rankdata[i].Score;
-		remembernumber[0] = allnumber / 10000;
-		remembernumber[1] = (allnumber - remembernumber[0] * 10000) / 1000;
-		remembernumber[2] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000) / 100;
-		remembernumber[3] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000 - remembernumber[2] * 100) / 10;
-		remembernumber[4] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000 - remembernumber[2] * 100 - remembernumber[3] * 10);
-
-		for (int j = 0; j < STR_MAX; j++) {
-			if (rankdata[i].Rank == StrData[j]->GetNumber()) {
-				rankdataimg[i].RankImage = StrData[j]->GetImage();
-			}
-		}
-		for (int x = 0; x < 10; x++) {
 			for (int j = 0; j < STR_MAX; j++) {
-				if (rankdata[i].Name[x] == StrData[j]->GetStr()) {
-					rankdataimg[i].NameImge[x] = StrData[j]->GetImage();
-				}
-				else if (rankdata[i].Name[x] == '*'){
-					rankdataimg[i].NameImge[x] = 0;
+				if (rankdata[i].Rank == StrData[j]->GetNumber()) {
+					rankdataimg[i].RankImage = StrData[j]->GetImage();
 				}
 			}
-		}
-		for (int x = 0; x < 5; x++) {
-			for (int j = 0; j < STR_MAX; j++) {
-				if (remembernumber[x] == StrData[j]->GetNumber()) {
-					rankdataimg[i].ScoreImage[x] = StrData[j]->GetImage();
+			for (int x = 0; x < 10; x++) {
+				for (int j = 0; j < STR_MAX; j++) {
+					if (rankdata[i].Name[x] == StrData[j]->GetStr()) {
+						rankdataimg[i].NameImge[x] = StrData[j]->GetImage();
+					}
+					else if (rankdata[i].Name[x] == '*') {
+						rankdataimg[i].NameImge[x] = 0;
+						continue;
+					}
 				}
 			}
 
+			allnumber = rankdata[i].Score;
+			remembernumber[0] = allnumber / 10000;
+			remembernumber[1] = (allnumber - remembernumber[0] * 10000) / 1000;
+			remembernumber[2] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000) / 100;
+			remembernumber[3] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000 - remembernumber[2] * 100) / 10;
+			remembernumber[4] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000 - remembernumber[2] * 100 - remembernumber[3] * 10);
+
+			for (int x = 0; x < 5; x++) {
+				for (int j = 0; j < STR_MAX; j++) {
+					if (remembernumber[x] == StrData[j]->GetNumber()) {
+						rankdataimg[i].ScoreImage[x] = StrData[j]->GetImage();
+					}
+				}
+
+			}
 		}
-	}
 }
 
 void CRankMng::InsertRankChar(char* data1)
@@ -303,7 +311,7 @@ void CRankMng::SortRanking()
 	int work;
 	char SaveStorage[10];
 	// 選択法ソート
-	for (int i = 3; i >= 0; i--) {
+	for (int i = 4; i >= 0; i--) {
 		for (int j = i + 1; j > 0; j--) {
 			if (rankdata[i].Score <= rankdata[j].Score) {
 				work = rankdata[i].Score;

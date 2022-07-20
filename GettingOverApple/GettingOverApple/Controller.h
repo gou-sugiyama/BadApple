@@ -13,7 +13,7 @@ private:
 	XINPUT_STATE OldKey;
 	XINPUT_STATE data;
 
-	int Score;
+	int Score=0;
 
 	bool ControlFlg=TRUE;
 

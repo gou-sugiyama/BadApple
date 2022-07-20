@@ -22,7 +22,7 @@ CUI::CUI(CController* pController) {
 	LoadDivGraph("images/number.png", 10, 10, 1, 30, 60, numberimage);
 
 
-	score =00000;
+	score =0;
 	timeLimit = 60 * 30;			//60ƒtƒŒ[ƒ€*30•b
 	isPause = false;
 }
