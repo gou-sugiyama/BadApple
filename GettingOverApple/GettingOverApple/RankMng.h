@@ -79,6 +79,7 @@ private:
 
     int selectSE;
     int deleteSE;
+    int RankingBGM;
 
     int WaitTime;
     int CntlTime;
