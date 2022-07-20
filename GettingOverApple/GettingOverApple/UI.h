@@ -15,6 +15,7 @@ private:
 	int scoreimage[5];
 	int objectcountimage[3][3];
 	int timeimage[2];
+	int pauseimage;
 
 	bool isPause;
 public:
