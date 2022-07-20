@@ -56,7 +56,7 @@ void CUI::Render()const {
 
 	if (isPause) {
 		SetFontSize(50);
-		DrawString(0, 240, "------PAUSE------", White);
+		DrawString(35, 240, "------PAUSE------", White);
 	}
 
 	DrawBox(500, 0, 640, 480, 0x009900, TRUE);

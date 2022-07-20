@@ -7,7 +7,7 @@
 // コンストラクタ
 //--------------------------------
 CEnd::CEnd(CController* pController) :CScene(pController) {
-
+	EndImage = LoadGraph("images/End.png");
 }
 
 //--------------------------------
@@ -22,5 +22,5 @@ CScene* CEnd::Update() {
 // 描画
 //--------------------------------
 void CEnd::Render()const {
-	DrawString(0, 0, "エンド画面", 0xFFFFFF);
+	DrawGraph(0,0,EndImage, FALSE);
 }
