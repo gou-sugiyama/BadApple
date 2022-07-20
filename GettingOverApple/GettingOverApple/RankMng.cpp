@@ -33,7 +33,6 @@ CRankMng::CRankMng(CController* pController) :CScene(pController) {
 	alldeleteimage = LoadGraph("images/alldelete.png");
 	selectimage = LoadGraph("images/select.png");
 	selecta = LoadGraph("images/selecta.png");
-	spaceimage = LoadGraph("images/space.png");
 
 	for (int i = 0; i < STR_MAX; i++) {
 		StrData[i] = new CString(i);
@@ -181,16 +180,10 @@ void CRankMng::ControlRanking(XINPUT_STATE data)
 
 	SetStrImageFlg(Str);
 
-	if (0 <= Str && Str < STR_MAX - 2 && data.Buttons[XINPUT_BUTTON_A]) {
+	if (0 <= Str && Str < STR_MAX - 3 && data.Buttons[XINPUT_BUTTON_A]) {
 		if (Count < 9) {
-			if (Str == STR_MAX - 3) {
-				RememberName[Count++] = '*';
-				NameImage[Count] = 0;
-			}
-			else {
-				RememberName[Count++] = StrData[Str]->GetStr();
-				NameImage[Count] = StrData[Str]->GetImage();
-			}
+			RememberName[Count++] = StrData[Str]->GetStr();
+			NameImage[Count] = StrData[Str]->GetImage();
 
 			PlaySoundMem(selectSE,DX_PLAYTYPE_BACK,TRUE);
 		}
@@ -259,13 +252,13 @@ void CRankMng::ChangeImage()
 	
 
 	for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < STR_MAX; j++) {
+			for (int j = 0; j < STR_MAX-3; j++) {
 				if (rankdata[i].Rank == StrData[j]->GetNumber()) {
 					rankdataimg[i].RankImage = StrData[j]->GetImage();
 				}
 			}
 			for (int x = 0; x < 10; x++) {
-				for (int j = 0; j < STR_MAX; j++) {
+				for (int j = 0; j < STR_MAX-3; j++) {
 					if (rankdata[i].Name[x] == StrData[j]->GetStr()) {
 						rankdataimg[i].NameImge[x] = StrData[j]->GetImage();
 					}
@@ -284,7 +277,7 @@ void CRankMng::ChangeImage()
 			remembernumber[4] = (allnumber - remembernumber[0] * 10000 - remembernumber[1] * 1000 - remembernumber[2] * 100 - remembernumber[3] * 10);
 
 			for (int x = 0; x < 5; x++) {
-				for (int j = 0; j < STR_MAX; j++) {
+				for (int j = 0; j < STR_MAX-3; j++) {
 					if (remembernumber[x] == StrData[j]->GetNumber()) {
 						rankdataimg[i].ScoreImage[x] = StrData[j]->GetImage();
 					}

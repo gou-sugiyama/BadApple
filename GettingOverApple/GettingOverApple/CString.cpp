@@ -17,9 +17,6 @@ CString::CString(int i)
 			string = '0' + i % 26;
 			Number =  i % 26;
 		}
-		else if (i % 26 == 10) {
-			string = ' ';
-		}
 		else {
 
 		}
