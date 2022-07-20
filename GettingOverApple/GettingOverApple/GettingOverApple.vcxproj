@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CFps.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Apple.h" />
     <ClInclude Include="AppleManager.h" />
@@ -36,6 +37,7 @@
   <ItemGroup>
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="AppleManager.cpp" />
+    <ClCompile Include="CFps.cpp" />
     <ClCompile Include="CString.cpp" />
     <ClCompile Include="End.cpp" />
     <ClCompile Include="Game.cpp" />

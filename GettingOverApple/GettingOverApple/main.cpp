@@ -4,6 +4,7 @@
 #include"Title.h"
 #include"Apple.h"
 #include"UI.h"
+#include"CFps.h"
 
 /*************************************************************************
 *	プログラムの開始
@@ -20,6 +21,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	//コントローラの動的確保
 	CController controller;
+	Fps fps;
 
 	//管理システムを動的確保
 	CSceneManager* manager;
@@ -30,12 +32,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		&& manager->Update() != nullptr&& controller.GetControl().Buttons[5] != TRUE) {
 		
 		ClearDrawScreen();		//画面の初期化
-
+		fps.Update();
 		controller.control(controller.GetControlFlg());
 
 		manager->Render();
+		fps.Draw();
 
 		ScreenFlip();				//裏画面の内容を表画面に反映
+		fps.Wait();
 	}
 
 	//managerの解放

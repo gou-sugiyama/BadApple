@@ -21,7 +21,7 @@ CUI::CUI(CController* pController) {
 	objectImage[D_APPLE_C] = LoadGraph("images/ringoC.png");
 
 	score =10000;
-	timeLimit = 60 * 1;			//60フレーム*30秒
+	timeLimit = 60 * 30;			//60フレーム*30秒
 	isPause = false;
 }
 
