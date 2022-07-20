@@ -363,8 +363,8 @@ int CRankMng::DelayCNTL()
 		if (data.ThumbLY > CONTROLLER_STICK_MAX) {
 			stick = 4;
 		}
-		if (data.ThumbLX < CONTROLLER_STICK_MAX && data.ThumbLX > -CONTROLLER_STICK_MAX
-			&& data.ThumbLY < CONTROLLER_STICK_MAX && data.ThumbLY > -CONTROLLER_STICK_MAX)
+		if (data.ThumbLX <= CONTROLLER_STICK_MAX && data.ThumbLX >= -CONTROLLER_STICK_MAX
+			&& data.ThumbLY <= CONTROLLER_STICK_MAX && data.ThumbLY >= -CONTROLLER_STICK_MAX)
 		{
 			stick = 0;
 			CntlTime = 0;
@@ -411,8 +411,6 @@ void CRankMng::Render() const {
 					, 30 / 2, 60 / 2, 1, 0, StrData[i]->GetImage(), TRUE);
 			}
 		}
-		//DrawString(360, 20, RememberName,0xffffff);
-
 		for (int i = 0; i < 10; i++) {
 			DrawRotaGraph2(300 + i * 30, 60
 				, 30 / 2, 60 / 2, 1, 0, NameImage[i], TRUE);
@@ -422,11 +420,6 @@ void CRankMng::Render() const {
 
 
 		for (int i = 0; i < 5; i++) {
-			/*	DrawFormatString(200, i * 90, 0xffffff,
-					"%d,%s,%d",
-					rankdata[i].Rank,
-					rankdata[i].Name,
-					rankdata[i].Score);*/
 
 
 			DrawRotaGraph2(50, i * 60 + 50
@@ -441,7 +434,8 @@ void CRankMng::Render() const {
 					, 30 / 2, 60 / 2, 1, 0, rankdataimg[i].ScoreImage[j], TRUE);
 			}
 		}
-		/*SetFontSize(28);
-		DrawString(10, 10, "ランキング表示", 0xFFFFFF);*/
+
+		SetFontSize(45);
+		DrawString(50, 390, "Bボタンで戻る", 0xf0ff0f);
 	}
 }

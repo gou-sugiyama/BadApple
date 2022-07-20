@@ -18,7 +18,7 @@ private:
 	bool ControlFlg=TRUE;
 
 public:
-	XINPUT_STATE control(bool data);
+	void control(bool data);
 
 	XINPUT_STATE GetControl() const;
 

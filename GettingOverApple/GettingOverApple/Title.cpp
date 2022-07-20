@@ -21,14 +21,14 @@ CTitle::CTitle(CController* pController) :CScene(pController) {
 	//選択SE
 	MenuSE= LoadSoundMem("sounds/SE/魔王魂 効果音 システム08.wav");
 	menuCursor = 0;
-	keyInput = controller->control(true);
+	keyInput = controller->GetControl();
 }
 
 //-----------------------------
 // 更新
 //-----------------------------
 CScene* CTitle::Update() {
-	keyInput = controller->control(true);
+	keyInput = controller->GetControl();
 
 	SelectMenu();
 

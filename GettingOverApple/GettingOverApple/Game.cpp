@@ -27,6 +27,7 @@ CGame::CGame(CController* pController):CScene(pController){
 	hit = new CHitBoxCheck;
 	GameBGM = LoadSoundMem("sounds/BGM/魔王魂 サイバー31 (online-audio-converter.com).wav");
 
+	controller->ToggleControlFlg(); //FALSEに変更
 	keyInput = controller->GetControl();
 }
 
@@ -42,7 +43,7 @@ CGame::~CGame() {
 }
 
 CScene* CGame::Update() {
-	keyInput = controller->control(true);
+	keyInput = controller->GetControl();
 	if (CheckSoundMem(GameBGM) == 0) {
 		PlaySoundMem(GameBGM, DX_PLAYTYPE_BACK, TRUE);
 	}
