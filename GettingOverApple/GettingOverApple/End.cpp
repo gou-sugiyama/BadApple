@@ -7,7 +7,7 @@
 // コンストラクタ
 //--------------------------------
 CEnd::CEnd(CController* pController) :CScene(pController) {
-	image = LoadGraph("images/haikei.png");
+	image = LoadGraph("images/End.png");
 }
 
 //--------------------------------
@@ -25,5 +25,5 @@ CScene* CEnd::Update() {
 // 描画
 //--------------------------------
 void CEnd::Render()const {
-	DrawGraph(0, 0, image, FALSE);
+	DrawGraph(0, 0, image, TRUE);
 }
