@@ -23,7 +23,7 @@ public:
 	XINPUT_STATE GetControl() const;
 
 	bool GetControlFlg() const;
-	void ToggleControlFlg();
+	void SetControlFlg(bool flg) { ControlFlg = flg; }
 
 	void SetScore(int i) { Score = i; }
 	int GetScore(){return Score;}

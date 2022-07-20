@@ -64,7 +64,7 @@ CRankMng::CRankMng(CController* pController) :CScene(pController) {
 
 	JudgeFlg = TRUE;
 
-	controller->ToggleControlFlg();
+	controller->SetControlFlg(true);
 	ChangeImage();
 }
 
@@ -110,7 +110,7 @@ CScene* CRankMng::Update() {
 			return this;
 		}
 		else {
-			controller->ToggleControlFlg();
+			controller->SetControlFlg(false);
 			StopSoundMem(RankingBGM);
 			return new CTitle(controller);
 		}

@@ -44,7 +44,4 @@ bool CController::GetControlFlg() const
 	return ControlFlg;
 }
 
-void CController::ToggleControlFlg()
-{
-	ControlFlg = !(ControlFlg);
-}
+

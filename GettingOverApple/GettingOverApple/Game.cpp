@@ -14,7 +14,7 @@ CGame::CGame(CController* pController):CScene(pController){
 	//受け取ったコントローラの格納
 	controller = pController;
 	//コントローラーのフラグを変更
-	controller->ToggleControlFlg();		//フラグをFALSEへ変更
+	controller->SetControlFlg(true);		//フラグをFALSEへ変更
 	//プレイヤーを動的確保
 	player = new CPlayer(controller);
 	//アップルマネージャーを動的確保
@@ -27,14 +27,11 @@ CGame::CGame(CController* pController):CScene(pController){
 	hit = new CHitBoxCheck;
 	GameBGM = LoadSoundMem("sounds/BGM/魔王魂 サイバー31 (online-audio-converter.com).wav");
 
-	controller->ToggleControlFlg(); //FALSEに変更
 	keyInput = controller->GetControl();
 }
 
 CGame::~CGame() {
 	//コントローラーのフラグを変更
-	controller->ToggleControlFlg();		//フラグをTRUEへ変更
-
 	//動的確保したものを解放する
 	delete player;
 	delete appleManager;
@@ -69,6 +66,7 @@ CScene* CGame::Update() {
 			WaitTime = 0;
 			StopSoundMem(GameBGM);
 			controller->SetScore(UI->GetScore());
+			controller->SetControlFlg(false);		//フラグをTRUEへ変更
 			return new CRankMng(controller);
 		}
 	}
