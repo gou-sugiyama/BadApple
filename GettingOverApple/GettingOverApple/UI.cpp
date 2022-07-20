@@ -81,10 +81,10 @@ void CUI::Render()const {
 
 	DrawObjectCount();
 
-	DrawString(510, StrMargin * 14, "SCORE:", White);
+	DrawString(510, StrMargin * 15, "SCORE:", White);
 	
 	for (int i = 0; i < 5; i++) {
-		DrawRotaGraph2(580 + i * 13, StrMargin*14
+		DrawRotaGraph2(575 + i * 13, StrMargin*15
 			, 30 / 2, 60 / 2, 0.5, 0, scoreimage[i], TRUE);
 	}
 
@@ -100,8 +100,8 @@ void CUI::DrawObjectCount()const {
 			StrMargin * 10, objectImage[i], TRUE);
 
 		for (int j = 0; j < 3; j++) {
-			DrawRotaGraph2(DRAW_OBJECT+j*12 + i *50, StrMargin * 12+10
-				, 30 / 2, 60 / 2, 0.4, 0, objectcountimage[i][j], TRUE);
+			DrawRotaGraph2(DRAW_OBJECT+j*12 + i *50, StrMargin * 12+15
+				, 30 / 2, 60 / 2, 0.5, 0, objectcountimage[i][j], TRUE);
 		}
 		/*DrawFormatString(DRAW_OBJECT + 50 * i, 
 			StrMargin * 12, White, "%03d", objectCount[i]);*/

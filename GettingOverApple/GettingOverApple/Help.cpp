@@ -17,6 +17,7 @@ CHelp::CHelp(CController* pController) :CScene(pController) {
 // çXêV
 //--------------------------------
 CScene* CHelp::Update() {
+
 	if (CheckSoundMem(HelpBGM) == 0) {
 		PlaySoundMem(HelpBGM, DX_PLAYTYPE_BACK, TRUE);
 	}
