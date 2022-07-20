@@ -10,10 +10,22 @@ private:
 	int objectImage[D_COUNT_OBJECT];
 	int score;
 	int timeLimit;
+
+	int numberimage[10];
+	int scoreimage[5];
+	int objectcountimage[3][3];
+	int timeimage[2];
+
 	bool isPause;
 public:
 	CUI(CController* pController);
 	bool Update();
+
+	void ChangeScoreImage();
+	void ChangeObjectImage();
+	void ChangeTimeImage();
+
+
 	void Render()const;
 	void DrawObjectCount()const;
 
@@ -34,5 +46,6 @@ public:
 		if (0 <= num && num < D_COUNT_OBJECT)
 		objectCount[num]++;
 	}
+
 };
 
