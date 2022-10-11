@@ -18,7 +18,7 @@ CString::CString(int i)
 			Number =  i % 26;
 		}
 		else {
-
+			Number = 10000;
 		}
 	}
 	strflg = FALSE;

@@ -255,12 +255,15 @@ void CRankMng::ChangeImage()
 			for (int j = 0; j < STR_MAX-3; j++) {
 				if (rankdata[i].Rank == StrData[j]->GetNumber()) {
 					rankdataimg[i].RankImage = StrData[j]->GetImage();
+					continue;
+
 				}
 			}
 			for (int x = 0; x < 10; x++) {
 				for (int j = 0; j < STR_MAX-3; j++) {
 					if (rankdata[i].Name[x] == StrData[j]->GetStr()) {
 						rankdataimg[i].NameImge[x] = StrData[j]->GetImage();
+						continue;
 					}
 					else if (rankdata[i].Name[x] == '*') {
 						rankdataimg[i].NameImge[x] = 0;
@@ -280,6 +283,8 @@ void CRankMng::ChangeImage()
 				for (int j = 0; j < STR_MAX-3; j++) {
 					if (remembernumber[x] == StrData[j]->GetNumber()) {
 						rankdataimg[i].ScoreImage[x] = StrData[j]->GetImage();
+						continue;
+
 					}
 				}
 
